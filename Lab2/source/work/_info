@@ -1,0 +1,34 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/ecegrid/a/mg45/ece337/Lab2/source
+vsensor_d
+DXx6 sv_std 3 std 0 22 >9az<^>2ff9DAl3OFGaAf1
+!s110 1599094845
+!i10b 1
+!s100 Kk;RST5H<TF6@cW@:o38b1
+IazHPTIKOXJnM;0<eFQQ@51
+VDg1SIo80bB@j0V0VzS_@n1
+!s105 sensor_d_sv_unit
+S1
+R0
+w1599094837
+8sensor_d.sv
+Fsensor_d.sv
+L0 9
+OE;L;10.7a;67
+r1
+!s85 0
+31
+!s108 1599094845.000000
+!s107 sensor_d.sv|
+!s90 sensor_d.sv|
+!i113 0
+o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+tCvgOpt 0
