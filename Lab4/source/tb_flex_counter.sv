@@ -72,7 +72,7 @@ module tb_flex_counter();
   endtask
 
   // Task to sychronously clear the counter
-  task clear_DUT;
+  task clear_dut;
   begin
     @(negedge tb_clk);
     tb_clear = 1'b1;
@@ -155,27 +155,24 @@ module tb_flex_counter();
     // ************************************************************************    
     @(negedge tb_clk); 
     tb_test_num = tb_test_num + 1;
-    tb_test_case = "Continuous counting from [0,2]";
-    // Start out with inactive value and reset the DUT to isolate from prior tests
+    tb_test_case = "Continuous counting";
+
     tb_clear = 1'b0;
     tb_count_enable = 1'b0;
     tb_rollover_val = 2'd3;
-    reset_dut();
-   
-    check_output(2'd0, 1'b0, "initial count_out");
 
-    // Assign test case stimulus
-    @(negedge tb_clk);
+    reset_dut();
+
     tb_count_enable = 1'b1;
 
-    // Should be 1
-    @(posedge tb_clk);
-    #(CHECK_DELAY);
-    check_output(2'd1, 1'b0, "after processing delay");
-
-    @(posedge tb_clk);
-    #(CHECK_DELAY);
-    check_output(2'd2, 1'b0, "after processing delay");
+    for (int i = 1; i <= 10; i++) begin
+    	@(posedge tb_clk);
+    	#(CHECK_DELAY);
+	if (i % tb_rollover_val == 0)
+    	    check_output(tb_rollover_val, 1'b1, "after processing delay");
+	else
+	    check_output(i % 3, 1'b0, "after processing delay");
+    end
 
     // ************************************************************************    
     // Test Case 3: Rollover at 3
@@ -183,13 +180,22 @@ module tb_flex_counter();
     tb_test_num = tb_test_num + 1;
     tb_test_case = "Rollover at 3";
 
-    @(posedge tb_clk);
-    #(CHECK_DELAY);
-    check_output(2'd3, 1'b1, "after processing delay");
+    tb_clear = 1'b0;
+    tb_count_enable = 1'b0;
+    tb_rollover_val = 2'd3;
 
-    @(posedge tb_clk);
-    #(CHECK_DELAY);
-    check_output(2'd0, 1'b0, "after processing delay");
+    reset_dut();
+
+    tb_count_enable = 1'b1;
+
+    for (int i = 1; i <= 10; i++) begin
+        @(posedge tb_clk);
+    	#(CHECK_DELAY);
+	if (i % tb_rollover_val == 0)
+    	    check_output(tb_rollover_val, 1'b1, "after processing delay");
+	else
+	    check_output(i % 3, 1'b0, "after processing delay");
+    end
 
     // ************************************************************************
     // Test Case 4: Discontinuous Counting
@@ -197,19 +203,35 @@ module tb_flex_counter();
     tb_test_num = tb_test_num + 1;
     tb_test_case = "Discontinuous Counting";
 
-    @(posedge tb_clk);
-    #(CHECK_DELAY);
-    check_output(2'd1, 1'b0, "after processing delay");
+    tb_clear = 1'b0;
+    tb_count_enable = 1'b0;
+    tb_rollover_val = 2'd3;
+
+    reset_dut();
+
+    tb_count_enable = 1'b1;
+
+    @(posedge tb_clk); // 1
+    @(posedge tb_clk); // 2
     
     @(negedge tb_clk);
     tb_count_enable = 1'b0;
 
     @(posedge tb_clk);
     #(CHECK_DELAY);
-    check_output(2'd1, 1'b0, "after processing delay");
+    check_output(2'd2, 1'b0, "after processing delay");
     
+    @(posedge tb_clk);
+    #(CHECK_DELAY);
+    check_output(2'd2, 1'b0, "after processing delay");
+
     @(negedge tb_clk);
     tb_count_enable = 1'b1;
+
+    @(posedge tb_clk);
+    #(CHECK_DELAY);
+    check_output(2'd3, 1'b1, "after processing delay");
+    
 
     // ************************************************************************
     // Test Case 5: Clear over Count Enable Priority
@@ -217,9 +239,22 @@ module tb_flex_counter();
     tb_test_num = tb_test_num + 1;
     tb_test_case = "Clear over Count Enable Priority";
 
-    // Assign test case stimulus
-    clear_DUT();
-    check_output(1'b0, 1'b0, "after clearing");
+    tb_clear = 1'b0;
+    tb_count_enable = 1'b0;
+    tb_rollover_val = 2'd3;
+
+    reset_dut();
+
+    tb_count_enable = 1'b1;
+
+    @(posedge tb_clk); // 1
+    @(posedge tb_clk); // 2
+    
+    clear_dut();
+
+    @(posedge tb_clk); // 1
+    #(CHECK_DELAY);
+    check_output(2'd1, 1'b0, "after processing delay");
 
   end
 endmodule
