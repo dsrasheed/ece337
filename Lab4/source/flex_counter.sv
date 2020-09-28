@@ -7,7 +7,7 @@
 // Description: Counter design with changeable maximum.
 
 module flex_counter #(
-	NUM_CNT_BITS = 3
+	parameter NUM_CNT_BITS = 2
 )
 (
 	input  clk, n_rst, clear, count_enable,
@@ -21,6 +21,8 @@ reg next_rollover;
 
 always_comb
 begin
+	next_cnt = count_out;
+
 	if (clear == 1)
 		next_cnt = 0;
 	else if (count_enable == 1)
@@ -30,32 +32,25 @@ begin
 		else
 			next_cnt = count_out + 1;
 	end
-	else
-		next_cnt = count_out;
-end
 
-always_ff @ (posedge clk, negedge n_rst)
-begin
-	if (n_rst == 0)
-		count_out <= '0;
-	else
-		count_out <= next_cnt;
-end
-
-always_comb
-begin
+	next_rollover = 0;
 	if (next_cnt == rollover_val)
 		next_rollover = 1;
-	else
-		next_rollover = 0;
 end
 
 always_ff @ (posedge clk, negedge n_rst)
 begin
 	if (n_rst == 0)
+	begin
+		count_out <= '0;
 		rollover_flag <= 0;
+	end
 	else
+	begin
+		count_out <= next_cnt;
 		rollover_flag <= next_rollover;
+	end
 end
 
 endmodule
+

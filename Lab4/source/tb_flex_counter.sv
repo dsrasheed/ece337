@@ -24,7 +24,7 @@ module tb_flex_counter();
   reg tb_clear;
   reg tb_count_enable;
   reg [1:0] tb_rollover_val;
-  reg [1:0] tb_count_out;
+  wire [1:0] tb_count_out;
   wire tb_rollover_flag;
   
   // Declare test bench signals
@@ -94,9 +94,8 @@ module tb_flex_counter();
   end
   
   // DUT Port map
-  flex_counter #(.NUM_CNT_BITS(2)) DUT(.clk(tb_clk), .n_rst(tb_n_rst), .clear(tb_clear),
-	 .count_enable(tb_count_enable), .count_out(tb_count_out), .rollover_val(tb_rollover_val),
-	 .rollover_flag(tb_rollover_flag));
+  flex_counter DUT(.clk(tb_clk), .n_rst(tb_n_rst), .clear(tb_clear), .count_enable(tb_count_enable), 
+	.count_out(tb_count_out), .rollover_val(tb_rollover_val), .rollover_flag(tb_rollover_flag));
   
   // Test bench main process
   initial
