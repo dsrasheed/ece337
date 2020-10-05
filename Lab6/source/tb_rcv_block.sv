@@ -117,10 +117,20 @@ module tb_rcv_block();
       $error("Test case %0d: Test data was not correctly received", tb_test_num);
       
     // If and only if a proper stop bit is sent ('1') there shouldn't be a framing error.
-    assert(tb_expected_framing_error == tb_framing_error)
+    if (1'b0 == tb_expected_framing_error)
+    begin
+    assert(1'b0 == tb_framing_error)
       $info("Test case %0d: DUT correctly shows no framing error", tb_test_num);
     else
       $error("Test case %0d: DUT incorrectly shows a framing error", tb_test_num);
+    end
+    if (1'b1 == tb_expected_framing_error)
+    begin
+    assert(1'b1 == tb_framing_error)
+      $info("Test case %0d: DUT correctly shows a framing error", tb_test_num);
+    else
+      $error("Test case %0d: DUT incorrectly does not show a framing error", tb_test_num);
+    end
     
     // If and only if a proper stop bit is sent ('1') should there be 'data ready'
     assert(tb_expected_data_ready == tb_data_ready)
@@ -295,7 +305,107 @@ module tb_rcv_block();
     check_outputs(tb_test_data_read);
   
     // Append additonal test cases here (such as overrun case)
+
+
+    // Test case 3: Normal packet, max slower data rate
+    // Synchronize to falling edge of clock to prevent timing shifts from prior test case(s)
+    @(negedge tb_clk);
+    tb_test_num += 1;
+    tb_test_case = "Max Slow Data-Rate, Normal Packet";
     
+    // Setup packet info for debugging/verification signals
+    tb_test_data = 8'b11010101;
+    tb_test_stop_bit = 1'b1;
+    tb_test_bit_period = WORST_SLOW_DATA_PERIOD;
+    tb_test_data_read = 1'b1;
+
+    // Define expected outputs for this test case
+    tb_expected_rx_data = tb_test_data;
+    tb_expected_data_ready = tb_test_stop_bit;
+    tb_expected_framing_error = ~tb_test_stop_bit;
+    tb_expected_overrun = 1'b0;
+
+    reset_dut;
+
+    send_packet(tb_test_data, tb_test_stop_bit, tb_test_bit_period);
+
+    #(tb_test_bit_period * 2);
+
+    check_outputs(tb_test_data_read);
+
+    // Test Case 4: Overrun Packet
+    @(negedge tb_clk);
+    tb_test_num += 1;
+    tb_test_case = "Overrun Packet";
+    
+    tb_test_data = 8'b11001101;
+    tb_test_stop_bit = 1'b1;
+    tb_test_bit_period = NORM_DATA_PERIOD;
+    tb_test_data_read = 1'b0;
+    
+    // Define expected outputs for this test case
+    tb_expected_rx_data = tb_test_data;
+    tb_expected_data_ready = tb_test_stop_bit;
+    tb_expected_framing_error = ~tb_test_stop_bit;
+    tb_expected_overrun = 1'b1;
+
+    reset_dut();
+
+    send_packet(tb_test_data, tb_test_stop_bit, tb_test_bit_period);
+    send_packet(tb_test_data, tb_test_stop_bit, tb_test_bit_period);
+    
+    #(tb_test_bit_period * 2);
+
+    check_outputs(tb_test_data_read);
+
+    // Test Case 5: Framing Error
+    @(negedge tb_clk);
+    tb_test_num += 1;
+    tb_test_case = "Framing Error";
+
+    tb_test_data = 8'b10000000;
+    tb_test_stop_bit = 1'b0;
+    tb_test_bit_period = NORM_DATA_PERIOD;
+    tb_test_data_read = 1'b0;
+
+    // Define expected outputs for this test case
+    tb_expected_rx_data = '1;
+    tb_expected_data_ready = tb_test_stop_bit;
+    tb_expected_framing_error = ~tb_test_stop_bit;
+    tb_expected_overrun = 1'b0;
+
+    reset_dut();
+
+    send_packet(tb_test_data, tb_test_stop_bit, tb_test_bit_period);
+
+    #(tb_test_bit_period * 2);
+
+    check_outputs(tb_test_data_read);
+
+    // Test Case 6: Multiple Slow Packets
+    @(negedge tb_clk);
+    tb_test_num += 1;
+    tb_test_case = "Multiple Slow Packets";
+    
+    tb_test_data = 8'b10101010;
+    tb_test_stop_bit = 1'b1;
+    tb_test_bit_period = WORST_SLOW_DATA_PERIOD;
+    tb_test_data_read = 1'b1;
+
+    // Define expected outputs
+    tb_expected_rx_data = tb_test_data;
+    tb_expected_data_ready = tb_test_stop_bit;
+    tb_expected_framing_error = ~tb_test_stop_bit;
+    tb_expected_overrun = 1'b0;
+
+    reset_dut();
+
+    for (int i = 0; i < 4; i++) begin
+        send_packet(tb_test_data, tb_test_stop_bit, tb_test_bit_period);
+        #(tb_test_bit_period * 2);
+        check_outputs(tb_test_data_read);
+    end
+
   end
 
 endmodule

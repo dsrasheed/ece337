@@ -21,3 +21,8 @@ covhtmlreport/
 #*#
 *.wlf
 do_mapping.tcl
+*.qdb
+*.qpg
+*.qtl
+_info
+_vmake

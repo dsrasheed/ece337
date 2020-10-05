@@ -13,7 +13,7 @@
 module tb_flex_counter();
 
   // Define local parameters used by the test bench
-  localparam  CLK_PERIOD    = 1;
+  localparam  CLK_PERIOD    = 2.5;
   localparam  FF_SETUP_TIME = 0.190;
   localparam  FF_HOLD_TIME  = 0.100;
   localparam  CHECK_DELAY   = (CLK_PERIOD - FF_SETUP_TIME); // Check right before the setup time starts
@@ -23,8 +23,8 @@ module tb_flex_counter();
   reg tb_n_rst;
   reg tb_clear;
   reg tb_count_enable;
-  reg [1:0] tb_rollover_val;
-  wire [1:0] tb_count_out;
+  reg [3:0] tb_rollover_val;
+  wire [3:0] tb_count_out;
   wire tb_rollover_flag;
   
   // Declare test bench signals
@@ -58,7 +58,7 @@ module tb_flex_counter();
 
   // Task to cleanly and consistently check DUT output values
   task check_output;
-    input logic [1:0] expected_count;
+    input logic [3:0] expected_count;
     input logic  expected_flag;
     input string check_tag;
   begin
@@ -104,7 +104,7 @@ module tb_flex_counter();
     tb_n_rst  = 1'b1;                 // Initialize reset to be inactive
     tb_clear  = 1'b0;                 // Initialize clear to be inactive
     tb_count_enable = 1'b0;           // Initialize count_enable to be inactive
-    tb_rollover_val = 2'b0;           // Initialize rollover_val to be inactive
+    tb_rollover_val = 4'b0;           // Initialize rollover_val to be inactive
     tb_test_num = 0;                  // Initialize test case counter
     tb_test_case = "Test bench initializaton";
     tb_stream_test_num = 0;
@@ -125,19 +125,19 @@ module tb_flex_counter();
     // Apply test case initial stimulus
     tb_clear  = 1'b0; // Set to be the the non-reset value
     tb_count_enable = 1'b0;
-    tb_rollover_val = 2'b0;
+    tb_rollover_val = 4'b0;
     tb_n_rst  = 1'b0;    // Activate reset
     
     // Wait for a bit before checking for correct functionality
     #(CLK_PERIOD * 0.5);
 
     // Check that internal state was correctly reset
-    check_output(2'b0, 1'b0, 
+    check_output(4'b0, 1'b0, 
                   "after reset applied");
     
     // Check that the reset value is maintained during a clock cycle
     #(CLK_PERIOD);
-    check_output(2'b0, 1'b0, 
+    check_output(4'b0, 1'b0, 
                  "after clock cycle while in reset");
     
     // Release the reset away from a clock edge
@@ -146,7 +146,7 @@ module tb_flex_counter();
     tb_n_rst  = 1'b1;   // Deactivate the chip reset
     #0.1;
     // Check that internal state was correctly keep after reset release
-    check_output(2'b0, 1'b0, 
+    check_output(4'b0, 1'b0, 
                   "after reset was released");
 
     // ************************************************************************
@@ -158,42 +158,42 @@ module tb_flex_counter();
 
     tb_clear = 1'b0;
     tb_count_enable = 1'b0;
-    tb_rollover_val = 2'd3;
+    tb_rollover_val = 4'd13;
 
     reset_dut();
 
     tb_count_enable = 1'b1;
 
-    for (int i = 1; i <= 10; i++) begin
+    for (int i = 1; i <= 40; i++) begin
     	@(posedge tb_clk);
     	#(CHECK_DELAY);
 	if (i % tb_rollover_val == 0)
     	    check_output(tb_rollover_val, 1'b1, "after processing delay");
 	else
-	    check_output(i % 3, 1'b0, "after processing delay");
+	    check_output(i % tb_rollover_val, 1'b0, "after processing delay");
     end
 
     // ************************************************************************    
-    // Test Case 3: Rollover at 3
+    // Test Case 3: Rollover at 13
     // ************************************************************************
     tb_test_num = tb_test_num + 1;
-    tb_test_case = "Rollover at 3";
+    tb_test_case = "Rollover at 13";
 
     tb_clear = 1'b0;
     tb_count_enable = 1'b0;
-    tb_rollover_val = 2'd3;
+    tb_rollover_val = 4'd13;
 
     reset_dut();
 
     tb_count_enable = 1'b1;
 
-    for (int i = 1; i <= 10; i++) begin
+    for (int i = 1; i <= 40; i++) begin
         @(posedge tb_clk);
     	#(CHECK_DELAY);
 	if (i % tb_rollover_val == 0)
     	    check_output(tb_rollover_val, 1'b1, "after processing delay");
 	else
-	    check_output(i % 3, 1'b0, "after processing delay");
+	    check_output(i % tb_rollover_val, 1'b0, "after processing delay");
     end
 
     // ************************************************************************
@@ -204,7 +204,7 @@ module tb_flex_counter();
 
     tb_clear = 1'b0;
     tb_count_enable = 1'b0;
-    tb_rollover_val = 2'd3;
+    tb_rollover_val = 4'd3;
 
     reset_dut();
 
@@ -218,18 +218,18 @@ module tb_flex_counter();
 
     @(posedge tb_clk);
     #(CHECK_DELAY);
-    check_output(2'd2, 1'b0, "after processing delay");
+    check_output(4'd2, 1'b0, "after processing delay");
     
     @(posedge tb_clk);
     #(CHECK_DELAY);
-    check_output(2'd2, 1'b0, "after processing delay");
+    check_output(4'd2, 1'b0, "after processing delay");
 
     @(negedge tb_clk);
     tb_count_enable = 1'b1;
 
     @(posedge tb_clk);
     #(CHECK_DELAY);
-    check_output(2'd3, 1'b1, "after processing delay");
+    check_output(4'd3, 1'b1, "after processing delay");
     
 
     // ************************************************************************
@@ -240,7 +240,7 @@ module tb_flex_counter();
 
     tb_clear = 1'b0;
     tb_count_enable = 1'b0;
-    tb_rollover_val = 2'd3;
+    tb_rollover_val = 4'd3;
 
     reset_dut();
 
@@ -253,7 +253,7 @@ module tb_flex_counter();
 
     @(posedge tb_clk); // 1
     #(CHECK_DELAY);
-    check_output(2'd1, 1'b0, "after processing delay");
+    check_output(4'd1, 1'b0, "after processing delay");
 
   end
 endmodule
