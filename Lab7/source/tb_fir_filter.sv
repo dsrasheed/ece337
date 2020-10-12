@@ -190,7 +190,7 @@ module tb_fir_filter();
 		end
 		else
 		begin
-			$error("Test Case #%0d Sample #%0d: Had an incorrect fir_out value", tb_test_case_num, tb_test_sample_num);
+			$error("Test Case #%0d Sample #%0d: Had an **INCORRECT** fir_out value", tb_test_case_num, tb_test_sample_num);
 		end
 		
 		// Handle the error
@@ -200,7 +200,7 @@ module tb_fir_filter();
 		end
 		else
 		begin
-			$error("Test Case #%0d Sample #%0d: Had an incorrect err value", tb_test_case_num, tb_test_sample_num);
+			$error("Test Case #%0d Sample #%0d: Had an **INCORRECT** err value", tb_test_case_num, tb_test_sample_num);
 		end
 		
 		// Handle the one_k_samples
@@ -210,7 +210,7 @@ module tb_fir_filter();
 		end
 		else
 		begin
-			$error("Test Case #%0d Sample #%0d: Had an incorrect one_k_samples value", tb_test_case_num, tb_test_sample_num);
+			$error("Test Case #%0d Sample #%0d: Had an **INCORRECT** one_k_samples value", tb_test_case_num, tb_test_sample_num);
 		end
 		
 		// Add some padding between samples
@@ -251,7 +251,7 @@ module tb_fir_filter();
 	initial
 	begin // TODO: Add more standard test cases here
 		// Populate the test vector array to use
-		tb_test_vectors = new[2];
+		tb_test_vectors = new[3];
 		// Test case 0
 		tb_test_vectors[0].coeffs		= {{COEFF_5}, {COEFF1}, {COEFF1}, {COEFF_5}};
 		tb_test_vectors[0].samples	= {16'd100, 16'd100, 16'd100, 16'd100};
@@ -262,6 +262,11 @@ module tb_fir_filter();
 		tb_test_vectors[1].samples	= {16'd1000, 16'd1000, 16'd100, 16'd100};
 		tb_test_vectors[1].results	= {16'd450, 16'd500, 16'd50 ,16'd50};
 		tb_test_vectors[1].errors		= {1'b0, 1'b0, 1'b0, 1'b0};
+
+		tb_test_vectors[2].coeffs		= {{COEFF1}, {COEFF1}, {COEFF1}, {COEFF1}};
+		tb_test_vectors[2].samples		= {16'h0000, 16'hffff, 16'h0000, 16'hffff};
+		tb_test_vectors[2].results		= {16'hffff, 16'hffff, 16'hffff, 16'hffff};
+		tb_test_vectors[2].errors		= {1'b1, 1'b1, 1'b0, 1'b0};
 	end
 	
 	// Test bench process

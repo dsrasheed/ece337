@@ -1,0 +1,129 @@
+m255
+K4
+z2
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/ecegrid/a/mg45/ece337/Lab7
+vcontroller
+Z1 DXx6 sv_std 3 std 0 22 >9az<^>2ff9DAl3OFGaAf1
+!s110 1602453521
+!i10b 1
+!s100 2PYkOfnHQh:C[G7V3oEfX3
+I4V[z4kOQMg9TD0K`GA6QH0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+!s105 controller_sv_unit
+S1
+R0
+w1602450822
+8/home/ecegrid/a/mg45/ece337/Lab7/source/controller.sv
+F/home/ecegrid/a/mg45/ece337/Lab7/source/controller.sv
+L0 9
+Z3 OE;L;10.7a;67
+r1
+!s85 0
+31
+!s108 1602453520.000000
+!s107 /home/ecegrid/a/mg45/ece337/Lab7/source/controller.sv|
+!s90 -nologo|-work|source|/home/ecegrid/a/mg45/ece337/Lab7/source/controller.sv|
+!i113 0
+Z4 o-nologo -work source
+Z5 tCoverage 63 CoverExcludeDefault 1 CoverOpt 1 CoverShortCircuit 0 CvgOpt 0
+vfir_filter
+R1
+!s110 1602453008
+!i10b 1
+!s100 XIkXn5>glUekG5]:CBT:c3
+IZ71FOK7O<YXk?>IPoXzYM1
+R2
+!s105 fir_filter_sv_unit
+S1
+R0
+w1602433489
+8/home/ecegrid/a/mg45/ece337/Lab7/source/fir_filter.sv
+F/home/ecegrid/a/mg45/ece337/Lab7/source/fir_filter.sv
+L0 9
+R3
+r1
+!s85 0
+31
+!s108 1602453008.000000
+!s107 /home/ecegrid/a/mg45/ece337/Lab7/source/fir_filter.sv|
+!s90 -nologo|-work|source|/home/ecegrid/a/mg45/ece337/Lab7/source/fir_filter.sv|
+!i113 0
+R4
+R5
+vmagnitude
+R1
+!s110 1602453006
+!i10b 1
+!s100 @KKHFb5a`jNCz0_0DFJBH3
+IU1:BfzAm1JHmN9H]`g>fZ3
+R2
+!s105 magnitude_sv_unit
+S1
+R0
+w1602431216
+8/home/ecegrid/a/mg45/ece337/Lab7/source/magnitude.sv
+F/home/ecegrid/a/mg45/ece337/Lab7/source/magnitude.sv
+L0 9
+R3
+r1
+!s85 0
+31
+!s108 1602453006.000000
+!s107 /home/ecegrid/a/mg45/ece337/Lab7/source/magnitude.sv|
+!s90 -nologo|-work|source|/home/ecegrid/a/mg45/ece337/Lab7/source/magnitude.sv|
+!i113 0
+R4
+R5
+vtb_fir_filter
+R1
+!s110 1602454498
+!i10b 1
+!s100 9lJK:10WN7U0OACL1>K`z3
+I]T?6L:ca4DkPY:AeaglRE3
+R2
+!s105 tb_fir_filter_sv_unit
+S1
+R0
+w1602454498
+8/home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_filter.sv
+F/home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_filter.sv
+Z6 L0 11
+R3
+r1
+!s85 0
+31
+!s108 1602454498.000000
+!s107 /home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_filter.sv|
+!s90 -nologo|-work|source|/home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_filter.sv|
+!i113 0
+R4
+R5
+vtb_fir_image
+R1
+!s110 1602451370
+!i10b 1
+!s100 aUbJYSNO:5M0890B^]iWK2
+I48[ZgSSFi;;jDRoSGH5ji0
+R2
+!s105 tb_fir_image_sv_unit
+S1
+R0
+w1602023316
+8/home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_image.sv
+F/home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_image.sv
+R6
+R3
+r1
+!s85 0
+31
+!s108 1602451370.000000
+!s107 /home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_image.sv|
+!s90 -nologo|-work|source|/home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_image.sv|
+!i113 0
+R4
+R5

@@ -25,7 +25,8 @@ TOP_LEVEL_FILE	:= fir_filter.sv
 
 # Specify the filepath of the test bench you want to use (ie. tb_top_level.sv)
 # (do not include the source folder in the name)
-TEST_BENCH	:= tb_$(TOP_LEVEL_FILE)
+TEST_BENCH := tb_$(TOP_LEVEL_FILE)
+# TEST_BENCH = tb_fir_image.sv
 
 # Fill in the names of any test bench helper code files (code files referenced by your testbenches
 # other than the actual design files)( do not include the 'source/')

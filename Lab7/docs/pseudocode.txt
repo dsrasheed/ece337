@@ -1,0 +1,34 @@
+idle:  if (dr = 0) goto idle;      // Wait until dr = 1
+store: if (dr = 0) goto eidle;     
+       reg[5] = data;              // Store data in a register
+       err = 0;                    // Reset error
+
+zero:  reg[0] = 0;                 // Zero out accumulator
+
+sort1: reg[1] = reg[2];            // Sample4 <- Prev Sample3
+sort2: reg[2] = reg[3];            // Sample3 <- Prev Sample2
+sort3: reg[3] = reg[4];            // Sample2 <- Prev Sample1
+sort4: reg[4] = reg[5];            // Sample1 <- New Sample
+
+mul1:  reg[10] = reg[1] * reg[6];  // Sample4 * F3
+add1:  reg[0] = reg[0] + reg[10];  // Add Small
+       if (V) goto eidle;
+
+mul2:  reg[10] = reg[2] * reg[7];  // Sample3 * F2
+sub1:  reg[0] = reg[0] - reg[10];  // Sub Large 
+       if (V) goto eidle;
+
+mul3:  reg[10] = reg[3] * reg[8];  // Sample2 * F1
+add2:  reg[0] = reg[0] + reg[10];  // Add Large
+       if (V) goto eidle;
+
+mul4:  reg[10] = reg[4] * reg[9];  // Sample1 * F0
+sub2:  reg[0] = reg[0] - reg[10];  // Sub Small
+       if (V) goto eidle;
+       else goto idle;
+
+eidle: err = 1;
+       if (dr = 1) goto store;     // Wait until dr = 1
+       if (dr = 0) goto eidle;
+
+

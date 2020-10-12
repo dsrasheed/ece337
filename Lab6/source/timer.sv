@@ -13,7 +13,7 @@ module timer(
 );
 
 wire [3:0] count;
-assign shift_enable = count == 2;
+assign shift_enable = count == 4'd2;
 
 flex_counter #(.NUM_CNT_BITS(4)) clkdiv (
 	.clk(clk),
