@@ -79,6 +79,30 @@ r1
 !i113 0
 R4
 R5
+vsync_low
+R1
+!s110 1602554941
+!i10b 1
+!s100 5V@VK]g2d;R1JE<A=0eXD1
+IPB66Zj:]Q0fkfPKJ;An8j2
+R2
+!s105 sync_low_sv_unit
+S1
+R0
+Z6 w1602451402
+8/home/ecegrid/a/mg45/ece337/Lab7/source/sync_low.sv
+F/home/ecegrid/a/mg45/ece337/Lab7/source/sync_low.sv
+L0 9
+R3
+r1
+!s85 0
+31
+!s108 1602554941.000000
+!s107 /home/ecegrid/a/mg45/ece337/Lab7/source/sync_low.sv|
+!s90 -nologo|-work|source|/home/ecegrid/a/mg45/ece337/Lab7/source/sync_low.sv|
+!i113 0
+R4
+R5
 vtb_fir_filter
 R1
 !s110 1602454498
@@ -92,7 +116,7 @@ R0
 w1602454498
 8/home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_filter.sv
 F/home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_filter.sv
-Z6 L0 11
+Z7 L0 11
 R3
 r1
 !s85 0
@@ -105,7 +129,7 @@ R4
 R5
 vtb_fir_image
 R1
-!s110 1602451370
+!s110 1602557333
 !i10b 1
 !s100 aUbJYSNO:5M0890B^]iWK2
 I48[ZgSSFi;;jDRoSGH5ji0
@@ -113,17 +137,41 @@ R2
 !s105 tb_fir_image_sv_unit
 S1
 R0
-w1602023316
+R6
 8/home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_image.sv
 F/home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_image.sv
-R6
+R7
 R3
 r1
 !s85 0
 31
-!s108 1602451370.000000
+!s108 1602557333.000000
 !s107 /home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_image.sv|
 !s90 -nologo|-work|source|/home/ecegrid/a/mg45/ece337/Lab7/source/tb_fir_image.sv|
+!i113 0
+R4
+R5
+vtb_sync_low
+R1
+!s110 1602554937
+!i10b 1
+!s100 ;zmC9jg1R[[Ug7YdK6T7z3
+I6jH2K3gI[NOiAKjUGi>SK3
+R2
+!s105 tb_sync_low_sv_unit
+S1
+R0
+R6
+8/home/ecegrid/a/mg45/ece337/Lab7/source/tb_sync_low.sv
+F/home/ecegrid/a/mg45/ece337/Lab7/source/tb_sync_low.sv
+L0 13
+R3
+r1
+!s85 0
+31
+!s108 1602554937.000000
+!s107 /home/ecegrid/a/mg45/ece337/Lab7/source/tb_sync_low.sv|
+!s90 -nologo|-work|source|/home/ecegrid/a/mg45/ece337/Lab7/source/tb_sync_low.sv|
 !i113 0
 R4
 R5

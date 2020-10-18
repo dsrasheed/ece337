@@ -1,0 +1,13 @@
+Minimum Amount of Time data_ready must be asserted: 10ns
+
+Must be asserted over two posedges of the clk. Since setup and hold times are neglible, it can be asserted
+immediately before the posedge of the clk, and then deasserted immediately after the next posedge of the clk.
+This is equivalent to the time of a single clock cycle, 10ns.
+
+Minimum Amount of Time Data Must Remain Valid: 4 clock cycles
+
+When data_ready is asserted, it takes 2 clock cycles for it to get to the output of the synchronizer. Another clock
+cycle for the controller to set the signals to configure the datapath module for loading. Then another for the datapath 
+module to actually store the sample.
+
+

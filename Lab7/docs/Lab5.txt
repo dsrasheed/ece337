@@ -1,0 +1,9 @@
+Q1
+The filtered image is grainier and darker. This makes sense since our module
+takes in each pixel, and performs a weighted sum with them.
+
+Q2
+func_name(file descriptor, arguments...)
+
+Q3
+All the ones available in C are also avaiable for system verilog.
