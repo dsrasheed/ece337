@@ -8,11 +8,17 @@
 
 `timescale 1ns / 10ps
 
-module tb_apb_slave();
+module tb_apb_uart_rx();
 
 // Timing related constants
 localparam CLK_PERIOD = 10;
 localparam BUS_DELAY  = 800ps; // Based on FF propagation delay
+
+// UART parameters
+parameter  NORM_DATA_PERIOD  = (10 * CLK_PERIOD);
+localparam OUTPUT_CHECK_DELAY = (CLK_PERIOD - 0.2);
+localparam WORST_FAST_DATA_PERIOD = (NORM_DATA_PERIOD * 0.96);
+localparam WORST_SLOW_DATA_PERIOD = (NORM_DATA_PERIOD * 1.04);
 
 // Sizing related constants
 localparam DATA_WIDTH      = 1;
@@ -50,11 +56,14 @@ integer  tb_current_transaction_num;
 logic    tb_model_reset;
 string   tb_test_case;
 integer  tb_test_case_num;
+integer  tb_i;
+logic [13:0]     tb_test_bit_period;
 logic [DATA_MAX_BIT:0] tb_test_data;
 string                 tb_check_tag;
-logic [13:0]           tb_test_bit_period;
 logic                  tb_mismatch;
 logic                  tb_check;
+logic [7:0] test_packets [];
+
 
 //*****************************************************************************
 // General System signals
@@ -63,7 +72,7 @@ logic tb_clk;
 logic tb_n_rst;
 
 //*****************************************************************************
-// APB-Slave side signals
+// Signals
 //*****************************************************************************
 logic                          tb_psel;
 logic [(ADDR_WIDTH - 1):0]     tb_paddr;
@@ -72,23 +81,13 @@ logic                          tb_pwrite;
 logic [((DATA_WIDTH*8) - 1):0] tb_pwdata;
 logic [((DATA_WIDTH*8) - 1):0] tb_prdata;
 logic                          tb_pslverr;
-logic [((DATA_WIDTH*8) - 1):0] tb_expected_prdata;
+logic                          tb_serial_in;
 
 //*****************************************************************************
-// UART-side Signals
+// Expected Signals
 //*****************************************************************************
-// From UART(TB)
-logic [7:0]  tb_rx_data;
-logic        tb_data_ready;
-logic        tb_overrun_error;
-logic        tb_framing_error;
-// To UART (From DUT)
-logic        tb_data_read;
-logic [3:0]  tb_data_size;
-logic [13:0] tb_bit_period;
-logic        tb_expected_data_read;
-logic [3:0]  tb_expected_data_size;
-logic [13:0] tb_expected_bit_period;
+logic [((DATA_WIDTH*8) - 1):0] tb_expected_prdata;
+// Expected slave error is handled by bus module
 
 //*****************************************************************************
 // Clock Generation Block
@@ -132,13 +131,9 @@ apb_bus BFM ( .clk(tb_clk),
 //*****************************************************************************
 // DUT Instance
 //*****************************************************************************
-apb_slave DUT ( .clk(tb_clk), .n_rst(tb_n_rst),
+apb_uart_rx DUT ( .clk(tb_clk), .n_rst(tb_n_rst),
             // UART Operation signals
-            .rx_data(tb_rx_data),
-            .data_ready(tb_data_ready),
-            .overrun_error(tb_overrun_error),
-            .framing_error(tb_framing_error),
-            .data_read(tb_data_read),
+            .serial_in(tb_serial_in),
             // APB-Slave bus signals
             .psel(tb_psel),
             .paddr(tb_paddr),
@@ -146,10 +141,7 @@ apb_slave DUT ( .clk(tb_clk), .n_rst(tb_n_rst),
             .pwrite(tb_pwrite),
             .pwdata(tb_pwdata),
             .prdata(tb_prdata),
-            .pslverr(tb_pslverr),
-            // UART Configuration values
-            .data_size(tb_data_size),
-            .bit_period(tb_bit_period));
+            .pslverr(tb_pslverr));
 
 //*****************************************************************************
 // DUT Related TB Tasks
@@ -182,29 +174,6 @@ task check_outputs;
 begin
   tb_mismatch = 1'b0;
   tb_check    = 1'b1;
-  if(tb_expected_data_read == tb_data_read) begin // Check passed
-    $info("Correct 'data_read' output %s during %s test case", check_tag, tb_test_case);
-  end
-  else begin // Check failed
-    tb_mismatch = 1'b1;
-    $error("Incorrect 'data_read' output %s during %s test case", check_tag, tb_test_case);
-  end
-
-  if(tb_expected_bit_period == tb_bit_period) begin // Check passed
-    $info("Correct 'bit_period' output %s during %s test case", check_tag, tb_test_case);
-  end
-  else begin // Check failed
-    tb_mismatch = 1'b1;
-    $error("Incorrect 'bit_period' output %s during %s test case", check_tag, tb_test_case);
-  end
-
-  if(tb_expected_data_size == tb_data_size) begin // Check passed
-    $info("Correct 'data_size' output %s during %s test case", check_tag, tb_test_case);
-  end
-  else begin // Check failed
-    tb_mismatch = 1'b1;
-    $error("Incorrect 'data_size' output %s during %s test case", check_tag, tb_test_case);
-  end
 
   if (tb_expected_prdata == tb_prdata) begin
     $info("Correct 'prdata' output %s during %s test case", check_tag, tb_test_case);
@@ -212,6 +181,7 @@ begin
   else begin
     tb_mismatch = 1'b1;
     $error("Incorrect 'prdata' output %s during %s test case", check_tag, tb_test_case);
+    $error("'prdata' was %d instead of %d", tb_prdata, tb_expected_prdata);
   end
 
   // Wait some small amount of time so check pulse timing is visible on waves
@@ -279,6 +249,56 @@ begin
 end
 endtask
 
+task configure_dut;
+  input logic [13:0] bit_period;
+  input logic [3:0]  data_size;
+begin
+  enqueue_transaction(1'b1, 1'b1, ADDR_BIT_CR0, bit_period[7:0], 1'b0);
+  enqueue_transaction(1'b1, 1'b1, ADDR_BIT_CR1, {2'b00, bit_period[13:8]},  1'b0);
+  enqueue_transaction(1'b1, 1'b1, ADDR_DATA_CR, {4'b0, data_size},  1'b0);
+
+  execute_transactions(3);
+end
+endtask
+
+task send_packet;
+    input  [7:0] data;
+    input  stop_bit;
+    input  time data_period;
+    input  int  data_size;
+    
+    integer i;
+  begin
+    // First synchronize to away from clock's rising edge
+    @(negedge tb_clk)
+    
+    // Send start bit
+    tb_serial_in = 1'b0;
+    #data_period;
+    
+    // Send data bits
+    for(i = 0; i < data_size; i = i + 1)
+    begin
+      tb_serial_in = data[i];
+      #data_period;
+    end
+    
+    // Send stop bit
+    tb_serial_in = stop_bit;
+    #data_period;
+  end
+endtask
+
+task poll;
+begin
+  tb_expected_prdata = 8'd0;
+  while (tb_prdata == 8'd0) begin
+    enqueue_transaction(1'b1, 1'b0, ADDR_DATA_SR, tb_expected_prdata, 1'b0);
+    execute_transactions(1);
+  end
+end
+endtask
+
 //*****************************************************************************
 //*****************************************************************************
 // Main TB Process
@@ -290,15 +310,12 @@ initial begin
   tb_test_case_num   = -1;
   tb_test_data       = '0;
   tb_check_tag       = "N/A";
-  tb_test_bit_period = '0;
   tb_check           = 1'b0;
   tb_mismatch        = 1'b0;
+  tb_test_bit_period = '0;
   // Initialize all of the directly controled DUT inputs
   tb_n_rst          = 1'b1;
-  tb_rx_data        = '0;
-  tb_data_ready     = 1'b0;
-  tb_overrun_error  = 1'b0;
-  tb_framing_error  = 1'b0;
+  tb_serial_in      = 1'b1;
   // Initialize all of the bus model control inputs
   tb_model_reset          = 1'b0;
   tb_enable_transactions  = 1'b0;
@@ -321,215 +338,166 @@ initial begin
   // Update Navigation Info
   tb_test_case     = "Power-on-Reset";
   tb_test_case_num = tb_test_case_num + 1;
-  
-  // Setup UART provided signals with 'active' values for reset check
-  tb_rx_data        = '1;
-  tb_data_ready     = 1'b1;
-  tb_overrun_error  = 1'b1;
-  tb_framing_error  = 1'b1;
-
+    
   // Reset the DUT
   reset_dut();
 
   // Check outputs for reset state
-  tb_expected_data_read  = 1'b0;
-  tb_expected_bit_period = RESET_BIT_PERIOD;
-  tb_expected_data_size  = RESET_DATA_SIZE;
   tb_expected_prdata     = '0;
   check_outputs("after DUT reset");
 
-  // Set all UART inputs back to inactive values
-  tb_rx_data        = '0;
-  tb_data_ready     = 1'b0;
-  tb_overrun_error  = 1'b0;
-  tb_framing_error  = 1'b0;
-
   //*****************************************************************************
-  // Test Case: Configure Bit Period Registers
+  // Configure Design Test Case
   //*****************************************************************************
-  // Update Navigation Info
-  tb_test_case     = "Write to Bit Period Registers";
+  tb_test_case = "Configure Design";
   tb_test_case_num = tb_test_case_num + 1;
 
-  // Reset the DUT to isolate from prior to isolate from prior test case
   reset_dut();
 
-  // Enque the needed transactions (Overall period of 10 clocks)
-  tb_test_bit_period = 14'd10;
-  enqueue_transaction(1'b1, 1'b1, ADDR_BIT_CR0, tb_test_bit_period[7:0], 1'b0);
-  enqueue_transaction(1'b1, 1'b1, ADDR_BIT_CR1, {2'b00, tb_test_bit_period[13:8]}, 1'b0);
+  configure_dut(13'd10, 8'd8);
 
-  // Run the transactions via the model
-  execute_transactions(2);
+  tb_expected_prdata = 8'd10;
+  enqueue_transaction(1'b1, 1'b0, ADDR_BIT_CR0, tb_expected_prdata, 1'b0);
+  execute_transactions(1);
+  check_outputs("after reading the least signficant bits of bit period");
 
-  // Check the DUT outputs
-  tb_expected_data_read  = 1'b0;
-  tb_expected_bit_period = tb_test_bit_period;
-  tb_expected_data_size  = RESET_DATA_SIZE;
-  tb_expected_prdata     = '0;
-  check_outputs("after attempting to configure a 10-cycle bit period");
+  tb_expected_prdata = 8'd0;
+  enqueue_transaction(1'b1, 1'b0, ADDR_BIT_CR1, tb_expected_prdata, 1'b0);
+  execute_transactions(1);
+  check_outputs("after reading the most signficant bits of bit period");
 
+  tb_expected_prdata = 8'd8;
+  enqueue_transaction(1'b1, 1'b0, ADDR_DATA_CR, tb_expected_prdata, 1'b0);
+  execute_transactions(1);
+  check_outputs("after reading the data size register");
 
   //*****************************************************************************
-  // Test Case: Configure and Read Bit Period Registers
+  // UART 10 cycle period, 8 bit size
   //*****************************************************************************
-  // Update Navigation Info
-  tb_test_case     = "Write/Read Bit Period Registers";
+  tb_test_case = "10 cycle bit period, 8 bit size, Single Packet";
   tb_test_case_num = tb_test_case_num + 1;
 
-  // Reset the DUT to isolate from prior to isolate from prior test case
   reset_dut();
-  
-  // Enque the needed transactions (Overall period of 1000 clocks)
-  tb_test_bit_period = 14'd1000;
-  // Enqueue the CR Writes
-  enqueue_transaction(1'b1, 1'b1, ADDR_BIT_CR0, tb_test_bit_period[7:0], 1'b0);
-  enqueue_transaction(1'b1, 1'b1, ADDR_BIT_CR1, {2'b00, tb_test_bit_period[13:8]}, 1'b0);
-  
-  // Run the write transactions via the model
-  execute_transactions(2);
 
-  // Check the DUT outputs
-  tb_expected_data_read  = 1'b0;
-  tb_expected_bit_period = tb_test_bit_period;
-  tb_expected_data_size  = RESET_DATA_SIZE;
-  tb_expected_prdata     = '0;
-  check_outputs("after attempting to configure a 1000-cycle bit period");
+  tb_test_bit_period = 13'd10;
+  configure_dut(13'd10, 8'd8);
 
-  // Enqueue the CR Reads
-  enqueue_transaction(1'b1, 1'b0, ADDR_BIT_CR0, tb_test_bit_period[7:0], 1'b0);
+  fork
+    send_packet(8'd170, 1'b1, 10 * CLK_PERIOD, 8);
+  join_none
 
-  // Run the first read transactions via the model
+  poll;
+
+  tb_expected_prdata = 8'd170;
+  enqueue_transaction(1'b1, 1'b0, ADDR_RX_DATA, tb_expected_prdata, 1'b0);
   execute_transactions(1);
 
-  tb_expected_prdata = tb_test_bit_period[7:0];
-  check_outputs("after attempting to read from address CR0");
+  check_outputs("after reading from rx data buffer");
 
-  // Run the second read transaction
-  enqueue_transaction(1'b1, 1'b0, ADDR_BIT_CR1, {2'b00, tb_test_bit_period[13:8]}, 1'b0);
+  tb_expected_prdata = 8'b0;
+  enqueue_transaction(1'b1, 1'b0, ADDR_ERROR_SR, tb_expected_prdata, 1'b0);
   execute_transactions(1);
 
-  tb_expected_prdata = {2'b00, tb_test_bit_period[13:8]};
-  check_outputs("after attempting to read from address CR1");
-
-  // Student TODO: Add more test cases here
-  //*****************************************************************************
-  // Test Case: Configure Data Size Register
-  //*****************************************************************************
-  // Update Navigation Info
-  tb_test_case     = "Configure Data Size Register";
-  tb_test_case_num = tb_test_case_num + 1;
-
-  // Reset the DUT to isolate from prior to isolate from prior test case
-  reset_dut();
-
-  // Enque the needed transactions (Data Size of 5 bits)
-  enqueue_transaction(1'b1, 1'b1, ADDR_DATA_CR, 8'd5, 1'b0);
-
-  // Run the transactions via the model
-  execute_transactions(1);
-
-  // Check the DUT outputs
-  tb_expected_data_read  = 1'b0;
-  tb_expected_bit_period = RESET_BIT_PERIOD;
-  tb_expected_data_size  = 8'd5;
-  tb_expected_prdata     = '0;
-  check_outputs("after attempting to configure data size to 5 bits");
+  check_outputs("after reading from error status register");
 
   //*****************************************************************************
-  // Test Case: Configure and Read Data Size Register
+  // UART 10 cycle period, 8 bit size, framing error
   //*****************************************************************************
-  // Update Navigation Info
-  tb_test_case     = "Configure and Read Data Size Register";
-  tb_test_case_num = tb_test_case_num + 1;
-
-  // Reset the DUT to isolate from prior to isolate from prior test case
-  reset_dut();
-  
-  // Enque the needed transactions (Overall period of 1000 clocks)
-  // Enqueue the Data Size Register Writes
-  enqueue_transaction(1'b1, 1'b1, ADDR_DATA_CR, 8'd5, 1'b0);
-  enqueue_transaction(1'b1, 1'b0, ADDR_DATA_CR, 8'd5, 1'b0);
-  
-  // Run the write transactions via the model
-  execute_transactions(2);
-
-  tb_expected_data_read  = 1'b0;
-  tb_expected_bit_period = RESET_BIT_PERIOD;
-  tb_expected_data_size  = 8'd5;
-  tb_expected_prdata     = 8'd5;
-  check_outputs("after attempting to read from data size register");
-
-  //*****************************************************************************
-  // Test Case: Read from the Status Register
-  //*****************************************************************************
-  // Update Navigation Info
-  tb_test_case     = "Read from Data Status Register";
-  tb_test_case_num = tb_test_case_num + 1;
-
-  // Reset the DUT to isolate from prior to isolate from prior test case
-  reset_dut();
-  
-  // Enqueue the needed transactions (Data Size of 5 bits)
-  tb_data_ready = 1'b1;
-  @(posedge tb_clk);
-  
-  enqueue_transaction(1'b1, 1'b0, ADDR_DATA_SR, 8'd1, 1'b0);
-  
-  // Run the write transactions via the model
-  execute_transactions(1);
-
-  // Check the DUT outputs
-  tb_expected_data_read  = 1'b0;
-  tb_expected_bit_period = RESET_BIT_PERIOD;
-  tb_expected_data_size  = RESET_DATA_SIZE;
-  tb_expected_prdata     = 8'd1;
-  check_outputs("after attempting to read from the status register");
-
-  //*****************************************************************************
-  // Test Case: Read from Data Buffer Register
-  //*****************************************************************************
-  tb_test_case     = "Read from Data Buffer Register";
+  tb_test_case = "10 cycle, 8 bit size, framing error";
   tb_test_case_num = tb_test_case_num + 1;
 
   reset_dut();
 
-  // Load data into Data Register
-  tb_rx_data = 8'b10101010;
-  @(posedge tb_clk);
+  configure_dut(13'd10, 8'd8);
 
-  enqueue_transaction(1'b1, 1'b0, ADDR_RX_DATA, tb_rx_data, 1'b0);
+  send_packet(8'b10101010, 1'b0, 10 * CLK_PERIOD, 4'd8);
+
+  tb_expected_prdata = '1;
+  enqueue_transaction(1'b1, 1'b0, ADDR_RX_DATA, tb_expected_prdata, 1'b0);
   execute_transactions(1);
 
-  tb_expected_data_read = 1'b1;
-  tb_expected_bit_period = RESET_BIT_PERIOD;
-  tb_expected_data_size = RESET_BIT_PERIOD;
-  tb_expected_prdata = tb_rx_data;
-  check_outputs("After attempting to read from the data buffer register");
+  check_outputs("after reading from rx data buffer");
+
+  tb_expected_prdata = 8'b1;
+  enqueue_transaction(1'b1, 1'b0, ADDR_ERROR_SR, tb_expected_prdata, 1'b0);
+  execute_transactions(1);
+
+  check_outputs("after reading from error status register");
 
   //*****************************************************************************
-  // Test Case: Write to Status Register (Error)
+  // UART 10 cycle period, 8 bit size, Multiple Fast Packets
   //*****************************************************************************
-  tb_test_case     = "Write to Data Status Register (Error)";
+  tb_test_case = "10 cycle bit period, 8 bit size, Multiple Fast Packets";
   tb_test_case_num = tb_test_case_num + 1;
 
   reset_dut();
 
-  enqueue_transaction(1'b1, 1'b1, ADDR_DATA_SR, 8'd6, 1'b1);
+  configure_dut(13'd10, 8'd8);
 
-  execute_transactions(1);
+  test_packets = new[4];
+  test_packets[0] = 8'b11101010;
+  test_packets[1] = 8'b11101111;
+  test_packets[2] = 8'b01101101;
+  test_packets[3] = 8'b01100101;
+
+  fork begin
+    for (integer i = 0; i < 4; i++) begin
+      send_packet(test_packets[i], 1'b1, 10 * CLK_PERIOD * 1.04, 8);
+    end
+  end
+  join_none
+
+  for (integer i = 0; i < 4; i++) begin
+    poll;
+
+    tb_expected_prdata = test_packets[i];
+    enqueue_transaction(1'b1, 1'b0, ADDR_RX_DATA, tb_expected_prdata, 1'b0);
+    execute_transactions(1);
+
+    check_outputs("after reading from rx data buffer");
+
+    tb_expected_prdata = 8'b0;
+    enqueue_transaction(1'b1, 1'b0, ADDR_ERROR_SR, tb_expected_prdata, 1'b0);
+    execute_transactions(1);
+
+    check_outputs("after reading from error status register");
+  end
 
   //*****************************************************************************
-  // Test Case: Write to Data Buffer (Error)
+  // UART 1000 cycle period, 5 bit size
   //*****************************************************************************
-  tb_test_case     = "Write to Data Buffer (Error)";
+  tb_test_case = "1000 cycle bit period, 5 bit size, Single Packet";
   tb_test_case_num = tb_test_case_num + 1;
 
   reset_dut();
 
-  enqueue_transaction(1'b1, 1'b1, ADDR_RX_DATA, 8'd6, 1'b1);
+  configure_dut(13'd1000, 8'd5);
 
-  execute_transactions(1);
+  test_packets = new[1];
+  test_packets[0] = 8'b10100101; // Only send last 5 bits (00101)
+
+  fork begin
+    for (integer i = 0; i < test_packets.size; i++) begin
+      send_packet(test_packets[i], 1'b1, 1000 * CLK_PERIOD, 5);
+    end
+  end
+  join_none
+
+  for (integer i = 0; i < test_packets.size; i++) begin
+    poll;
+
+    tb_expected_prdata = {3'b0, test_packets[i][4:0]};
+    enqueue_transaction(1'b1, 1'b0, ADDR_RX_DATA, tb_expected_prdata, 1'b0);
+    execute_transactions(1);
+
+    check_outputs("after reading from rx data buffer");
+
+    tb_expected_prdata = 8'b0;
+    enqueue_transaction(1'b1, 1'b0, ADDR_ERROR_SR, tb_expected_prdata, 1'b0);
+    execute_transactions(1);
+
+    check_outputs("after reading from error status register");
+  end
 
 end
 
