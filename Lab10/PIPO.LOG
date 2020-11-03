@@ -1,0 +1,61 @@
+
+********************************************************************************
+Product   : Virtuoso(R) STREAM In
+Program   : @(#)$CDS: pipo.exe version 5.1.0 11/22/2011 01:41 (cicln04) $
+SubVersion: sub-version 5.10.41.500.6.151
+Started at: 28-Oct-2020  21:12:50
+User Name : mg45
+Host Name : ecegrid-thin1.ecn.purdue.edu
+Directory : /home/ecegrid/a/mg45/ece337/Lab10
+CADENCE Design Systems, Inc.
+********************************************************************************
+
+Stream file   : /home/ecegrid/a/mg45/ece337/Lab10/final.gds2
+
+Reading Stream File ...
+VERSION      : 3
+MODIFICATION : Wed Oct 28 20:51:24 2020
+ACCESS       : Wed Oct 28 20:51:24 2020
+WARNING (158): Years in non-standard four-digit format encountered in the Stream file.
+GDS LIBRARY  : DesignLib
+U-UNIT/DBU   : 0.001000000000
+METRIC/DBU   : 0.000000001000
+
+TARGET LIBRARY PATH: /home/ecegrid/a/mg45/ece337/Lab10/My_Layout
+
+     1. scanning cellview (layout_lab_design layout)
+     2. scanning cellview (M3_M2 layout)
+     3. scanning cellview (M2_M1 layout)
+     4. scanning cellview (layout_lab_design_VIA0 layout)
+     5. scanning cellview (layout_lab_design_VIA1 layout)
+     6. scanning cellview (layout_lab_design_VIA2 layout)
+     7. scanning cellview (layout_lab_design_VIA3 layout)
+     8. scanning cellview (layout_lab_design_VIA4 layout)
+     9. scanning cellview (PADVDD layout)
+    10. scanning cellview (PADNC layout)
+    11. scanning cellview (PADOUT layout)
+    12. scanning cellview (PADINC layout)
+    13. scanning cellview (PADGND layout)
+    14. scanning cellview (PADFC layout)
+    15. scanning cellview (DFFSR layout)
+    16. scanning cellview (XNOR2X1 layout)
+    17. scanning cellview (MUX2X1 layout)
+    18. scanning cellview (XOR2X1 layout)
+    19. scanning cellview (OR2X1 layout)
+    20. scanning cellview (OAI22X1 layout)
+    21. scanning cellview (OAI21X1 layout)
+    22. scanning cellview (NOR2X1 layout)
+    23. scanning cellview (NAND3X1 layout)
+    24. scanning cellview (NAND2X1 layout)
+    25. scanning cellview (INVX2 layout)
+    26. scanning cellview (INVX1 layout)
+    27. scanning cellview (DFFPOSX1 layout)
+    28. scanning cellview (BUFX2 layout)
+    29. scanning cellview (AOI22X1 layout)
+    30. scanning cellview (AOI21X1 layout)
+    31. scanning cellview (AND2X1 layout)
+    32. scanning cellview (FILL layout)
+
+PASS 2...
+* Fatal * dbCreateLib: cannot create library 'My_Layout'  because ddCreateLib: The directory '/home/ecegrid/a/mg45/ece337/Lab10' for lib 'My_Layout' does not exist.
+FATAL (66): Failed to create the target library `My_Layout' in the run directory. Check that you have permissions to create the target library.

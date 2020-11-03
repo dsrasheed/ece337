@@ -11,7 +11,7 @@
 module tb_ahb_lite_fir_filter();
 
 // Timing related constants
-localparam CLK_PERIOD = 10;
+localparam CLK_PERIOD = 9;
 localparam BUS_DELAY  = 800ps; // Based on FF propagation delay
 
 // Sizing related constants
@@ -271,18 +271,6 @@ begin
 end
 endtask
 
-task poll;
-begin
-  $info("Polling until FIR is Free, Expect an Incorrect hrata when the status becomes 0");
-  enqueue_transaction(1'b1, 1'b0, ADDR_STATUS, 16'b1, 1'b0, 1'b1);
-  execute_transactions(1);
-  while (tb_hrdata != '0) begin
-    enqueue_transaction(1'b1, 1'b0, ADDR_STATUS, 16'b1, 1'b0, 1'b1);
-    execute_transactions(1);
-  end
-end
-endtask
-
 task load_coeff;
 	input [15:0] coeffs [3:0];
 begin
@@ -292,7 +280,9 @@ begin
   enqueue_transaction(1'b1, 1'b1, ADDR_COEF_SET, 8'b1, 1'b0, 1'b0);
   execute_transactions(5);
 
-  poll;
+  for (int i = 0; i < 8; i++) begin
+    @(posedge tb_clk);
+  end
 end
 endtask
 
@@ -304,13 +294,20 @@ task test_sample;
 	input [15:0] expected_fir_out;
 	input expected_err;
 begin
-		enqueue_transaction(1'b1, 1'b1, ADDR_SAMPLE, sample_value, expected_err, 1'b1);
-    execute_transactions(1'b1);
+		enqueue_transaction(1'b1, 1'b1, ADDR_SAMPLE, sample_value, 1'b0, 1'b1);
+    execute_transactions(1);
 
-    poll;
+    for (int i = 0; i < 16; i++) begin
+      @(posedge tb_clk);
+    end
 
-    enqueue_transaction(1'b1, 1'b0, ADDR_RESULT, expected_fir_out, expected_err, 1'b1);
-    execute_transactions(1'b1);
+    $info("Reading FIR Results of Sample %d", sample_value);
+    enqueue_transaction(1'b1, 1'b0, ADDR_RESULT, expected_fir_out, 1'b0, 1'b1);
+    execute_transactions(1);
+
+    $info("Reading FIR Error of Sample %d", sample_value);
+    enqueue_transaction(1'b1, 1'b0, ADDR_STATUS_ERR, {15'b0, expected_err}, 1'b0, 1'b0);
+    execute_transactions(1);
 
 		// Add some padding between samples
 		#(CLK_PERIOD * 3);
@@ -329,13 +326,15 @@ task test_stream;
 		
 	integer s;
 begin
-	// Reset the design
+	// Count the test case
 	tb_test_case_num += 1;
-	reset_dut;
+
+  // reset
+  reset_dut();
 		
 	// Load the set of coefficients
-	load_coeff(tv.coeffs);
-		
+  load_coeff(tv.coeffs);
+
 	// Send the stream of samples provided
 	for(s = 0; s < 4; s++)
 	begin
@@ -347,7 +346,7 @@ endtask
 initial
 	begin // TODO: Add more standard test cases here
 		// Populate the test vector array to use
-		tb_test_vectors = new[3];
+		tb_test_vectors = new[4];
 		// Test case 0
 		tb_test_vectors[0].coeffs		= {{COEFF_5}, {COEFF1}, {COEFF1}, {COEFF_5}};
 		tb_test_vectors[0].samples	= {16'd100, 16'd100, 16'd100, 16'd100};
@@ -361,8 +360,13 @@ initial
 
 		tb_test_vectors[2].coeffs		= {{COEFF1}, {COEFF1}, {COEFF1}, {COEFF1}};
 		tb_test_vectors[2].samples		= {16'h0000, 16'hffff, 16'h0000, 16'hffff};
-		tb_test_vectors[2].results		= {16'hffff, 16'hffff, 16'hffff, 16'hffff};
+		tb_test_vectors[2].results		= {16'hfff2, 16'h0002, 16'hffff, 16'hffff};
 		tb_test_vectors[2].errors		= {1'b1, 1'b1, 1'b0, 1'b0};
+
+    tb_test_vectors[3].coeffs   = {{COEFF_25}, {COEFF_125}, {COEFF_5}, {COEFF0}};
+    tb_test_vectors[3].samples  = {16'd8765, 16'd7475, 16'd5743, 16'h0000};
+    tb_test_vectors[3].results  = {16'd3020, 16'd2871, 16'h0000, 16'h0000};
+    tb_test_vectors[3].errors   = {1'b0, 1'b0, 1'b0, 1'b0};
 	end
 
 //*****************************************************************************
@@ -452,8 +456,30 @@ initial begin
   reset_dut();
 
   test_stream(tb_test_vectors[0]);
+  test_stream(tb_test_vectors[1]);
 
+  //*****************************************************************************
+  // Test Case: Valid Sample Handling #2
+  //*****************************************************************************
+  tb_test_case     = "Sample Test 2";
+  tb_test_case_num = tb_test_case_num + 1;
+
+  reset_dut();
+
+  test_stream(tb_test_vectors[0]);
+  test_stream(tb_test_vectors[1]);
+  test_stream(tb_test_vectors[2]);
+
+  //*****************************************************************************
+  // Test Case: Valid Sample Handling #3
+  //*****************************************************************************
+  tb_test_case     = "Sample Test 3";
+  tb_test_case_num = tb_test_case_num + 1; 
+
+  reset_dut();
   
+  test_stream(tb_test_vectors[1]);
+  test_stream(tb_test_vectors[3]);
 end
 
 endmodule

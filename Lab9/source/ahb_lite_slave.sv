@@ -9,7 +9,7 @@
 module ahb_lite_slave (
     input  wire         clk, n_rst,
     // FIR Sample Loading
-    output reg          data_ready, 
+    output reg          data_ready,
     output wire  [15:0] sample_data,
     // FIR Coefficient Loading
     output wire         new_coefficient_set,
@@ -26,7 +26,7 @@ module ahb_lite_slave (
     input  wire  [1:0]  htrans,
     input  wire         hwrite,
     input  wire  [15:0] hwdata,
-    output reg   [15:0] hrdata,
+    output logic [15:0] hrdata,
     output logic        hresp
 );
 
@@ -36,8 +36,6 @@ localparam NON_SEQ = 2'd2;
 localparam IDLE    = 2'd0;
 
 /**** REGISTERS ****/
-reg [15:0] status;
-reg [15:0] result;
 reg [15:0] new_sample;
 reg [15:0] F0;
 reg [15:0] F1;
@@ -52,6 +50,12 @@ reg [5:0] delay_wsel_even;
 reg [4:0] delay_wsel_odd;
 logic [2:0] rsel_even;
 logic [2:0] rsel_odd;
+reg [2:0] delay_rsel_odd;
+reg [2:0] delay_rsel_even;
+reg [1:0] delay_htrans;
+reg [2:0] delay_haddr;
+reg delay_hsize;
+logic [3:0] shifted_haddr;
 
 always_comb begin
     wsel_even = '0;
@@ -59,22 +63,25 @@ always_comb begin
     rsel_even = '0;
     rsel_odd  = '0;
     hresp = 0;
+    shifted_haddr = '0;
     if (hsel && hwrite && htrans == NON_SEQ) begin
         // 0xF doesn't have a register, so a 1 byte write cannot be performed
         // Addresses 0,1,2,3 are read-only.
-        if (hsize == 0 && haddr == 4'hf || haddr < 4'h4)
+        if ((hsize == 0 && haddr == 4'hf) || haddr == 4'h0 || haddr == 4'h1 || haddr == 4'h2 || haddr == 4'h3)
             hresp = 1;
-        // For 2 byte writes to 0xF, just write to 0xE.
-        else if (haddr == 4'hf)
-            wsel_even[3'h7 - 3'h2] = 1;
-        else if (hsize == 1) begin
-            wsel_even[haddr[3:1] - 3'h2] = 1'b1;
-            wsel_odd[haddr[3:1] - 3'h2] = 1'b1;
+        else begin
+            shifted_haddr = haddr - 4'h4;
+            if (hsize == 1) begin
+                wsel_even[shifted_haddr[3:1]] = 1'b1;
+                if (haddr != 4'hf) begin
+                    wsel_odd[shifted_haddr[3:1]] = 1'b1;
+                end
+            end
+            else if (hsize == 0 && haddr[0] == 0) 
+                wsel_even[shifted_haddr[3:1]] = 1'b1;
+            else if (hsize == 0 && haddr[0] == 1)
+                wsel_odd[shifted_haddr[3:1]]  = 1'b1;
         end
-        else if (hsize == 0 && haddr[0] == 0) 
-            wsel_even[haddr[3:1] - 3'h2] = 1'b1;
-        else if (hsize == 0 && haddr[0] == 1)
-            wsel_odd[haddr[3:1] - 3'h2] = 1'b1;
     end
     else if (hsel && !hwrite && htrans == NON_SEQ) begin
         // OxF doesn't have a register, so a 1 byte read cannot be performed
@@ -93,16 +100,27 @@ always_ff @ (posedge clk, negedge n_rst) begin
     if (n_rst == 0) begin
         delay_wsel_even <= '0;
         delay_wsel_odd  <= '0;
+        delay_rsel_odd  <= '0;
+        delay_rsel_even <= '0;
+        delay_htrans <= '0;
+        delay_hsize <= '0;
+        delay_haddr <= '0;
     end
     else begin
         delay_wsel_even <= wsel_even;
         delay_wsel_odd  <= wsel_odd;
+        delay_rsel_odd <= rsel_odd;
+        delay_rsel_even <= rsel_even;
+        delay_htrans <= htrans;
+        delay_hsize <= hsize;
+        delay_haddr <= haddr;
     end
 end
 
 /**** READ-ONLY REGISTERS ****/
 // Status Controller
-wire [16:0] nxt_status;
+/*
+wire [15:0] nxt_status;
 assign nxt_status = {7'b0, err, 7'b0, modwait | new_coefficient_set};
 always_ff @ (posedge clk, negedge n_rst) begin
     if (n_rst == 0)
@@ -118,6 +136,7 @@ always_ff @ (posedge clk, negedge n_rst) begin
     else
         result <= fir_out;
 end
+*/
 
 /**** CONFIG REGISTERS (Addresses 0x4 to 0xE) ****/
 // Addresses 0x4 to 0xD (Sample Data and Coefficients)
@@ -163,7 +182,7 @@ logic [7:0] nxt_new_coeff_confirm;
 always_comb begin
     nxt_new_coeff_confirm = new_coeff_confirm;
 
-    if (delay_wsel_even[3'h7 - 3'h2] == 1)
+    if (delay_wsel_even[3'h5] == 1)
         nxt_new_coeff_confirm = hwdata[7:0];
     else if (coefficient_num == 2'd3 && modwait == 1)
         nxt_new_coeff_confirm = '0;
@@ -189,7 +208,7 @@ logic nxt_data_ready;
 
 always_comb begin
     nxt_data_ready = data_ready;
-    if (delay_wsel_even[0] == 1'b1 && delay_wsel_odd[0] == 1'b1)
+    if (delay_wsel_even[0] == 1'b1 || delay_wsel_odd[0] == 1'b1)
         nxt_data_ready = 1;
     else if (modwait == 1)
         nxt_data_ready = 0;
@@ -204,41 +223,33 @@ end
 
 /**** HRDATA INTERFACE ****/
 wire [7:0] upper, lower;
-assign lower = rsel_even == 3'd0 ? status[7:0] :
-               rsel_even == 3'd1 ? result[7:0] :
-               rsel_even == 3'd2 ? sample_data[7:0] :
-               rsel_even == 3'd3 ? F0[7:0] :
-               rsel_even == 3'd4 ? F1[7:0] :
-               rsel_even == 3'd5 ? F2[7:0] :
-               rsel_even == 3'd6 ? F3[7:0] : new_coeff_confirm;
-assign upper = rsel_odd  == 3'd0 ? status[15:8] :
-               rsel_odd  == 3'd1 ? result[15:8] :
-               rsel_odd  == 3'd2 ? sample_data[15:8] :
-               rsel_odd  == 3'd3 ? F0[15:8] :
-               rsel_odd  == 3'd4 ? F1[15:8] :
-               rsel_odd  == 3'd5 ? F2[15:8] :
-               rsel_odd  == 3'd6 ? F3[15:8] : 8'd0;
-
-logic [15:0] nxt_hrdata;
+assign lower = delay_rsel_even == 3'd0 ? {7'b0, modwait | new_coefficient_set} :
+               delay_rsel_even == 3'd1 ? fir_out[7:0] :
+               delay_rsel_even == 3'd2 ? sample_data[7:0] :
+               delay_rsel_even == 3'd3 ? F0[7:0] :
+               delay_rsel_even == 3'd4 ? F1[7:0] :
+               delay_rsel_even == 3'd5 ? F2[7:0] :
+               delay_rsel_even == 3'd6 ? F3[7:0] : new_coeff_confirm;
+               
+assign upper = delay_rsel_odd  == 3'd0 ? {7'b0, err} :
+               delay_rsel_odd  == 3'd1 ? fir_out[15:8] :
+               delay_rsel_odd  == 3'd2 ? sample_data[15:8] :
+               delay_rsel_odd  == 3'd3 ? F0[15:8] :
+               delay_rsel_odd  == 3'd4 ? F1[15:8] :
+               delay_rsel_odd  == 3'd5 ? F2[15:8] :
+               delay_rsel_odd  == 3'd6 ? F3[15:8] : 8'd0;
 
 always_comb begin
-    nxt_hrdata = hrdata;
+    hrdata = '0;
 
-    if (htrans == NON_SEQ) begin
-        if (hsize == 1)
-            nxt_hrdata = {upper, lower};
-        else if (hsize == 0 && haddr[0] == 0) // Even
-            nxt_hrdata = {8'b0, lower};
-        else if (hsize == 0 && haddr[0] == 1) // Odd
-            nxt_hrdata = {upper, 8'b0};
+    if (delay_htrans == NON_SEQ) begin
+        if (delay_hsize == 1)
+            hrdata = {upper, lower};
+        else if (delay_hsize == 0 && delay_haddr[0] == 0) // Even
+            hrdata = {8'b0, lower};
+        else if (delay_hsize == 0 && delay_haddr[0] == 1) // Odd
+            hrdata = {8'b0, upper};
     end
-end
-
-always_ff @ (posedge clk, negedge n_rst) begin
-    if (n_rst == 0)
-        hrdata <= '0;
-    else
-        hrdata <= nxt_hrdata;
 end
 
 endmodule

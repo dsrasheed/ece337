@@ -1,0 +1,305 @@
+[11/01 13:15:05      0s] 
+[11/01 13:15:05      0s] Cadence Innovus(TM) Implementation System.
+[11/01 13:15:05      0s] Copyright 2016 Cadence Design Systems, Inc. All rights reserved worldwide.
+[11/01 13:15:05      0s] 
+[11/01 13:15:05      0s] Version:	v16.12-s051_1, built Wed Aug 17 12:18:54 PDT 2016
+[11/01 13:15:05      0s] Options:	
+[11/01 13:15:05      0s] Date:		Sun Nov  1 13:15:05 2020
+[11/01 13:15:05      0s] Host:		ecegrid-thin1.ecn.purdue.edu (x86_64 w/Linux 3.10.0-1127.8.2.el7.x86_64) (6cores*24cpus*Intel(R) Xeon(R) CPU X5675 @ 3.07GHz 12288KB)
+[11/01 13:15:05      0s] OS:		CentOS Linux release 7.8.2003 (Core)
+[11/01 13:15:05      0s] 
+[11/01 13:15:05      0s] License:
+[11/01 13:15:05      0s] 		invs	Innovus Implementation System	16.1	checkout succeeded
+[11/01 13:15:05      0s] 		8 CPU jobs allowed with the current license(s). Use setMultiCpuUsage to set your required CPU count.
+[11/01 13:15:16     10s] @(#)CDS: Innovus v16.12-s051_1 (64bit) 08/17/2016 12:18 (Linux 2.6.18-194.el5)
+[11/01 13:15:16     10s] @(#)CDS: NanoRoute 16.12-s051_1 NR160816-1350/16_12-UB (database version 2.30, 347.6.1) {superthreading v1.30}
+[11/01 13:15:16     10s] @(#)CDS: AAE 16.12-s026 (64bit) 08/17/2016 (Linux 2.6.18-194.el5)
+[11/01 13:15:16     10s] @(#)CDS: CTE 16.12-s023_1 () Aug 12 2016 01:35:46 ( )
+[11/01 13:15:16     10s] @(#)CDS: SYNTECH 16.12-s009_1 () Aug 11 2016 01:33:09 ( )
+[11/01 13:15:16     10s] @(#)CDS: CPE v16.12-s054
+[11/01 13:15:16     10s] @(#)CDS: IQRC/TQRC 15.2.4-s467 (64bit) Wed Jul 20 17:12:38 PDT 2016 (Linux 2.6.18-194.el5)
+[11/01 13:15:16     10s] @(#)CDS: OA 22.50-p049 Fri Jun 10 10:56:20 2016
+[11/01 13:15:16     10s] @(#)CDS: SGN 10.10-p124 (19-Aug-2014) (64 bit executable)
+[11/01 13:15:16     10s] @(#)CDS: RCDB 11.8
+[11/01 13:15:16     10s] --- Running on ecegrid-thin1.ecn.purdue.edu (x86_64 w/Linux 3.10.0-1127.8.2.el7.x86_64) (6cores*24cpus*Intel(R) Xeon(R) CPU X5675 @ 3.07GHz 12288KB) ---
+[11/01 13:15:16     10s] Create and set the environment variable TMPDIR to /tmp/innovus_temp_13159_ecegrid-thin1.ecn.purdue.edu_mg45_LNM0Bq.
+
+[11/01 13:15:17     10s] 
+[11/01 13:15:17     10s] **INFO:  MMMC transition support version v31-84 
+[11/01 13:15:17     10s] 
+[11/01 13:15:17     10s] <CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+[11/01 13:15:17     10s] <CMD> suppressMessage ENCEXT-2799
+[11/01 13:15:17     11s] <CMD> getDrawView
+[11/01 13:15:17     11s] <CMD> loadWorkspace -name Physical
+[11/01 13:15:17     11s] <CMD> win
+[11/01 13:27:09     91s] <CMD> set init_verilog final.v
+[11/01 13:27:09     91s] <CMD> init_design
+[11/01 13:27:09     91s] **WARN: (GLOBAL-100):	Global 'timing_disable_backward_compatible_mmmc_mode' has become obsolete. It will be removed in the next release.
+[11/01 13:27:09     91s] No LEF file provided, but timing lib is provided.
+[11/01 13:27:09     91s] Use timer mode.
+[11/01 13:27:09     91s] *** End library_loading (cpu=0.00min, mem=0.0M, fe_cpu=1.52min, fe_real=12.07min, fe_mem=507.9M) ***
+[11/01 13:27:09     91s] #- Begin Load netlist data ... (date=11/01 13:27:09, mem=507.9M)
+[11/01 13:27:09     91s] *** Begin netlist parsing (mem=507.9M) ***
+[11/01 13:27:09     91s] Created 0 new cells from 0 timing libraries.
+[11/01 13:27:09     91s] Reading netlist ...
+[11/01 13:27:09     91s] Backslashed names will retain backslash and a trailing blank character.
+[11/01 13:27:09     91s] Reading verilog netlist 'final.v'
+[11/01 13:27:09     91s] Module BUFX2 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module DFFSR is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module NOR2X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module MUX2X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module INVX1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module NAND2X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module XNOR2X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module OAI21X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module AOI22X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module AOI21X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module DFFPOSX1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module OR2X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module INVX2 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module NAND3X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module XOR2X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module OAI22X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module AND2X1 is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module PADOUT is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] Module PADINC is not defined and will be treated as an empty module.
+[11/01 13:27:09     91s] 
+[11/01 13:27:09     91s] *** Memory Usage v#1 (Current mem = 509.488M, initial mem = 163.832M) ***
+[11/01 13:27:09     91s] *** End netlist parsing (cpu=0:00:00.0, real=0:00:00.0, mem=509.5M) ***
+[11/01 13:27:09     91s] #- End Load netlist data ... (date=11/01 13:27:09, total cpu=0:00:00.0, real=0:00:00.0, peak res=509.5M, current mem=509.5M)
+[11/01 13:27:09     91s] Top level cell is layout_lab_design.
+[11/01 13:27:09     91s] Hooked 0 DB cells to tlib cells.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'DFFSR' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'BUFX2' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'PADINC' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'PADOUT' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'AND2X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'OAI22X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'XOR2X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'NAND3X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'INVX2' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'OR2X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'DFFPOSX1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'AOI21X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'AOI22X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'OAI21X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'XNOR2X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'NAND2X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'INVX1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'MUX2X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] **WARN: (IMPDB-2504):	Cell 'NOR2X1' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+[11/01 13:27:09     91s] Cell 'XNOR2X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'XNOR2X1' as output for net 'tx_value' in module 'layout_lab_usb_encoder'.
+[11/01 13:27:09     91s] Cell 'MUX2X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'MUX2X1' as output for net 'n1' in module 'layout_lab_usb_encoder'.
+[11/01 13:27:09     91s] Cell 'INVX1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'INVX1' as output for net 'n25' in module 'layout_lab_usb_tx_sr_1'.
+[11/01 13:27:09     91s] Cell 'OR2X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'OR2X1' as output for net 'rdata[7]' in module 'fiforam'.
+[11/01 13:27:09     91s] Cell 'BUFX2' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'BUFX2' as output for net 'FE_OFN24_n241' in module 'fiforam'.
+[11/01 13:27:09     91s] Cell 'AOI22X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'AOI22X1' as output for net 'n9' in module 'fiforam'.
+[11/01 13:27:09     91s] Cell 'NOR2X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'NOR2X1' as output for net 'n53' in module 'fiforam'.
+[11/01 13:27:09     91s] Cell 'INVX2' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'INVX2' as output for net 'n61' in module 'fiforam'.
+[11/01 13:27:09     91s] Cell 'NAND3X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'NAND3X1' as output for net 'n183' in module 'fiforam'.
+[11/01 13:27:09     91s] Cell 'DFFSR' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Q' of cell 'DFFSR' as output for net 'wptr[3]' in module 'write_ptr'.
+[11/01 13:27:09     91s] Cell 'XOR2X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'XOR2X1' as output for net 'wptr_nxt[2]' in module 'write_ptr'.
+[11/01 13:27:09     91s] Cell 'NAND2X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'NAND2X1' as output for net 'n3' in module 'write_fifo_ctrl'.
+[11/01 13:27:09     91s] Cell 'OAI21X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'OAI21X1' as output for net 'n32' in module 'layout_lab_usb_timer'.
+[11/01 13:27:09     91s] Cell 'OAI22X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'OAI22X1' as output for net 'n15' in module 'layout_lab_usb_timer'.
+[11/01 13:27:09     91s] Cell 'AOI21X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'AOI21X1' as output for net 'n9' in module 'layout_lab_usb_tcu'.
+[11/01 13:27:09     91s] Cell 'AND2X1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Y' of cell 'AND2X1' as output for net 'n41' in module 'layout_lab_usb_tcu'.
+[11/01 13:27:09     91s] Cell 'PADOUT' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'YPAD' of cell 'PADOUT' as output for net 'd_plus' in module 'layout_lab_design'.
+[11/01 13:27:09     91s] Cell 'PADINC' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'DI' of cell 'PADINC' as output for net 'nclk' in module 'layout_lab_design'.
+[11/01 13:27:09     91s] Cell 'DFFPOSX1' is referenced in the netlist but not defined in netlist, lef or timing library. Using the net connection data to mark the pin 'Q' of cell 'DFFPOSX1' as output for net '\fiforeg[0][7] ' in module 'fiforam'.
+[11/01 13:27:09     91s] 19 empty module found.
+[11/01 13:27:09     91s] Starting recursive module instantiation check.
+[11/01 13:27:09     91s] No recursion found.
+[11/01 13:27:09     91s] Term dir updated for 0 vinsts of 19 cells.
+[11/01 13:27:09     91s] Building hierarchical netlist for Cell layout_lab_design ...
+[11/01 13:27:09     91s] *** Netlist is unique.
+[11/01 13:27:09     91s] ** info: there are 35 modules.
+[11/01 13:27:09     91s] ** info: there are 0 stdCell insts.
+[11/01 13:27:09     91s] 
+[11/01 13:27:09     91s] *** Memory Usage v#1 (Current mem = 532.246M, initial mem = 163.832M) ***
+[11/01 13:27:09     91s] Set Default Net Delay as 1000 ps.
+[11/01 13:27:09     91s] Set Default Net Load as 0.5 pF. 
+[11/01 13:27:09     91s] Set Default Input Pin Transition as 0.1 ps.
+[11/01 13:27:09     91s] **WARN: (IMPSYT-7328):	The design has been initialized in physical-only mode because the init_mmmc_file global variable was not defined. Timing analysis will not be possible within this session. You can only use commands that do not depend on timing data. If you need to use timing, you need to restart with an init_mmmc_file to define the timing setup, or you can save this design and use restoreDesign -mmmc_file <viewDef.tcl> to add the timing setup information.
+[11/01 13:27:09     91s] 
+[11/01 13:27:09     91s] *** Summary of all messages that are not suppressed in this session:
+[11/01 13:27:09     91s] Severity  ID               Count  Summary                                  
+[11/01 13:27:09     91s] WARNING   IMPSYT-7328          1  The design has been initialized in physi...
+[11/01 13:27:09     91s] WARNING   IMPDB-2504          19  Cell '%s' is instantiated in the Verilog...
+[11/01 13:27:09     91s] *** Message Summary: 20 warning(s), 0 error(s)
+[11/01 13:27:09     91s] 
+[11/01 13:27:20     92s] <CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+[11/01 13:27:20     92s] <CMD> suppressMessage ENCEXT-2799
+[11/01 13:27:20     92s] <CMD> getDrawView
+[11/01 13:27:20     92s] <CMD> loadWorkspace -name Physical
+[11/01 13:27:20     92s] <CMD> win
+[11/01 13:27:21     92s] <CMD> set ::TimeLib::tsgMarkCellLatchConstructFlag 1
+[11/01 13:27:21     92s] <CMD> set conf_qxconf_file NULL
+[11/01 13:27:21     92s] <CMD> set conf_qxlib_file NULL
+[11/01 13:27:21     92s] <CMD> set defHierChar /
+[11/01 13:27:21     92s] Set Default Input Pin Transition as 0.1 ps.
+[11/01 13:27:21     92s] <CMD> set delaycal_input_transition_delay 0.1ps
+[11/01 13:27:21     92s] <CMD> set distributed_client_message_echo 1
+[11/01 13:27:21     92s] <CMD> set distributed_mmmc_disable_reports_auto_redirection 0
+[11/01 13:27:21     92s] <CMD> set floorplan_default_site core
+[11/01 13:27:21     92s] <CMD> set fpIsMaxIoHeight 0
+[11/01 13:27:21     92s] <CMD> set init_gnd_net gnd
+[11/01 13:27:21     92s] <CMD> set init_io_file innovus.io
+[11/01 13:27:21     92s] <CMD> set init_lef_file {/package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.lef /package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.stacks.lef}
+[11/01 13:27:21     92s] <CMD> set init_mmmc_file osu05_MMMC.view
+[11/01 13:27:21     92s] <CMD> set init_oa_search_lib {}
+[11/01 13:27:21     92s] <CMD> set init_pwr_net vdd
+[11/01 13:27:21     92s] <CMD> set init_verilog mapped/layout_lab_design.v
+[11/01 13:27:21     92s] <CMD> set latch_time_borrow_mode max_borrow
+[11/01 13:27:21     92s] <CMD> set pegDefaultResScaleFactor 1
+[11/01 13:27:21     92s] <CMD> set pegDetailResScaleFactor 1
+[11/01 13:27:21     92s] <CMD> set report_inactive_arcs_format {from to when arc_type sense reason}
+[11/01 13:27:21     92s] <CMD> set timing_library_ccs_noise_vin_clip_points {}
+[11/01 13:27:21     92s] <CMD> set timing_library_ccs_noise_vout_clip_points {}
+[11/01 13:27:21     92s] <CMD> set timing_library_load_pin_cap_indices {}
+[11/01 13:27:21     92s] <CMD> set timing_library_write_library_to_directory {}
+[11/01 13:27:21     92s] <CMD> set tso_post_client_restore_command {update_timing ; write_eco_opt_db ;}
+[11/01 13:27:21     92s] <CMD> init_design
+[11/01 13:27:21     92s] **WARN: (IMPSYT-7329):	Cannot load design with init_design, after design is already in memory.  This command is skipped.
+[11/01 13:27:21     92s] 
+[11/01 13:27:21     92s] *** Summary of all messages that are not suppressed in this session:
+[11/01 13:27:21     92s] Severity  ID               Count  Summary                                  
+[11/01 13:27:21     92s] WARNING   IMPSYT-7329          1  Cannot load design with init_design, aft...
+[11/01 13:27:21     92s] *** Message Summary: 1 warning(s), 0 error(s)
+[11/01 13:27:21     92s] 
+[11/01 13:27:21     92s] <CMD> floorPlan -r 2.0 0.6 50 50 50 50
+[11/01 13:27:21     92s] floorPlan cannot be used in timer mode
+[11/01 13:27:38     94s] <CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+[11/01 13:27:38     94s] <CMD> suppressMessage ENCEXT-2799
+[11/01 13:27:38     94s] <CMD> getDrawView
+[11/01 13:27:38     94s] <CMD> loadWorkspace -name Physical
+[11/01 13:27:38     94s] <CMD> win
+[11/01 13:27:38     94s] <CMD> set ::TimeLib::tsgMarkCellLatchConstructFlag 1
+[11/01 13:27:38     94s] <CMD> set conf_qxconf_file NULL
+[11/01 13:27:38     94s] <CMD> set conf_qxlib_file NULL
+[11/01 13:27:38     94s] <CMD> set defHierChar /
+[11/01 13:27:38     94s] Set Default Input Pin Transition as 0.1 ps.
+[11/01 13:27:38     94s] <CMD> set delaycal_input_transition_delay 0.1ps
+[11/01 13:27:38     94s] <CMD> set distributed_client_message_echo 1
+[11/01 13:27:38     94s] <CMD> set distributed_mmmc_disable_reports_auto_redirection 0
+[11/01 13:27:38     94s] <CMD> set floorplan_default_site core
+[11/01 13:27:38     94s] <CMD> set fpIsMaxIoHeight 0
+[11/01 13:27:38     94s] <CMD> set init_gnd_net gnd
+[11/01 13:27:38     94s] <CMD> set init_io_file innovus.io
+[11/01 13:27:38     94s] <CMD> set init_lef_file {/package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.lef /package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.stacks.lef}
+[11/01 13:27:38     94s] <CMD> set init_mmmc_file osu05_MMMC.view
+[11/01 13:27:38     94s] <CMD> set init_oa_search_lib {}
+[11/01 13:27:38     94s] <CMD> set init_pwr_net vdd
+[11/01 13:27:38     94s] <CMD> set init_verilog mapped/layout_lab_design.v
+[11/01 13:27:38     94s] <CMD> set latch_time_borrow_mode max_borrow
+[11/01 13:27:38     94s] <CMD> set pegDefaultResScaleFactor 1
+[11/01 13:27:38     94s] <CMD> set pegDetailResScaleFactor 1
+[11/01 13:27:38     94s] <CMD> set report_inactive_arcs_format {from to when arc_type sense reason}
+[11/01 13:27:38     94s] <CMD> set timing_library_ccs_noise_vin_clip_points {}
+[11/01 13:27:38     94s] <CMD> set timing_library_ccs_noise_vout_clip_points {}
+[11/01 13:27:38     94s] <CMD> set timing_library_load_pin_cap_indices {}
+[11/01 13:27:38     94s] <CMD> set timing_library_write_library_to_directory {}
+[11/01 13:27:38     94s] <CMD> set tso_post_client_restore_command {update_timing ; write_eco_opt_db ;}
+[11/01 13:27:38     94s] <CMD> init_design
+[11/01 13:27:38     94s] **WARN: (IMPSYT-7329):	Cannot load design with init_design, after design is already in memory.  This command is skipped.
+[11/01 13:27:38     94s] 
+[11/01 13:27:38     94s] *** Summary of all messages that are not suppressed in this session:
+[11/01 13:27:38     94s] Severity  ID               Count  Summary                                  
+[11/01 13:27:38     94s] WARNING   IMPSYT-7329          1  Cannot load design with init_design, aft...
+[11/01 13:27:38     94s] *** Message Summary: 1 warning(s), 0 error(s)
+[11/01 13:27:38     94s] 
+[11/01 13:27:38     94s] <CMD> floorPlan -r 2.0 0.6 50 50 50 50
+[11/01 13:27:38     94s] floorPlan cannot be used in timer mode
+[11/01 13:36:09    156s] <CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+[11/01 13:36:09    156s] <CMD> suppressMessage ENCEXT-2799
+[11/01 13:36:09    156s] <CMD> getDrawView
+[11/01 13:36:09    156s] <CMD> loadWorkspace -name Physical
+[11/01 13:36:09    156s] <CMD> win
+[11/01 13:36:10    156s] <CMD> set ::TimeLib::tsgMarkCellLatchConstructFlag 1
+[11/01 13:36:10    156s] <CMD> set conf_qxconf_file NULL
+[11/01 13:36:10    156s] <CMD> set conf_qxlib_file NULL
+[11/01 13:36:10    156s] <CMD> set defHierChar /
+[11/01 13:36:10    156s] Set Default Input Pin Transition as 0.1 ps.
+[11/01 13:36:10    156s] <CMD> set delaycal_input_transition_delay 0.1ps
+[11/01 13:36:10    156s] <CMD> set distributed_client_message_echo 1
+[11/01 13:36:10    156s] <CMD> set distributed_mmmc_disable_reports_auto_redirection 0
+[11/01 13:36:10    156s] <CMD> set floorplan_default_site core
+[11/01 13:36:10    156s] <CMD> set fpIsMaxIoHeight 0
+[11/01 13:36:10    156s] <CMD> set init_gnd_net gnd
+[11/01 13:36:10    156s] <CMD> set init_io_file innovus.io
+[11/01 13:36:10    156s] <CMD> set init_lef_file {/package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.lef /package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.stacks.lef}
+[11/01 13:36:10    156s] <CMD> set init_mmmc_file osu05_MMMC.view
+[11/01 13:36:10    156s] <CMD> set init_oa_search_lib {}
+[11/01 13:36:10    156s] <CMD> set init_pwr_net vdd
+[11/01 13:36:10    156s] <CMD> set init_verilog mapped/layout_lab_design.v
+[11/01 13:36:10    156s] <CMD> set latch_time_borrow_mode max_borrow
+[11/01 13:36:10    156s] <CMD> set pegDefaultResScaleFactor 1
+[11/01 13:36:10    156s] <CMD> set pegDetailResScaleFactor 1
+[11/01 13:36:10    156s] <CMD> set report_inactive_arcs_format {from to when arc_type sense reason}
+[11/01 13:36:10    156s] <CMD> set timing_library_ccs_noise_vin_clip_points {}
+[11/01 13:36:10    156s] <CMD> set timing_library_ccs_noise_vout_clip_points {}
+[11/01 13:36:10    156s] <CMD> set timing_library_load_pin_cap_indices {}
+[11/01 13:36:10    156s] <CMD> set timing_library_write_library_to_directory {}
+[11/01 13:36:10    156s] <CMD> set tso_post_client_restore_command {update_timing ; write_eco_opt_db ;}
+[11/01 13:36:10    156s] <CMD> init_design
+[11/01 13:36:10    156s] **WARN: (IMPSYT-7329):	Cannot load design with init_design, after design is already in memory.  This command is skipped.
+[11/01 13:36:10    156s] 
+[11/01 13:36:10    156s] *** Summary of all messages that are not suppressed in this session:
+[11/01 13:36:10    156s] Severity  ID               Count  Summary                                  
+[11/01 13:36:10    156s] WARNING   IMPSYT-7329          1  Cannot load design with init_design, aft...
+[11/01 13:36:10    156s] *** Message Summary: 1 warning(s), 0 error(s)
+[11/01 13:36:10    156s] 
+[11/01 13:36:10    156s] <CMD> floorPlan -r 1.0 0.6 50 50 50 50
+[11/01 13:36:10    156s] floorPlan cannot be used in timer mode
+[11/01 13:42:32    208s] <CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+[11/01 13:42:32    208s] <CMD> suppressMessage ENCEXT-2799
+[11/01 13:42:32    208s] <CMD> getDrawView
+[11/01 13:42:32    208s] <CMD> loadWorkspace -name Physical
+[11/01 13:42:32    208s] <CMD> win
+[11/01 13:42:32    208s] <CMD> set ::TimeLib::tsgMarkCellLatchConstructFlag 1
+[11/01 13:42:32    208s] <CMD> set conf_qxconf_file NULL
+[11/01 13:42:32    208s] <CMD> set conf_qxlib_file NULL
+[11/01 13:42:32    208s] <CMD> set defHierChar /
+[11/01 13:42:32    208s] Set Default Input Pin Transition as 0.1 ps.
+[11/01 13:42:32    208s] <CMD> set delaycal_input_transition_delay 0.1ps
+[11/01 13:42:32    208s] <CMD> set distributed_client_message_echo 1
+[11/01 13:42:32    208s] <CMD> set distributed_mmmc_disable_reports_auto_redirection 0
+[11/01 13:42:32    208s] <CMD> set floorplan_default_site core
+[11/01 13:42:32    208s] <CMD> set fpIsMaxIoHeight 0
+[11/01 13:42:32    208s] <CMD> set init_gnd_net gnd
+[11/01 13:42:32    208s] <CMD> set init_io_file innovus.io
+[11/01 13:42:32    208s] <CMD> set init_lef_file {/package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.lef /package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.stacks.lef}
+[11/01 13:42:32    208s] <CMD> set init_mmmc_file osu05_MMMC.view
+[11/01 13:42:32    208s] <CMD> set init_oa_search_lib {}
+[11/01 13:42:32    208s] <CMD> set init_pwr_net vdd
+[11/01 13:42:32    208s] <CMD> set init_verilog mapped/layout_lab_design.v
+[11/01 13:42:32    208s] <CMD> set latch_time_borrow_mode max_borrow
+[11/01 13:42:32    208s] <CMD> set pegDefaultResScaleFactor 1
+[11/01 13:42:32    208s] <CMD> set pegDetailResScaleFactor 1
+[11/01 13:42:32    208s] <CMD> set report_inactive_arcs_format {from to when arc_type sense reason}
+[11/01 13:42:32    208s] <CMD> set timing_library_ccs_noise_vin_clip_points {}
+[11/01 13:42:32    208s] <CMD> set timing_library_ccs_noise_vout_clip_points {}
+[11/01 13:42:32    208s] <CMD> set timing_library_load_pin_cap_indices {}
+[11/01 13:42:32    208s] <CMD> set timing_library_write_library_to_directory {}
+[11/01 13:42:32    208s] <CMD> set tso_post_client_restore_command {update_timing ; write_eco_opt_db ;}
+[11/01 13:42:32    208s] <CMD> init_design
+[11/01 13:42:32    208s] **WARN: (IMPSYT-7329):	Cannot load design with init_design, after design is already in memory.  This command is skipped.
+[11/01 13:42:32    208s] 
+[11/01 13:42:32    208s] *** Summary of all messages that are not suppressed in this session:
+[11/01 13:42:32    208s] Severity  ID               Count  Summary                                  
+[11/01 13:42:32    208s] WARNING   IMPSYT-7329          1  Cannot load design with init_design, aft...
+[11/01 13:42:32    208s] *** Message Summary: 1 warning(s), 0 error(s)
+[11/01 13:42:32    208s] 
+[11/01 13:42:32    208s] <CMD> floorPlan -r 1.0 0.6 50 50 50 50
+[11/01 13:42:32    208s] floorPlan cannot be used in timer mode
+[11/01 13:44:49    228s] 
+[11/01 13:44:49    228s] *** Memory Usage v#1 (Current mem = 641.527M, initial mem = 163.832M) ***
+[11/01 13:44:49    228s] 
+[11/01 13:44:49    228s] *** Summary of all messages that are not suppressed in this session:
+[11/01 13:44:49    228s] Severity  ID               Count  Summary                                  
+[11/01 13:44:49    228s] WARNING   IMPSYT-7329          4  Cannot load design with init_design, aft...
+[11/01 13:44:49    228s] WARNING   IMPSYT-7328          1  The design has been initialized in physi...
+[11/01 13:44:49    228s] WARNING   IMPDB-2504          19  Cell '%s' is instantiated in the Verilog...
+[11/01 13:44:49    228s] *** Message Summary: 24 warning(s), 0 error(s)
+[11/01 13:44:49    228s] 
+[11/01 13:44:49    228s] --- Ending "Innovus" (totcpu=0:03:49, real=0:29:44, mem=641.5M) ---

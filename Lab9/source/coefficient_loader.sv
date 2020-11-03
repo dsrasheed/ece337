@@ -16,10 +16,12 @@ module coefficient_loader (
 
 logic nxt_load_coeff;
 logic increment;
+logic clear;
 
 always_comb begin
     nxt_load_coeff = 0;
     increment = 0;
+    clear = 0;
 
     if (new_coefficient_set) begin
         if (coefficient_num == 2'd3)
@@ -29,6 +31,8 @@ always_comb begin
 
         if (modwait == 1)
             increment = 1;
+        if (modwait == 1 && clear == 1)
+            clear = 1;
     end
 end 
 
@@ -43,7 +47,7 @@ end
 
 flex_counter #(.NUM_CNT_BITS(2)) coeff_cnt(
     .clk(clk), .n_rst(n_rst),
-    .clear(1'b0), .count_enable(increment),
+    .clear(clear), .count_enable(increment),
     .count_out(coefficient_num),
     .rollover_val(2'd3)
 );
