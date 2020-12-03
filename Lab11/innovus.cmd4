@@ -1,0 +1,916 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Wed Nov  4 17:54:33 2020                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v16.12-s051_1 (64bit) 08/17/2016 12:18 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 16.12-s051_1 NR160816-1350/16_12-UB (database version 2.30, 347.6.1) {superthreading v1.30}
+#@(#)CDS: AAE 16.12-s026 (64bit) 08/17/2016 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 16.12-s023_1 () Aug 12 2016 01:35:46 ( )
+#@(#)CDS: SYNTECH 16.12-s009_1 () Aug 11 2016 01:33:09 ( )
+#@(#)CDS: CPE v16.12-s054
+#@(#)CDS: IQRC/TQRC 15.2.4-s467 (64bit) Wed Jul 20 17:12:38 PDT 2016 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+set ::TimeLib::tsgMarkCellLatchConstructFlag 1
+set conf_qxconf_file NULL
+set conf_qxlib_file NULL
+set defHierChar /
+set delaycal_input_transition_delay 0.1ps
+set distributed_client_message_echo 1
+set distributed_mmmc_disable_reports_auto_redirection 0
+set floorplan_default_site core
+set fpIsMaxIoHeight 0
+set init_gnd_net gnd
+set init_io_file innovus.io
+set init_lef_file {/package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.lef /package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.stacks.lef}
+set init_mmmc_file osu05_MMMC.view
+set init_oa_search_lib {}
+set init_pwr_net vdd
+set init_verilog mapped/layout_lab_design.v
+set latch_time_borrow_mode max_borrow
+set pegDefaultResScaleFactor 1
+set pegDetailResScaleFactor 1
+set report_inactive_arcs_format {from to when arc_type sense reason}
+set timing_library_ccs_noise_vin_clip_points {}
+set timing_library_ccs_noise_vout_clip_points {}
+set timing_library_load_pin_cap_indices {}
+set timing_library_write_library_to_directory {}
+set tso_post_client_restore_command {update_timing ; write_eco_opt_db ;}
+init_design
+floorPlan -r 1.0 0.6 50 50 50 50
+unfixAllIos
+legalizePin
+zoomIn
+panPage 0 1
+panPage 0 1
+panPage 0 1
+zoomIn
+panPage 0 -1
+uiSetTool ruler
+zoomOut
+zoomOut
+panPage 0 -1
+addRing -spacing_bottom 9.9 -width_left 9.9 -width_bottom 9.9 -width_top 9.9 -spacing_top 9.9 -layer_bottom metal1 -width_right 9.9 -around default_power_domain -center 1 -layer_top metal1 -spacing_right 9.9 -spacing_left 9.9 -layer_right metal2 -layer_left metal2 -offset 9.9 -nets { gnd vdd }
+zoomIn
+panPage 1 0
+panPage 0 -1
+panPage 0 -1
+panPage 0 1
+panPage 0 1
+panPage -1 0
+panPage -1 0
+panPage 0 -1
+zoomOut
+panPage 1 0
+panPage 0 1
+panPage -1 0
+zoomIn
+panPage 0 -1
+zoomOut
+panPage 0 -1
+panPage 0 1
+panPage 0 -1
+panPage 0 1
+panPage 1 0
+panPage -1 0
+panPage 1 0
+panPage -1 0
+panPage 0 -1
+setPlaceMode -congEffort medium
+placeDesign -inPlaceOpt
+checkPlace
+zoomIn
+uiSetTool ruler
+uiSetTool ruler
+uiSetTool select
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U203
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U257
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U204
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[5][6]}
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U86
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U277
+zoomIn
+panPage 0 1
+panPage 1 0
+panPage 0 1
+panPage 1 0
+zoomIn
+panPage -1 0
+panPage -1 0
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 0 1
+zoomIn
+zoomIn
+zoomOut
+zoomOut
+zoomOut
+zoomOut
+zoomOut
+panPage -1 0
+panPage 0 1
+panPage 1 0
+zoomIn
+panPage 0 -1
+panPage -1 0
+zoomIn
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 0 1
+panPage 1 0
+panPage 1 0
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 0 -1
+panPage 0 -1
+panPage 0 1
+panPage -1 0
+panPage -1 0
+panPage 0 -1
+panPage 0 -1
+panPage 1 0
+panPage 0 -1
+panPage 0 -1
+panPage -1 0
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage -1 0
+panPage 0 1
+panPage -1 0
+zoomIn
+deselectAll
+selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/B
+deselectAll
+selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/D
+deselectAll
+selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/Y
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260
+deselectAll
+selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/A
+deselectAll
+selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/C
+deselectAll
+selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/Y
+deselectAll
+selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/B
+zoomOut
+deselectAll
+selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/A
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260
+deselectAll
+selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/C
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260
+zoomOut
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/waddr_reg[2]}
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UWFC/full_flag_r_reg
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UWFC/U16
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/WPU1/binary_r_reg[0]}
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UWFC/WPU1/U21
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/waddr_reg[0]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[3]}
+deselectAll
+selectInst {I0/LD/T_SR_1/curr_val_reg[5]}
+deselectAll
+selectInst {I0/LD/T_SR_1/curr_val_reg[6]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[6]}
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U161
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][6]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/wrptr_r1_reg[1]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/wrptr_r2_reg[1]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/WPU1/binary_r_reg[1]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/wrptr_r2_reg[1]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[7][4]}
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U198
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U13
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U12
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[7][5]}
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U98
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[2][4]}
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U254
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[2][5]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][2]}
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U247
+deselectAll
+selectInst {I0/LD/T_SR_1/curr_val_reg[6]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+deselectAll
+selectInst I0/LD/T_SR_1/FE_OFC21_n58
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/URFC/raddr_reg[2]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[7]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][7]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][7]}
+panPage -1 0
+panPage 0 1
+deselectAll
+selectInst {I0/LD/CTRL/curr_state_reg[3]}
+deselectAll
+selectInst I0/LD/CTRL/U92
+deselectAll
+selectInst I0/LD/OCTRL/d_plus_reg_reg
+deselectAll
+selectInst I0/LD/ENC/last_bit_reg
+deselectAll
+selectInst I0/LD/ENC/FE_RC_1_0
+deselectAll
+selectInst I0/LD/ENC/U5
+deselectAll
+selectInst I0/LD/OCTRL/U9
+deselectAll
+selectInst {I0/LD/CTRL/curr_state_reg[3]}
+deselectAll
+selectInst I0/LD/CTRL/U88
+deselectAll
+selectInst I0/LD/CTRL/U75
+deselectAll
+selectInst I0/LD/CTRL/U51
+deselectAll
+selectInst I0/LD/CTRL/U73
+deselectAll
+selectInst I0/LD/CTRL/U50
+deselectAll
+selectInst I0/LD/CTRL/U46
+deselectAll
+selectInst I0/LD/CTRL/U17
+deselectAll
+selectInst I0/LD/CTRL/U53
+deselectAll
+selectInst I0/LD/CTRL/U19
+deselectAll
+selectInst I0/LD/CTRL/U62
+deselectAll
+selectInst I0/LD/CTRL/U18
+deselectAll
+selectInst I0/LD/CTRL/U39
+deselectAll
+selectInst I0/LD/CTRL/U56
+deselectAll
+selectInst I0/LD/CTRL/U54
+deselectAll
+selectInst I0/LD/CTRL/U60
+deselectAll
+selectInst I0/LD/CTRL/U7
+deselectAll
+selectInst I0/LD/CTRL/U79
+deselectAll
+selectInst {I0/LD/TIM/curr_state_reg[1]}
+deselectAll
+selectInst I0/LD/CTRL/U32
+deselectAll
+selectInst {I0/LD/CTRL/bit_cnt_reg[0]}
+deselectAll
+selectInst {I0/LD/T_SR_1/curr_val_reg[5]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+deselectAll
+selectInst {I0/LD/T_SR_1/curr_val_reg[6]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[6]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][4]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+deselectAll
+selectInst {I0/LD/T_SR_1/curr_val_reg[7]}
+deselectAll
+selectInst I0/LD/T_SR_1/U24
+deselectAll
+selectInst I0/LD/CTRL/FE_OFC40_n31
+deselectAll
+selectInst I0/LD/CTRL/U62
+deselectAll
+selectInst I0/LD/CTRL/U53
+deselectAll
+selectInst I0/LD/CTRL/U17
+deselectAll
+selectInst I0/LD/CTRL/U50
+deselectAll
+selectInst I0/LD/CTRL/U73
+deselectAll
+selectInst I0/LD/CTRL/U75
+deselectAll
+selectInst I0/LD/CTRL/FE_OFC43_n59
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[4]}
+deselectAll
+selectInst {I0/LD/T_SR_1/curr_val_reg[7]}
+deselectAll
+selectInst I0/LD/CTRL/U35
+deselectAll
+selectInst I0/LD/CTRL/U62
+deselectAll
+selectInst I0/LD/CTRL/U80
+deselectAll
+selectInst I0/LD/CTRL/U88
+deselectAll
+selectInst I0/LD/ENC/last_bit_reg
+deselectAll
+selectInst I0/LD/OCTRL/d_plus_reg_reg
+deselectAll
+selectInst I0/LD/CTRL/U87
+deselectAll
+selectInst I0/LD/CTRL/U41
+deselectAll
+selectInst {I0/LD/CTRL/curr_state_reg[0]}
+deselectAll
+selectInst {I0/LD/CTRL/curr_state_reg[1]}
+deselectAll
+selectInst {I0/LD/CTRL/curr_state_reg[2]}
+deselectAll
+selectInst {I0/LD/CTRL/bit_cnt_reg[0]}
+deselectAll
+selectInst {I0/LD/CTRL/bit_cnt_reg[1]}
+deselectAll
+selectInst I0/LD/T_SR_0/U11
+deselectAll
+selectInst {I0/LD/T_SR_1/curr_val_reg[7]}
+deselectAll
+zoomOut
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[0][5]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[4]}
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U134
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[5][3]}
+deselectAll
+selectInst {I0/LD/CTRL/bit_cnt_reg[2]}
+deselectAll
+selectInst {I0/LD/T_SR_1/curr_val_reg[6]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[6]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/wrptr_r1_reg[1]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/wrptr_r2_reg[1]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[2]}
+deselectAll
+sroute
+selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+deselectAll
+selectInst I0/LD/CTRL/U77
+deselectAll
+selectInst I0/LD/TIM/U30
+deselectAll
+selectInst {I0/LD/T_SR_1/curr_val_reg[7]}
+deselectAll
+zoomIn
+zoomIn
+panPage -1 0
+panPage -1 0
+panPage -1 0
+uiSetTool ruler
+trialRoute
+timeDesign -preCTS
+zoomOut
+zoomOut
+panPage 1 0
+panPage -1 0
+zoomIn
+panPage 1 0
+panPage 1 0
+panPage -1 0
+zoomOut
+fit
+fit
+fit
+zoomIn
+zoomIn
+zoomOut
+zoomOut
+zoomIn
+zoomIn
+zoomOut
+zoomIn
+zoomIn
+zoomOut
+zoomOut
+zoomOut
+zoomIn
+zoomIn
+zoomOut
+zoomOut
+zoomIn
+zoomOut
+zoomIn
+zoomIn
+zoomOut
+zoomOut
+zoomIn
+zoomIn
+zoomOut
+zoomOut
+zoomIn
+zoomIn
+zoomOut
+zoomOut
+zoomIn
+zoomIn
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM3 -isVisible 1
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3Cont -isVisible 1
+zoomOut
+zoomOut
+zoomIn
+zoomIn
+uiSetTool select
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][4]}
+deselectAll
+selectWire 821.2500 729.7500 827.5500 731.2500 3 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/n12
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][4]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+deselectAll
+selectInst {I0/LD/T_SR_1/curr_val_reg[6]}
+zoomIn
+deselectAll
+selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+deselectAll
+selectWire 732.7500 751.0500 736.0500 751.9500 2 nclk
+deselectAll
+selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 732.7500 751.0500 736.0500 751.9500 2 nclk
+deselectAll
+selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+deselectAll
+selectWire 732.7500 751.0500 736.0500 751.9500 2 nclk
+deselectAll
+selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+deselectAll
+selectWire 732.7500 751.0500 736.0500 751.9500 2 nclk
+deselectAll
+selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+deselectAll
+selectWire 739.9500 739.0500 740.8500 754.9500 2 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/n117
+deselectAll
+selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 751.6500 759.7500 767.5500 761.2500 3 {I0/LD/tx_data_int[5]}
+deselectAll
+selectWire 751.6500 759.7500 767.5500 761.2500 3 {I0/LD/tx_data_int[5]}
+deselectAll
+selectWire 751.6500 759.7500 767.5500 761.2500 3 {I0/LD/tx_data_int[5]}
+deselectAll
+selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 773.5500 748.0500 774.4500 751.9500 2 {I0/LD/read_data_int[5]}
+deselectAll
+selectWire 773.2500 747.7500 803.5500 749.2500 3 {I0/LD/read_data_int[5]}
+deselectAll
+selectWire 770.8500 753.7500 781.9500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 782.8500 750.7500 899.5500 752.2500 3 {I0/LD/read_data_int[6]}
+deselectAll
+selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+deselectAll
+selectWire 734.8500 738.7500 741.1500 740.2500 3 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/n117
+deselectAll
+selectWire 734.8500 738.7500 741.1500 740.2500 3 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/n117
+deselectAll
+selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 732.7500 751.0500 736.0500 751.9500 2 nclk
+deselectAll
+selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+panPage -1 0
+panPage -1 0
+deselectAll
+selectObject Pin {I0/LD/T_SR_0/curr_val_reg[5]/S}
+deselectAll
+selectWire 638.8500 753.7500 724.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 684.7500 751.0500 685.6500 790.9500 2 I0/LD/T_SR_0/n32
+deselectAll
+selectWire 658.0500 747.7500 681.1500 749.2500 3 nclk
+deselectAll
+selectWire 655.9500 760.0500 656.8500 766.9500 2 {I0/LD/T_SR_0/curr_val[5]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+deselectAll
+selectWire 638.8500 753.7500 724.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 684.7500 751.0500 685.6500 790.9500 2 I0/LD/T_SR_0/n32
+deselectAll
+selectWire 658.0500 747.7500 681.1500 749.2500 3 nclk
+zoomOut
+deselectAll
+selectInst I0/LD/U5
+deselectAll
+selectWire 638.8500 753.7500 724.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+deselectAll
+selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+deselectAll
+selectInst I0/LD/T_SR_1/U27
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+deselectAll
+selectWire 576.4500 753.7500 640.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+deselectAll
+selectWire 576.4500 753.7500 640.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectWire 617.5500 730.0500 618.4500 754.9500 2 {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg[4][3]}
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+deselectAll
+selectInst I0/LD/U5
+panPage 0 1
+deselectAll
+selectInst I0/LD/U5
+zoomIn
+zoomOut
+deselectAll
+selectWire 638.8500 753.7500 724.3500 755.2500 3 I0/LD/n3
+zoomIn
+zoomOut
+deselectAll
+selectWire 638.8500 753.7500 724.3500 755.2500 3 I0/LD/n3
+deselectAll
+selectInst I0/LD/U5
+panPage 0 -1
+panPage -1 0
+zoomIn
+panPage 1 0
+deselectAll
+selectInst I0/LD/U5
+zoomOut
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+deselectAll
+selectInst I0/LD/U5
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+zoomIn
+zoomIn
+zoomOut
+panPage 1 0
+panPage 1 0
+panPage 1 0
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+deselectAll
+selectWire 751.6500 759.7500 767.5500 761.2500 3 {I0/LD/tx_data_int[5]}
+deselectAll
+selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+deselectAll
+selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+deselectAll
+selectWire 658.0500 747.7500 681.1500 749.2500 3 nclk
+zoomOut
+deselectAll
+selectInst I0/LD/U5
+deselectAll
+selectInst I0/LD/U3
+deselectAll
+selectInst I0/LD/U5
+zoomIn
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 1 0
+panPage 1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage -1 0
+panPage 1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+deselectAll
+selectWire 509.5500 670.0500 512.8500 670.9500 2 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/n263
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U239
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U239
+deselectAll
+panPage -1 0
+panPage -1 0
+selectWire 471.1500 670.0500 484.0500 670.9500 2 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/FE_OFN8_n29
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 1 0
+deselectAll
+selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U231
+deselectAll
+panPage 0 -1
+panPage -1 0
+panPage -1 0
+panPage 0 -1
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 0 1
+panPage 1 0
+panPage 1 0
+panPage 0 -1
+panPage 1 0
+panPage 1 0
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage -1 0
+panPage 0 1
+panPage 0 1
+panPage -1 0
+panPage -1 0
+panPage 0 1
+panPage 1 0
+panPage 0 1
+panPage 0 1
+panPage 1 0
+panPage 1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 0 -1
+panPage -1 0
+panPage -1 0
+panPage 0 1
+panPage -1 0
+panPage 0 -1
+panPage 0 1
+panPage 1 0
+panPage 1 0
+panPage 0 1
+panPage -1 0
+panPage 0 1
+panPage 1 0
+panPage 1 0
+panPage 0 1
+panPage -1 0
+panPage 0 -1
+panPage 0 -1
+panPage 1 0
+panPage 1 0
+panPage 0 1
+panPage 1 0
+panPage 0 1
+panPage 1 0
+panPage 1 0
+panPage 0 1
+panPage 1 0
+panPage 1 0
+panPage 0 1
+panPage -1 0
+panPage -1 0
+panPage 0 1
+panPage 0 1
+panPage 1 0
+panPage 0 1
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 0 1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+zoomOut
+zoomOut
+panPage 1 0
+panPage 1 0
+panPage -1 0
+zoomOut
+panPage 0 -1
+panPage 0 1
+panPage 0 -1
+panPage 0 1
+panPage 0 -1
+panPage 0 1
+panPage 0 -1
+fit
+selectInst U16
+deselectAll
+zoomIn
+panPage -1 0
+panPage -1 0
+zoomIn
+panPage 1 0
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 1 0
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 1 0
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 -1
+panPage 0 1
+panPage 0 1
+panPage 0 1
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 1 0
+panPage 1 0
+panPage 0 1
+panPage 0 1
+panPage -1 0
+panPage -1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage 1 0
+panPage -1 0
+panPage -1 0
+panPage 1 0
+panPage 1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage -1 0
+panPage 0 -1

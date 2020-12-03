@@ -1,0 +1,2072 @@
+
+Cadence Innovus(TM) Implementation System.
+Copyright 2016 Cadence Design Systems, Inc. All rights reserved worldwide.
+
+Version:	v16.12-s051_1, built Wed Aug 17 12:18:54 PDT 2016
+Options:	
+Date:		Wed Nov  4 17:54:23 2020
+Host:		ecegrid-thin1.ecn.purdue.edu (x86_64 w/Linux 3.10.0-1127.8.2.el7.x86_64) (6cores*24cpus*Intel(R) Xeon(R) CPU X5675 @ 3.07GHz 12288KB)
+OS:		CentOS Linux release 7.8.2003 (Core)
+
+License:
+		invs	Innovus Implementation System	16.1	checkout succeeded
+		8 CPU jobs allowed with the current license(s). Use setMultiCpuUsage to set your required CPU count.
+
+**INFO:  MMMC transition support version v31-84 
+
+<CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+<CMD> suppressMessage ENCEXT-2799
+<CMD> getDrawView
+<CMD> loadWorkspace -name Physical
+<CMD> win
+<CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+<CMD> suppressMessage ENCEXT-2799
+<CMD> getDrawView
+<CMD> loadWorkspace -name Physical
+<CMD> win
+<CMD> set ::TimeLib::tsgMarkCellLatchConstructFlag 1
+<CMD> set conf_qxconf_file NULL
+<CMD> set conf_qxlib_file NULL
+<CMD> set defHierChar /
+Set Default Input Pin Transition as 0.1 ps.
+<CMD> set delaycal_input_transition_delay 0.1ps
+<CMD> set distributed_client_message_echo 1
+<CMD> set distributed_mmmc_disable_reports_auto_redirection 0
+<CMD> set floorplan_default_site core
+<CMD> set fpIsMaxIoHeight 0
+<CMD> set init_gnd_net gnd
+<CMD> set init_io_file innovus.io
+<CMD> set init_lef_file {/package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.lef /package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.stacks.lef}
+<CMD> set init_mmmc_file osu05_MMMC.view
+<CMD> set init_oa_search_lib {}
+<CMD> set init_pwr_net vdd
+<CMD> set init_verilog mapped/layout_lab_design.v
+<CMD> set latch_time_borrow_mode max_borrow
+<CMD> set pegDefaultResScaleFactor 1
+<CMD> set pegDetailResScaleFactor 1
+<CMD> set report_inactive_arcs_format {from to when arc_type sense reason}
+<CMD> set timing_library_ccs_noise_vin_clip_points {}
+<CMD> set timing_library_ccs_noise_vout_clip_points {}
+<CMD> set timing_library_load_pin_cap_indices {}
+<CMD> set timing_library_write_library_to_directory {}
+<CMD> set tso_post_client_restore_command {update_timing ; write_eco_opt_db ;}
+<CMD> init_design
+#- Begin Load MMMC data ... (date=11/04 17:55:18, mem=489.6M)
+#- End Load MMMC data ... (date=11/04 17:55:18, total cpu=0:00:00.0, real=0:00:01.0, peak res=489.6M, current mem=489.6M)
+osu05
+**WARN: (GLOBAL-100):	Global 'timing_disable_backward_compatible_mmmc_mode' has become obsolete. It will be removed in the next release.
+
+Loading LEF file /package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.lef ...
+**WARN: (IMPLF-108):	There is no overlap layer defined in any LEF file
+so you are unable to create rectilinear partition in a hierarchical flow.
+Set DBUPerIGU to M2 pitch 2400.
+
+Loading LEF file /package/eda/cells/OSU/v2.7/cadence/lib/ami05/lib/osu05_stdcells.stacks.lef ...
+**WARN: (IMPLF-119):	LAYER 'nwell' has been found in the database. Its content except ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-119' for more detail.
+**WARN: (IMPLF-119):	LAYER 'nactive' has been found in the database. Its content except ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-119' for more detail.
+**WARN: (IMPLF-119):	LAYER 'pactive' has been found in the database. Its content except ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-119' for more detail.
+**WARN: (IMPLF-119):	LAYER 'poly' has been found in the database. Its content except ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-119' for more detail.
+**WARN: (IMPLF-119):	LAYER 'cc' has been found in the database. Its content except ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-119' for more detail.
+**WARN: (IMPLF-119):	LAYER 'metal1' has been found in the database. Its content except ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-119' for more detail.
+**WARN: (IMPLF-119):	LAYER 'via' has been found in the database. Its content except ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-119' for more detail.
+**WARN: (IMPLF-119):	LAYER 'metal2' has been found in the database. Its content except ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-119' for more detail.
+**WARN: (IMPLF-119):	LAYER 'via2' has been found in the database. Its content except ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-119' for more detail.
+**WARN: (IMPLF-119):	LAYER 'metal3' has been found in the database. Its content except ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-119' for more detail.
+**ERROR: (IMPLF-223):	The LEF via 'M2_M1' has been defined and found in the database. The current definition will be ignored. Review the LEF files to ensure that you have not specified duplicate LEF files, or LEF files with duplicate VIA definitions.
+Type 'man IMPLF-223' for more detail.
+**ERROR: (IMPLF-223):	The LEF via 'M3_M2' has been defined and found in the database. The current definition will be ignored. Review the LEF files to ensure that you have not specified duplicate LEF files, or LEF files with duplicate VIA definitions.
+Type 'man IMPLF-223' for more detail.
+**WARN: (IMPLF-151):	The viaRule 'viagen21' has been defined, the content will be skipped.
+**WARN: (IMPLF-151):	The viaRule 'viagen32' has been defined, the content will be skipped.
+**WARN: (IMPLF-151):	The viaRule 'TURN1' has been defined, the content will be skipped.
+**WARN: (IMPLF-151):	The viaRule 'TURN2' has been defined, the content will be skipped.
+**WARN: (IMPLF-151):	The viaRule 'TURN3' has been defined, the content will be skipped.
+**WARN: (IMPLF-58):	MACRO 'FILL' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'AND2X1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'AND2X2' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'AOI21X1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'AOI22X1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'BUFX2' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'BUFX4' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'DFFNEGX1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'NOR3X1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'DFFPOSX1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'FAX1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'HAX1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'INVX1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'INVX2' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'INVX4' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'INVX8' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'NAND2X1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'NAND3X1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'NOR2X1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (IMPLF-58):	MACRO 'OAI21X1' has been found in the database. Its content except DENSITY and PIN ANTENNA* data will be ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-58' for more detail.
+**WARN: (EMS-27):	Message (IMPLF-58) has exceeded the current message display limit of 20.
+To increase the message display limit, refer to the product command reference manual.
+**WARN: (IMPLF-61):	40 duplicated MACRO definitions have been found in the LEF file(s). Their content except DENSITY and PIN ANTENNA* data have been ignored.
+Review the LEF files specified in the init_lef_file variable and remove redundant definitions.
+Type 'man IMPLF-61' for more detail.
+
+viaInitial starts at Wed Nov  4 17:55:19 2020
+**WARN: (IMPPP-557):	A single-layer VIARULE GENERATE for turn-vias is obsolete and is being ignored. Remove this statement from the technology file: VIARULE TURN1 GENERATE.
+Type 'man IMPPP-557' for more detail.
+**WARN: (IMPPP-557):	A single-layer VIARULE GENERATE for turn-vias is obsolete and is being ignored. Remove this statement from the technology file: VIARULE TURN2 GENERATE.
+Type 'man IMPPP-557' for more detail.
+**WARN: (IMPPP-557):	A single-layer VIARULE GENERATE for turn-vias is obsolete and is being ignored. Remove this statement from the technology file: VIARULE TURN3 GENERATE.
+Type 'man IMPPP-557' for more detail.
+viaInitial ends at Wed Nov  4 17:55:19 2020
+Loading view definition file from osu05_MMMC.view
+Reading OSUv2.7 timing library '/package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib' ...
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'A' of cell 'AND2X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'B' of cell 'AND2X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Y' of cell 'AND2X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'A' of cell 'AND2X2' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'B' of cell 'AND2X2' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Y' of cell 'AND2X2' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'A' of cell 'AOI21X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'B' of cell 'AOI21X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'C' of cell 'AOI21X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Y' of cell 'AOI21X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'A' of cell 'AOI22X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'B' of cell 'AOI22X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'C' of cell 'AOI22X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'D' of cell 'AOI22X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Y' of cell 'AOI22X1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'A' of cell 'BUFX2' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Y' of cell 'BUFX2' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'A' of cell 'BUFX4' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Y' of cell 'BUFX4' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+**WARN: (TECHLIB-436):	Attribute 'fanout_load' on 'input/inout' pin 'A' of cell 'CLKBUF1' is not defined in the library. (File /package/eda/cells/OSU/v2.7/cadence/lib/ami05/signalstorm/osu05_stdcells.lib)
+Message <TECHLIB-436> has exceeded the message display limit of '20'. Use 'set_message -no_limit -id list_of_msgIDs' to reset the message limit.
+Read 39 cells in library 'osu05_stdcells' 
+*** End library_loading (cpu=0.00min, mem=0.0M, fe_cpu=0.24min, fe_real=0.93min, fe_mem=510.7M) ***
+#- Begin Load netlist data ... (date=11/04 17:55:19, mem=510.7M)
+*** Begin netlist parsing (mem=510.7M) ***
+**WARN: (IMPVL-159):	Pin 'YPAD' of cell 'PADGND' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'gnd' of cell 'PADGND' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'YPAD' of cell 'PADVDD' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'vdd' of cell 'PADVDD' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'gnd' of cell 'XOR2X1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'vdd' of cell 'XOR2X1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'gnd' of cell 'XNOR2X1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'vdd' of cell 'XNOR2X1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'gnd' of cell 'TBUFX2' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'vdd' of cell 'TBUFX2' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'gnd' of cell 'TBUFX1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'vdd' of cell 'TBUFX1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'gnd' of cell 'OR2X2' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'vdd' of cell 'OR2X2' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'gnd' of cell 'OR2X1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'vdd' of cell 'OR2X1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'gnd' of cell 'OAI22X1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'vdd' of cell 'OAI22X1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'gnd' of cell 'OAI21X1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'vdd' of cell 'OAI21X1' is defined in LEF but not in the timing library.
+**WARN: (EMS-27):	Message (IMPVL-159) has exceeded the current message display limit of 20.
+To increase the message display limit, refer to the product command reference manual.
+Created 39 new cells from 1 timing libraries.
+Reading netlist ...
+Backslashed names will retain backslash and a trailing blank character.
+Reading verilog netlist 'mapped/layout_lab_design.v'
+
+*** Memory Usage v#1 (Current mem = 510.695M, initial mem = 171.832M) ***
+*** End netlist parsing (cpu=0:00:00.0, real=0:00:00.0, mem=510.7M) ***
+#- End Load netlist data ... (date=11/04 17:55:19, total cpu=0:00:00.0, real=0:00:00.0, peak res=510.7M, current mem=510.7M)
+Top level cell is layout_lab_design.
+**WARN: (IMPTS-124):	Timing library description of pin 'YPAD' is missing from cell 'PADGND' in timing library 'osu05_stdcells'.
+**WARN: (IMPTS-124):	Timing library description of pin 'YPAD' is missing from cell 'PADVDD' in timing library 'osu05_stdcells'.
+Hooked 39 DB cells to tlib cells.
+Starting recursive module instantiation check.
+No recursion found.
+Building hierarchical netlist for Cell layout_lab_design ...
+*** Netlist is unique.
+** info: there are 56 modules.
+** info: there are 668 stdCell insts.
+** info: there are 16 Pad insts.
+
+*** Memory Usage v#1 (Current mem = 547.457M, initial mem = 171.832M) ***
+Reading IO assignment file "innovus.io" ...
+**WARN: (IMPFP-3961):	The techSite 'IO' has no related standard cells in LEF/OA library. Cannot make calculations for this site type unless standard cell models of this type exist in the LEF/OA library. If the SITE is not used by the library you can ignore this warning or remove the SITE definition from the LEF/OA to avoid this message.
+Type 'man IMPFP-3961' for more detail.
+**WARN: (IMPFP-3961):	The techSite 'corner' has no related standard cells in LEF/OA library. Cannot make calculations for this site type unless standard cell models of this type exist in the LEF/OA library. If the SITE is not used by the library you can ignore this warning or remove the SITE definition from the LEF/OA to avoid this message.
+Type 'man IMPFP-3961' for more detail.
+Horizontal Layer M1 offset = 1500 (derived)
+Vertical Layer M2 offset = 1200 (derived)
+Set Default Net Delay as 1000 ps.
+Set Default Net Load as 0.5 pF. 
+Set Default Input Pin Transition as 0.1 ps.
+Extraction setup Started 
+Initializing multi-corner RC extraction with 1 active RC Corners ...
+Reading Capacitance Table File osu05.capTbl ...
+Process name: DIFFERENT_KINDS_OF_DIELECTRIC.
+Importing multi-corner RC tables ... 
+Summary of Active RC-Corners : 
+ 
+ Analysis View: osu05
+    RC-Corner Name        : osu05
+    RC-Corner Index       : 0
+    RC-Corner Temperature : 30 Celsius
+    RC-Corner Cap Table   : 'osu05.capTbl'
+    RC-Corner PreRoute Res Factor         : 1
+    RC-Corner PreRoute Cap Factor         : 1
+    RC-Corner PostRoute Res Factor        : 1 {1 1 1}
+    RC-Corner PostRoute Cap Factor        : 1 {1 1 1}
+    RC-Corner PostRoute XCap Factor       : 1 {1 1 1}
+    RC-Corner PreRoute Clock Res Factor   : 1	[Derived from postRoute_res (effortLevel low)]
+    RC-Corner PreRoute Clock Cap Factor   : 1	[Derived from postRoute_cap (effortLevel low)]
+    RC-Corner PostRoute Clock Cap Factor  : 1 {1 1 1} 	[Derived from postRoute_cap (effortLevel low)]
+    RC-Corner PostRoute Clock Res Factor  : 1 {1 1 1} 	[Derived from postRoute_res (effortLevel low)]
+*Info: initialize multi-corner CTS.
+Reading timing constraints file 'prects.sdc' ...
+Current (total cpu=0:00:14.9, real=0:00:56.0, peak res=207.4M, current mem=662.0M)
+**WARN: (TCLNL-330):	set_input_delay on clock root 'clk' is not supported. You should use the -source option to set_clock_latency to provide this offset. You can also use the global timing_allow_input_delay_on_clock_source to allow set_input_delay assertion to have an effect on clock source paths beginning at this clock root. (File prects.sdc, Line 14).
+
+INFO (CTE): Reading of timing constraints file prects.sdc completed, with 1 WARNING
+Ending "Constraint file reading stats" (total cpu=0:00:00.1, real=0:00:00.0, peak res=222.7M, current mem=679.2M)
+Current (total cpu=0:00:15.0, real=0:00:56.0, peak res=222.7M, current mem=679.2M)
+Reading timing constraints file 'postcts.sdc' ...
+Current (total cpu=0:00:15.0, real=0:00:56.0, peak res=222.7M, current mem=679.2M)
+Resetting all latency settings from fanout cone of clock 'clk' (File postcts.sdc, Line 2).
+
+INFO (CTE): Constraints read successfully.
+Ending "Constraint file reading stats" (total cpu=0:00:00.1, real=0:00:00.0, peak res=234.7M, current mem=691.5M)
+Current (total cpu=0:00:15.1, real=0:00:56.0, peak res=234.7M, current mem=691.5M)
+Total number of combinational cells: 26
+Total number of sequential cells: 4
+Total number of tristate cells: 2
+Total number of level shifter cells: 0
+Total number of power gating cells: 0
+Total number of isolation cells: 0
+Total number of power switch cells: 0
+Total number of pulse generator cells: 0
+Total number of always on buffers: 0
+Total number of retention cells: 0
+List of usable buffers: BUFX2 BUFX4 CLKBUF1
+Total number of usable buffers: 3
+List of unusable buffers:
+Total number of unusable buffers: 0
+List of usable inverters: INVX2 INVX1 INVX4 INVX8
+Total number of usable inverters: 4
+List of unusable inverters:
+Total number of unusable inverters: 0
+List of identified usable delay cells: CLKBUF2 CLKBUF3
+Total number of identified usable delay cells: 2
+List of identified unusable delay cells:
+Total number of identified unusable delay cells: 0
+
+*** Summary of all messages that are not suppressed in this session:
+Severity  ID               Count  Summary                                  
+WARNING   IMPLF-151            5  The viaRule '%s' has been defined, the c...
+WARNING   IMPLF-58            40  MACRO '%s' has been found in the databas...
+WARNING   IMPLF-61             1  %d duplicated MACRO definitions have bee...
+ERROR     IMPLF-223            2  The LEF via '%s' has been defined and fo...
+WARNING   IMPLF-108            1  There is no overlap layer defined in any...
+WARNING   IMPLF-119           10  LAYER '%s' has been found in the databas...
+WARNING   IMPFP-3961           2  The techSite '%s' has no related standar...
+WARNING   IMPTS-124            2  Timing library description of pin '%s' i...
+WARNING   IMPVL-159           68  Pin '%s' of cell '%s' is defined in LEF ...
+WARNING   IMPPP-557            3  A single-layer VIARULE GENERATE for turn...
+*** Message Summary: 132 warning(s), 2 error(s)
+
+<CMD> floorPlan -r 1.0 0.6 50 50 50 50
+Snap core to left to manufacture grid: 49.9500.
+Snap core to bottom to manufacture grid: 49.9500.
+Snap core to right to manufacture grid: 49.9500.
+Snap core to top to manufacture grid: 49.9500.
+Horizontal Layer M1 offset = 1500 (derived)
+Vertical Layer M2 offset = 1200 (derived)
+**WARN: (IMPFP-325):	Floorplan of the design is resized. All current floorplan objects are automatically derived based on specified new floorplan. This may change blocks, fixed standard cells, existing routes and blockages.
+<CMD> unfixAllIos
+<CMD> legalizePin
+#- Begin legalizePin (date=11/04 17:55:19, mem=699.5M)
+
+Start pin legalization for the partition [layout_lab_design]:
+Summary report for top level: [layout_lab_design] 
+	Total Pads                         : 16
+	Total Pins                         : 0
+	Legally Assigned Pins              : 0
+	Illegally Assigned Pins            : 0
+	Unplaced Pins                      : 0
+	Constant/Spl Net Pins              : 0
+	Internal Pins                      : 0
+	Legally Assigned Feedthrough Pins  : 0
+	Illegally Assigned Feedthrough Pins: 0
+End of Summary report
+End pin legalization for the partition [layout_lab_design].
+
+#- End legalizePin (date=11/04 17:55:19, total cpu=0:00:00.0, real=0:00:00.0, peak res=699.5M, current mem=699.5M)
+<CMD> zoomIn
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> zoomIn
+<CMD> panPage 0 -1
+<CMD> uiSetTool ruler
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> panPage 0 -1
+<CMD> addRing -spacing_bottom 9.9 -width_left 9.9 -width_bottom 9.9 -width_top 9.9 -spacing_top 9.9 -layer_bottom metal1 -width_right 9.9 -around default_power_domain -center 1 -layer_top metal1 -spacing_right 9.9 -spacing_left 9.9 -layer_right metal2 -layer_left metal2 -offset 9.9 -nets { gnd vdd }
+#- Begin addRing (date=11/04 17:56:18, mem=882.0M)
+**WARN: (IMPPP-4022):	Option "-spacing_bottom" is obsolete and has been replaced by "-spacing". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-spacing"..
+**WARN: (IMPPP-4022):	Option "-width_left" is obsolete and has been replaced by "-width". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-width"..
+**WARN: (IMPPP-4022):	Option "-width_bottom" is obsolete and has been replaced by "-width". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-width"..
+**WARN: (IMPPP-4022):	Option "-width_top" is obsolete and has been replaced by "-width". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-width"..
+**WARN: (IMPPP-4022):	Option "-spacing_top" is obsolete and has been replaced by "-spacing". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-spacing"..
+**WARN: (IMPPP-4022):	Option "-layer_bottom" is obsolete and has been replaced by "-layer". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-layer"..
+**WARN: (IMPPP-4022):	Option "-width_right" is obsolete and has been replaced by "-width". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-width"..
+**WARN: (IMPPP-4022):	Option "-layer_top" is obsolete and has been replaced by "-layer". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-layer"..
+**WARN: (IMPPP-4022):	Option "-spacing_right" is obsolete and has been replaced by "-spacing". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-spacing"..
+**WARN: (IMPPP-4022):	Option "-spacing_left" is obsolete and has been replaced by "-spacing". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-spacing"..
+**WARN: (IMPPP-4022):	Option "-layer_right" is obsolete and has been replaced by "-layer". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-layer"..
+**WARN: (IMPPP-4022):	Option "-layer_left" is obsolete and has been replaced by "-layer". The obsolete option still works in this release, but to avoid this warning and to ensure compatibility with future releases, update your script to use "-layer"..
+
+Ring generation is complete; vias are now being generated.
+addRing created 8 wires.
+ViaGen created 8 vias and deleted 0 via to avoid violation.
++--------+----------------+----------------+
+|  Layer |     Created    |     Deleted    |
++--------+----------------+----------------+
+| metal1 |        4       |       NA       |
+|   via  |        8       |        0       |
+| metal2 |        4       |       NA       |
++--------+----------------+----------------+
+#- End addRing (date=11/04 17:56:18, total cpu=0:00:00.0, real=0:00:00.0, peak res=883.0M, current mem=883.0M)
+<CMD> zoomIn
+<CMD> panPage 1 0
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 -1
+<CMD> zoomOut
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> zoomIn
+<CMD> panPage 0 -1
+<CMD> zoomOut
+<CMD> panPage 0 -1
+<CMD> panPage 0 1
+<CMD> panPage 0 -1
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 -1
+<CMD> setPlaceMode -congEffort medium
+<CMD> placeDesign -inPlaceOpt
+**WARN: the option '-inPlaceOpt' will become obsolete in the next major release. Instead use the following mode  'setOptMode -allEndPoints true' and run regular placeDesign followed by optDesign -preCts. The obsolete option still works in this release, but to avoid this warning and to ensure the compatibility with future relases, update your script to use the recommended setting.
+**WARN: the option '-inPlaceOpt' will become obsolete in the next major release. Instead use the following mode  'setOptMode -allEndPoints true' and run regular placeDesign followed by optDesign -preCts. The obsolete option still works in this release, but to avoid this warning and to ensure the compatibility with future relases, update your script to use the recommended setting.
+*** Starting placeDesign concurrent flow ***
+**INFO: Enable pre-place timing setting for timing analysis
+Set Using Default Delay Limit as 101.
+**WARN: (IMPDC-1629):	The default delay limit was set to 101. This is less than the default of 1000 and may result in inaccurate delay calculation for nets with a fanout higher than the setting.  If needed, the default delay limit may be adjusted by running the command 'set delaycal_use_default_delay_limit'.
+Set Default Net Delay as 0 ps.
+Set Default Net Load as 0 pF. 
+**INFO: Analyzing IO path groups for slack adjustment
+Effort level <high> specified for reg2reg_tmp.12719 path_group
+#################################################################################
+# Design Stage: PreRoute
+# Design Name: layout_lab_design
+# Design Mode: 90nm
+# Analysis Mode: MMMC Non-OCV 
+# Parasitics Mode: No SPEF/RCDB
+# Signoff Settings: SI Off 
+#################################################################################
+Calculate delays in Single mode...
+siFlow : Timing analysis mode is single, using late cdB files
+Total number of fetched objects 696
+End delay calculation. (MEM=1295.13 CPU=0:00:00.1 REAL=0:00:00.0)
+**INFO: Disable pre-place timing setting for timing analysis
+Set Using Default Delay Limit as 1000.
+Set Default Net Delay as 1000 ps.
+Set Default Net Load as 0.5 pF. 
+*** Start deleteBufferTree ***
+Info: Detect buffers to remove automatically.
+Analyzing netlist ...
+Updating netlist
+
+*summary: 10 instances (buffers/inverters) removed
+*** Finish deleteBufferTree (0:00:00.0) ***
+*** ThreeLayerMode is automatically turned on for small designs with less than 4 layers.
+ThreeLayerMode is on. Timing-driven placement option disabled.
+Deleted 0 physical inst  (cell - / prefix -).
+Extracting standard cell pins and blockage ...... 
+Pin and blockage extraction finished
+Extracting macro/IO cell pins and blockage ...... 
+Pin and blockage extraction finished
+*** Starting "NanoPlace(TM) placement v#1 (mem=1281.0M)" ...
+Options: clkGateAware pinGuide congEffort=medium gpeffort=medium 
+#std cell=658 (0 fixed + 658 movable) #block=0 (0 floating + 0 preplaced)
+#ioInst=44 #net=686 #term=2363 #term/net=3.44, #fixedIo=44, #floatIo=0, #fixedPin=0, #floatPin=16
+stdCell: 658 single + 0 double + 0 multi
+Total standard cell length = 10.3872 (mm), area = 0.3116 (mm^2)
+Estimated cell power/ground rail width = 3.750 um
+Average module density = 0.500.
+Density for the design = 0.500.
+       = stdcell_area 4328 sites (311616 um^2) / alloc_area 8658 sites (623376 um^2).
+Pin Density = 0.2729.
+            = total # of pins 2363 / total area 8658.
+=== lastAutoLevel = 6 
+**WARN: (IMPSP-9531):	Turning off clkGateAware when timingDriven is off
+Iteration  1: Total net bbox = 2.028e+04 (9.09e+03 1.12e+04)
+              Est.  stn bbox = 2.408e+04 (1.09e+04 1.32e+04)
+              cpu = 0:00:00.0 real = 0:00:00.0 mem = 1281.0M
+Iteration  2: Total net bbox = 2.028e+04 (9.09e+03 1.12e+04)
+              Est.  stn bbox = 2.408e+04 (1.09e+04 1.32e+04)
+              cpu = 0:00:00.0 real = 0:00:00.0 mem = 1281.0M
+Iteration  3: Total net bbox = 2.131e+04 (1.02e+04 1.11e+04)
+              Est.  stn bbox = 2.610e+04 (1.27e+04 1.34e+04)
+              cpu = 0:00:00.0 real = 0:00:00.0 mem = 1297.0M
+Iteration  4: Total net bbox = 4.219e+04 (2.45e+04 1.77e+04)
+              Est.  stn bbox = 5.375e+04 (3.26e+04 2.11e+04)
+              cpu = 0:00:00.2 real = 0:00:00.0 mem = 1297.0M
+Iteration  5: Total net bbox = 5.570e+04 (3.33e+04 2.24e+04)
+              Est.  stn bbox = 7.171e+04 (4.44e+04 2.73e+04)
+              cpu = 0:00:00.3 real = 0:00:01.0 mem = 1297.0M
+Iteration  6: Total net bbox = 6.507e+04 (3.60e+04 2.91e+04)
+              Est.  stn bbox = 8.227e+04 (4.72e+04 3.51e+04)
+              cpu = 0:00:00.3 real = 0:00:00.0 mem = 1297.0M
+Iteration  7: Total net bbox = 7.484e+04 (4.13e+04 3.36e+04)
+              Est.  stn bbox = 9.277e+04 (5.29e+04 3.99e+04)
+              cpu = 0:00:00.4 real = 0:00:00.0 mem = 1297.0M
+Iteration  8: Total net bbox = 7.861e+04 (4.27e+04 3.59e+04)
+              Est.  stn bbox = 9.635e+04 (5.42e+04 4.21e+04)
+              cpu = 0:00:00.5 real = 0:00:01.0 mem = 1297.0M
+Iteration  9: Total net bbox = 8.265e+04 (4.57e+04 3.69e+04)
+              Est.  stn bbox = 1.011e+05 (5.78e+04 4.33e+04)
+              cpu = 0:00:01.3 real = 0:00:01.0 mem = 1297.0M
+Iteration 10: Total net bbox = 8.265e+04 (4.57e+04 3.69e+04)
+              Est.  stn bbox = 1.011e+05 (5.78e+04 4.33e+04)
+              cpu = 0:00:00.0 real = 0:00:00.0 mem = 1297.0M
+Iteration 11: Total net bbox = 8.265e+04 (4.57e+04 3.69e+04)
+              Est.  stn bbox = 1.011e+05 (5.78e+04 4.33e+04)
+              cpu = 0:00:00.0 real = 0:00:00.0 mem = 1297.0M
+*** cost = 8.265e+04 (4.57e+04 3.69e+04) (cpu for global=0:00:03.0) real=0:00:04.0***
+Core Placement runtime cpu: 0:00:03.0 real: 0:00:04.0
+**WARN: (IMPSP-9025):	No scan chain specified/traced.
+Type 'man IMPSP-9025' for more detail.
+*** Starting refinePlace (0:00:47.9 mem=1297.0M) ***
+Total net bbox length = 8.265e+04 (4.571e+04 3.694e+04) (ext = 3.225e+03)
+Density distribution unevenness ratio = 4.609%
+Move report: Detail placement moves 658 insts, mean move: 13.58 um, max move: 93.03 um
+	Max move on inst (I0/LD/T_FIFO/IP_FIFO/URFC/rwptr_r2_reg[2]): (1035.74, 950.23) --> (1068.00, 1011.00)
+	Runtime: CPU: 0:00:00.1 REAL: 0:00:00.0 MEM: 1297.0MB
+Summary Report:
+Instances move: 658 (out of 658 movable)
+Instances flipped: 0
+Mean displacement: 13.58 um
+Max displacement: 93.03 um (Instance: I0/LD/T_FIFO/IP_FIFO/URFC/rwptr_r2_reg[2]) (1035.74, 950.229) -> (1068, 1011)
+	Length: 22 sites, height: 1 rows, site name: core, cell type: DFFSR
+Total net bbox length = 7.859e+04 (4.192e+04 3.668e+04) (ext = 3.170e+03)
+Runtime: CPU: 0:00:00.1 REAL: 0:00:00.0 MEM: 1297.0MB
+*** Finished refinePlace (0:00:48.0 mem=1297.0M) ***
+*** End of Placement (cpu=0:00:03.1, real=0:00:04.0, mem=1297.0M) ***
+default core: bins with density >  0.75 =    0 % ( 0 / 9 )
+Density distribution unevenness ratio = 4.701%
+setAnalysisMode  -domain allClockDomain -checkType setup -skew true -usefulSkew false -log true -warn true -caseAnalysis true -sequentialConstProp false -moduleIOCstr true -clockPropagation forcedIdeal -clkSrcPath false -timingSelfLoopsNoSkew false -asyncChecks async -useOutputPinCap true -latch true -latchDelayCalIteration 2 -timeBorrowing true -latchFullDelayCal false -clockGatingCheck true -enableMultipleDriveNet true -analysisType single -cppr false -clkNetsMarking beforeConstProp -honorVirtualPartition false -honorClockDomains false
+**INFO: setDesignMode -flowEffort standard -> setting 'setOptMode -allEndPoints true' for the duration of this command.
+GigaOpt running with 1 threads.
+**WARN: (IMPOPT-6118):	The following cells have a dont_touch property but without being dont_use.
+To avoid such a configuration impacting timing closure, since otherwise such cells could be inserted but never optimized or removed, optDesign is treating the following cells as dont_use.
+			Cell PADVDD is dont_touch but not dont_use
+			Cell PADNC is dont_touch but not dont_use
+			Cell PADGND is dont_touch but not dont_use
+			Cell PADFC is dont_touch but not dont_use
+	...
+	Reporting only the 20 first cells found...
+
+**optDesign ... cpu = 0:00:00, real = 0:00:00, mem = 1157.6M, totSessionCpu=0:00:48 **
+Added -handlePreroute to trialRouteMode
+*** optDesign -preCTS ***
+DRC Margin: user margin 0.0; extra margin 0.2
+Setup Target Slack: user slack 0; extra slack 0.1
+Hold Target Slack: user slack 0
+No user sequential activity specified, applying default sequential activity of "0.2" for Dynamic Power reporting.
+'set_default_switching_activity' finished successfully.
+Start to check current routing status for nets...
+All nets will be re-routed.
+End to check current routing status for nets (mem=1157.6M)
+[NR-eGR] honorMsvRouteConstraint: false
+[NR-eGR] honorClockSpecNDR      : 0
+[NR-eGR] minRouteLayer          : 2
+[NR-eGR] maxRouteLayer          : 2147483647
+[NR-eGR] numTracksPerClockWire  : 0
+[NR-eGR] Layer1 has no routable track
+[NR-eGR] Layer2 has single uniform track structure
+[NR-eGR] Layer3 has single uniform track structure
+[NR-eGR] numRoutingBlks=0 numInstBlks=294 numPGBlocks=12 numBumpBlks=0 numBoundaryFakeBlks=0
+[NR-eGR] numPreroutedNet = 0  numPreroutedWires = 0
+[NR-eGR] Read numTotalNets=686  numIgnoredNets=16
+[NR-eGR] There are 1 clock nets ( 0 with NDR ).
+[NR-eGR] ============ Routing rule table ============
+[NR-eGR] Rule id 0. Nets 670 
+[NR-eGR] id=0  ndrTrackId=0  ndrViaId=-1  extraSpace=0  numShields=0  maxHorDemand=1  maxVerDemand=1
+[NR-eGR] Pitch:  L1=1800  L2=2400  L3=3000
+[NR-eGR] ========================================
+[NR-eGR] 
+[NR-eGR] Layer group 1: route 670 net(s) in layer range [2, 3]
+[NR-eGR] earlyGlobalRoute overflow of layer group 1: 0.00% H + 0.22% V. EstWL: 9.711000e+04um
+[NR-eGR] 
+[NR-eGR] Overflow after earlyGlobalRoute (GR compatible) 0.00% H + 0.00% V
+[NR-eGR] Overflow after earlyGlobalRoute 0.00% H + 0.00% V
+[NR-eGR] Layer1(metal1)(F) length: 0.000000e+00um, number of vias: 2315
+[NR-eGR] Layer2(metal2)(V) length: 5.101710e+04um, number of vias: 3575
+[NR-eGR] Layer3(metal3)(H) length: 5.247120e+04um, number of vias: 0
+[NR-eGR] Total length: 1.034883e+05um, number of vias: 5890
+[NR-eGR] End Peak syMemory usage = 1153.6 MB
+[NR-eGR] Early Global Router Kernel+IO runtime : 0.02 seconds
+Updating RC grid for preRoute extraction ...
+Initializing multi-corner capacitance tables ... 
+Initializing multi-corner resistance tables ...
+Extraction called for design 'layout_lab_design' of instances=702 and nets=696 using extraction engine 'preRoute' .
+**WARN: (IMPEXT-3530):	The process node is not set. Use the command setDesignMode -process <process node> prior to extraction for maximum accuracy and optimal automatic threshold setting.
+Type 'man IMPEXT-3530' for more detail.
+PreRoute RC Extraction called for design layout_lab_design.
+RC Extraction called in multi-corner(1) mode.
+RCMode: PreRoute
+      RC Corner Indexes            0   
+Capacitance Scaling Factor   : 1.00000 
+Resistance Scaling Factor    : 1.00000 
+Clock Cap. Scaling Factor    : 1.00000 
+Clock Res. Scaling Factor    : 1.00000 
+Shrink Factor                : 1.00000
+PreRoute extraction is honoring NDR/Shielding/ExtraSpace for clock nets.
+Using capacitance table file ...
+Updating RC grid for preRoute extraction ...
+Initializing multi-corner capacitance tables ... 
+Initializing multi-corner resistance tables ...
+PreRoute RC Extraction DONE (CPU Time: 0:00:00.0  Real Time: 0:00:00.0  MEM: 1153.613M)
+** INFO : this run is activating medium effort placeOptDesign flow
+*** Starting optimizing excluded clock nets MEM= 1153.6M) ***
+*info: No excluded clock nets to be optimized.
+*** Finished optimizing excluded clock nets (CPU Time= 0:00:00.0  MEM= 1160.1M) ***
+#################################################################################
+# Design Stage: PreRoute
+# Design Name: layout_lab_design
+# Design Mode: 90nm
+# Analysis Mode: MMMC Non-OCV 
+# Parasitics Mode: No SPEF/RCDB
+# Signoff Settings: SI Off 
+#################################################################################
+AAE_INFO: 1 threads acquired from CTE.
+Calculate delays in Single mode...
+Total number of fetched objects 686
+End delay calculation. (MEM=1249.51 CPU=0:00:00.7 REAL=0:00:01.0)
+The useful skew maximum allowed delay is: 0.3
+Info: 16 io nets excluded
+Info: 2 clock nets excluded from IPO operation.
+*info: There are 3 candidate Buffer cells
+*info: There are 4 candidate Inverter cells
+
+Netlist preparation processing... 
+Removed 0 instance
+*info: Marking 0 isolation instances dont touch
+*info: Marking 0 level shifter instances dont touch
+Begin: GigaOpt high fanout net optimization
+Info: 16 io nets excluded
+Info: 2 clock nets excluded from IPO operation.
++----------+---------+--------+--------+------------+--------+
+| Density  | Commits |  WNS   |  TNS   |    Real    |  Mem   |
++----------+---------+--------+--------+------------+--------+
+|    49.99%|        -|  -1.448|  -6.061|   0:00:00.0| 1368.1M|
+|    49.99%|        -|  -1.448|  -6.061|   0:00:00.0| 1368.1M|
++----------+---------+--------+--------+------------+--------+
+
+*** Finish pre-CTS High Fanout Net Fixing (cpu=0:00:00.0 real=0:00:00.0 mem=1368.1M) ***
+End: GigaOpt high fanout net optimization
+Begin: GigaOpt DRV Optimization
+Info: 16 io nets excluded
+Info: 2 clock nets excluded from IPO operation.
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|      max-tran     |      max-cap      |     max-fanout    |     max-length    |       |           |           |           |         |            |           |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|  nets   |  terms  |  nets   |  terms  |  nets   |  terms  |  nets   |  terms  |  WNS  |  #Buffer  | #Inverter |  #Resize  | Density |    Real    |    Mem    |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|     0   |     0   |    23   |     23  |     0   |     0   |     0   |     0   | -1.45 |          0|          0|          0|  49.99  |            |           |
+|     0   |     0   |     0   |      0  |     0   |     0   |     0   |     0   | -1.24 |         22|          0|          1|  50.76  |   0:00:00.0|    1368.1M|
+|     0   |     0   |     0   |      0  |     0   |     0   |     0   |     0   | -1.24 |          0|          0|          0|  50.76  |   0:00:00.0|    1368.1M|
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+*** Finish DRV Fixing (cpu=0:00:00.2 real=0:00:00.0 mem=1368.1M) ***
+
+End: GigaOpt DRV Optimization
+**optDesign ... cpu = 0:00:02, real = 0:00:02, mem = 1228.1M, totSessionCpu=0:00:50 **
+Begin: GigaOpt Global Optimization
+*info: use new DP (enabled)
+Info: 16 io nets excluded
+Info: 2 clock nets excluded from IPO operation.
+*info: 16 io nets excluded
+*info: 2 clock nets excluded
+*info: 2 special nets excluded.
+*info: 9 no-driver nets excluded.
+** GigaOpt Global Opt WNS Slack -1.240  TNS Slack -3.323 
++--------+--------+----------+------------+--------+----------+---------+----------------------------------------------------+
+|  WNS   |  TNS   | Density  |    Real    |  Mem   |Worst View|Pathgroup|                     End Point                      |
++--------+--------+----------+------------+--------+----------+---------+----------------------------------------------------+
+|  -1.240|  -3.323|    50.76%|   0:00:00.0| 1383.6M|     osu05|  default| I0/LD/T_FIFO/IP_FIFO/URFC/empty_flag_r_reg/D       |
+|  -0.257|  -0.257|    51.00%|   0:00:00.0| 1389.4M|     osu05|  default| I0/LD/T_FIFO/IP_FIFO/URFC/empty_flag_r_reg/D       |
+|  -0.257|  -0.257|    51.00%|   0:00:00.0| 1389.4M|     osu05|  default| I0/LD/T_FIFO/IP_FIFO/URFC/empty_flag_r_reg/D       |
+|  -0.257|  -0.257|    51.00%|   0:00:00.0| 1389.4M|     osu05|  default| I0/LD/T_FIFO/IP_FIFO/URFC/empty_flag_r_reg/D       |
+|  -0.257|  -0.257|    51.00%|   0:00:00.0| 1389.4M|     osu05|  default| I0/LD/T_FIFO/IP_FIFO/URFC/empty_flag_r_reg/D       |
+|  -0.020|  -0.020|    51.11%|   0:00:00.0| 1389.4M|     osu05|  default| I0/LD/T_FIFO/IP_FIFO/URFC/empty_flag_r_reg/D       |
+|  -0.020|  -0.020|    51.11%|   0:00:00.0| 1389.4M|     osu05|  default| I0/LD/T_FIFO/IP_FIFO/URFC/empty_flag_r_reg/D       |
+|  -0.020|  -0.020|    51.11%|   0:00:00.0| 1389.4M|     osu05|  default| I0/LD/T_FIFO/IP_FIFO/URFC/empty_flag_r_reg/D       |
+|  -0.020|  -0.020|    51.11%|   0:00:00.0| 1389.4M|     osu05|  default| I0/LD/T_FIFO/IP_FIFO/URFC/empty_flag_r_reg/D       |
++--------+--------+----------+------------+--------+----------+---------+----------------------------------------------------+
+
+*** Finish pre-CTS Global Setup Fixing (cpu=0:00:00.2 real=0:00:00.0 mem=1389.4M) ***
+
+*** Finish pre-CTS Setup Fixing (cpu=0:00:00.2 real=0:00:00.0 mem=1389.4M) ***
+** GigaOpt Global Opt End WNS Slack -0.019  TNS Slack -0.019 
+Global Opt: restore maxLocalDensity to 3.0
+End: GigaOpt Global Optimization
+
+Active setup views:
+ osu05
+  Dominating endpoints: 0
+  Dominating TNS: -0.000
+
+*** Timing NOT met, worst failing slack is -0.020
+*** Check timing (0:00:00.0)
+Info: 16 io nets excluded
+Info: 2 clock nets excluded from IPO operation.
+Begin: Area Reclaim Optimization
+Reclaim Optimization WNS Slack -0.019  TNS Slack -0.019 Density 51.11
++----------+---------+--------+--------+------------+--------+
+| Density  | Commits |  WNS   |  TNS   |    Real    |  Mem   |
++----------+---------+--------+--------+------------+--------+
+|    51.11%|        -|  -0.019|  -0.019|   0:00:00.0| 1386.8M|
+|    51.09%|        2|  -0.020|  -0.020|   0:00:00.0| 1389.5M|
+|    51.09%|        0|  -0.020|  -0.020|   0:00:00.0| 1389.5M|
+|    50.90%|        5|  -0.001|  -0.001|   0:00:00.0| 1389.5M|
+|    50.88%|        2|  -0.001|  -0.001|   0:00:00.0| 1389.5M|
+|    50.88%|        0|  -0.001|  -0.001|   0:00:00.0| 1389.5M|
++----------+---------+--------+--------+------------+--------+
+Reclaim Optimization End WNS Slack -0.001  TNS Slack -0.001 Density 50.88
+** Finished Core Area Reclaim Optimization (cpu = 0:00:00.3) (real = 0:00:00.0) **
+Executing incremental physical updates
+Executing incremental physical updates
+*** Finished Area Reclaim Optimization (cpu=0:00:00, real=0:00:00, mem=1239.96M, totSessionCpu=0:00:52).
+*** Timing NOT met, worst failing slack is -0.001
+*** Check timing (0:00:00.0)
+Begin: GigaOpt Optimization in WNS mode
+Info: 16 io nets excluded
+Info: 2 clock nets excluded from IPO operation.
+*info: 16 io nets excluded
+*info: 2 clock nets excluded
+*info: 2 special nets excluded.
+*info: 9 no-driver nets excluded.
+** GigaOpt Optimizer WNS Slack -0.001 TNS Slack -0.001 Density 50.88
+Active Path Group: reg2reg  
++--------+---------+--------+---------+----------+------------+--------+----------+---------+----------------------------------------------------+
+|  WNS   | All WNS |  TNS   | All TNS | Density  |    Real    |  Mem   |Worst View|Pathgroup|                     End Point                      |
++--------+---------+--------+---------+----------+------------+--------+----------+---------+----------------------------------------------------+
+|  -0.001|   -0.001|  -0.001|   -0.001|    50.88%|   0:00:00.0| 1391.5M|     osu05|  reg2reg| I0/LD/T_FIFO/IP_FIFO/URFC/empty_flag_r_reg/D       |
+|   0.098|    0.005|   0.000|    0.000|    50.94%|   0:00:00.0| 1392.5M|        NA|       NA| NA                                                 |
+|   0.098|    0.005|   0.000|    0.000|    50.94%|   0:00:00.0| 1392.5M|     osu05|       NA| NA                                                 |
++--------+---------+--------+---------+----------+------------+--------+----------+---------+----------------------------------------------------+
+
+*** Finish Core Optimize Step (cpu=0:00:00.0 real=0:00:00.0 mem=1392.5M) ***
+Active Path Group: default 
++--------+---------+--------+---------+----------+------------+--------+----------+---------+----------------------------------------------------+
+|  WNS   | All WNS |  TNS   | All TNS | Density  |    Real    |  Mem   |Worst View|Pathgroup|                     End Point                      |
++--------+---------+--------+---------+----------+------------+--------+----------+---------+----------------------------------------------------+
+|   0.005|    0.005|   0.000|    0.000|    50.94%|   0:00:00.0| 1392.5M|     osu05|  default| I0/LD/T_FIFO/IP_FIFO/UWFC/full_flag_r_reg/D        |
+|   0.098|    0.104|   0.000|    0.000|    50.97%|   0:00:00.0| 1392.5M|        NA|       NA| NA                                                 |
+|   0.098|    0.104|   0.000|    0.000|    50.97%|   0:00:00.0| 1392.5M|     osu05|       NA| NA                                                 |
++--------+---------+--------+---------+----------+------------+--------+----------+---------+----------------------------------------------------+
+
+*** Finish Core Optimize Step (cpu=0:00:00.0 real=0:00:00.0 mem=1392.5M) ***
+
+*** Finished Optimize Step Cumulative (cpu=0:00:00.1 real=0:00:00.0 mem=1392.5M) ***
+** GigaOpt Optimizer WNS Slack 0.098 TNS Slack 0.000 Density 50.97
+** GigaOpt Optimizer WNS Slack 0.098 TNS Slack 0.000 Density 50.97
+
+*** Finish pre-CTS Setup Fixing (cpu=0:00:00.1 real=0:00:01.0 mem=1392.5M) ***
+
+End: GigaOpt Optimization in WNS mode
+*** Timing Is met
+*** Check timing (0:00:00.0)
+Info: 16 io nets excluded
+Info: 2 clock nets excluded from IPO operation.
+Begin: Area Reclaim Optimization
+Reclaim Optimization WNS Slack 0.000  TNS Slack 0.000 Density 50.97
++----------+---------+--------+--------+------------+--------+
+| Density  | Commits |  WNS   |  TNS   |    Real    |  Mem   |
++----------+---------+--------+--------+------------+--------+
+|    50.97%|        -|   0.000|   0.000|   0:00:00.0| 1374.5M|
+|    50.87%|        3|   0.000|   0.000|   0:00:00.0| 1374.5M|
+|    50.87%|        0|   0.000|   0.000|   0:00:00.0| 1374.5M|
++----------+---------+--------+--------+------------+--------+
+Reclaim Optimization End WNS Slack 0.000  TNS Slack 0.000 Density 50.87
+** Finished Core Area Reclaim Optimization (cpu = 0:00:00.1) (real = 0:00:00.0) **
+*** Finished Area Reclaim Optimization (cpu=0:00:00, real=0:00:00, mem=1240.96M, totSessionCpu=0:00:53).
+*** Steiner Routed Nets: 13.324%; Threshold: 100; Threshold for Hold: 100
+[NR-eGR] Started earlyGlobalRoute kernel
+[NR-eGR] Initial Peak syMemory usage = 1241.0 MB
+[NR-eGR] honorMsvRouteConstraint: false
+[NR-eGR] honorClockSpecNDR      : 0
+[NR-eGR] minRouteLayer          : 2
+[NR-eGR] maxRouteLayer          : 2147483647
+[NR-eGR] numTracksPerClockWire  : 0
+[NR-eGR] Layer1 has no routable track
+[NR-eGR] Layer2 has single uniform track structure
+[NR-eGR] Layer3 has single uniform track structure
+[NR-eGR] numRoutingBlks=0 numInstBlks=293 numPGBlocks=12 numBumpBlks=0 numBoundaryFakeBlks=0
+[NR-eGR] numPreroutedNet = 0  numPreroutedWires = 0
+[NR-eGR] Read numTotalNets=713  numIgnoredNets=26
+[NR-eGR] There are 1 clock nets ( 0 with NDR ).
+[NR-eGR] ============ Routing rule table ============
+[NR-eGR] Rule id 0. Nets 687 
+[NR-eGR] id=0  ndrTrackId=0  ndrViaId=-1  extraSpace=0  numShields=0  maxHorDemand=1  maxVerDemand=1
+[NR-eGR] Pitch:  L1=1800  L2=2400  L3=3000
+[NR-eGR] ========================================
+[NR-eGR] 
+[NR-eGR] Layer group 1: route 687 net(s) in layer range [2, 3]
+[NR-eGR] earlyGlobalRoute overflow of layer group 1: 0.00% H + 0.22% V. EstWL: 9.696000e+04um
+[NR-eGR] 
+[NR-eGR] Overflow after earlyGlobalRoute (GR compatible) 0.00% H + 0.00% V
+[NR-eGR] Overflow after earlyGlobalRoute 0.00% H + 0.00% V
+[NR-eGR] Layer1(metal1)(F) length: 0.000000e+00um, number of vias: 2346
+[NR-eGR] Layer2(metal2)(V) length: 5.098410e+04um, number of vias: 3582
+[NR-eGR] Layer3(metal3)(H) length: 5.243280e+04um, number of vias: 0
+[NR-eGR] Total length: 1.034169e+05um, number of vias: 5928
+[NR-eGR] End Peak syMemory usage = 1220.3 MB
+[NR-eGR] Early Global Router Kernel+IO runtime : 0.03 seconds
+Extraction called for design 'layout_lab_design' of instances=729 and nets=722 using extraction engine 'preRoute' .
+**WARN: (IMPEXT-3530):	The process node is not set. Use the command setDesignMode -process <process node> prior to extraction for maximum accuracy and optimal automatic threshold setting.
+Type 'man IMPEXT-3530' for more detail.
+PreRoute RC Extraction called for design layout_lab_design.
+RC Extraction called in multi-corner(1) mode.
+RCMode: PreRoute
+      RC Corner Indexes            0   
+Capacitance Scaling Factor   : 1.00000 
+Resistance Scaling Factor    : 1.00000 
+Clock Cap. Scaling Factor    : 1.00000 
+Clock Res. Scaling Factor    : 1.00000 
+Shrink Factor                : 1.00000
+PreRoute extraction is honoring NDR/Shielding/ExtraSpace for clock nets.
+Using capacitance table file ...
+Updating RC grid for preRoute extraction ...
+Initializing multi-corner capacitance tables ... 
+Initializing multi-corner resistance tables ...
+PreRoute RC Extraction DONE (CPU Time: 0:00:00.0  Real Time: 0:00:00.0  MEM: 1220.293M)
+Compute RC Scale Done ...
+#################################################################################
+# Design Stage: PreRoute
+# Design Name: layout_lab_design
+# Design Mode: 90nm
+# Analysis Mode: MMMC Non-OCV 
+# Parasitics Mode: No SPEF/RCDB
+# Signoff Settings: SI Off 
+#################################################################################
+AAE_INFO: 1 threads acquired from CTE.
+Calculate delays in Single mode...
+Total number of fetched objects 713
+End delay calculation. (MEM=1310.74 CPU=0:00:00.7 REAL=0:00:01.0)
+Begin: GigaOpt postEco DRV Optimization
+Info: 16 io nets excluded
+Info: 2 clock nets excluded from IPO operation.
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|      max-tran     |      max-cap      |     max-fanout    |     max-length    |       |           |           |           |         |            |           |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|  nets   |  terms  |  nets   |  terms  |  nets   |  terms  |  nets   |  terms  |  WNS  |  #Buffer  | #Inverter |  #Resize  | Density |    Real    |    Mem    |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|     0   |     0   |     1   |      1  |     0   |     0   |     0   |     0   | -0.03 |          0|          0|          0|  50.87  |            |           |
+|     0   |     0   |     0   |      0  |     0   |     0   |     0   |     0   | -0.03 |          0|          0|          1|  50.90  |   0:00:00.0|    1387.1M|
+|     0   |     0   |     0   |      0  |     0   |     0   |     0   |     0   | -0.03 |          0|          0|          0|  50.90  |   0:00:00.0|    1387.1M|
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+*** Finish DRV Fixing (cpu=0:00:00.1 real=0:00:00.0 mem=1387.1M) ***
+
+*** Starting refinePlace (0:00:53.6 mem=1403.1M) ***
+Total net bbox length = 7.912e+04 (4.208e+04 3.704e+04) (ext = 3.174e+03)
+**WARN: (IMPSP-5140):	Global net connect rules have not been created. Added  insts would have no supply connectivity, and would fail DRC.
+Type 'man IMPSP-5140' for more detail.
+**WARN: (IMPSP-315):	Found 693 instances insts with no PG Term connections.
+Type 'man IMPSP-315' for more detail.
+Move report: Detail placement moves 33 insts, mean move: 7.13 um, max move: 24.00 um
+	Max move on inst (I0/LD/T_SR_1/FE_OFC23_FE_OFN11_load_data_1_int): (542.40, 861.00) --> (566.40, 861.00)
+	Runtime: CPU: 0:00:00.0 REAL: 0:00:00.0 MEM: 1403.1MB
+Summary Report:
+Instances move: 33 (out of 685 movable)
+Instances flipped: 2
+Mean displacement: 7.13 um
+Max displacement: 24.00 um (Instance: I0/LD/T_SR_1/FE_OFC23_FE_OFN11_load_data_1_int) (542.4, 861) -> (566.4, 861)
+	Length: 2 sites, height: 1 rows, site name: core, cell type: INVX1
+Total net bbox length = 7.936e+04 (4.233e+04 3.703e+04) (ext = 3.169e+03)
+Runtime: CPU: 0:00:00.0 REAL: 0:00:00.0 MEM: 1403.1MB
+*** Finished refinePlace (0:00:53.6 mem=1403.1M) ***
+*** maximum move = 24.00 um ***
+*** Finished re-routing un-routed nets (1403.1M) ***
+
+*** Finish Physical Update (cpu=0:00:00.0 real=0:00:00.0 mem=1403.1M) ***
+End: GigaOpt postEco DRV Optimization
+GigaOpt: WNS changes after routing: 0.003 -> -0.033 (bump = 0.036)
+Begin: GigaOpt postEco optimization
+Info: 16 io nets excluded
+Info: 2 clock nets excluded from IPO operation.
+*info: 16 io nets excluded
+*info: 2 clock nets excluded
+*info: 2 special nets excluded.
+*info: 9 no-driver nets excluded.
+** GigaOpt Optimizer WNS Slack -0.033 TNS Slack -0.033 Density 50.90
+Active Path Group: reg2reg  
++--------+---------+--------+---------+----------+------------+--------+----------+---------+----------------------------------------------------+
+|  WNS   | All WNS |  TNS   | All TNS | Density  |    Real    |  Mem   |Worst View|Pathgroup|                     End Point                      |
++--------+---------+--------+---------+----------+------------+--------+----------+---------+----------------------------------------------------+
+|  -0.033|   -0.033|  -0.033|   -0.033|    50.90%|   0:00:00.0| 1403.1M|     osu05|  reg2reg| I0/LD/T_FIFO/IP_FIFO/URFC/empty_flag_r_reg/D       |
+|   0.000|    0.001|   0.000|    0.000|    50.91%|   0:00:00.0| 1403.1M|     osu05|       NA| NA                                                 |
++--------+---------+--------+---------+----------+------------+--------+----------+---------+----------------------------------------------------+
+
+*** Finish Core Optimize Step (cpu=0:00:00.0 real=0:00:00.0 mem=1403.1M) ***
+
+*** Finished Optimize Step Cumulative (cpu=0:00:00.0 real=0:00:00.0 mem=1403.1M) ***
+** GigaOpt Optimizer WNS Slack 0.000 TNS Slack 0.000 Density 50.91
+** GigaOpt Optimizer WNS Slack 0.000 TNS Slack 0.000 Density 50.91
+
+*** Finish pre-CTS Setup Fixing (cpu=0:00:00.1 real=0:00:00.0 mem=1403.1M) ***
+
+End: GigaOpt postEco optimization
+*** Steiner Routed Nets: 3.647%; Threshold: 100; Threshold for Hold: 100
+Start to check current routing status for nets...
+All nets are already routed correctly.
+End to check current routing status for nets (mem=1368.0M)
+doiPBLastSyncSlave
+Extraction called for design 'layout_lab_design' of instances=729 and nets=722 using extraction engine 'preRoute' .
+**WARN: (IMPEXT-3530):	The process node is not set. Use the command setDesignMode -process <process node> prior to extraction for maximum accuracy and optimal automatic threshold setting.
+Type 'man IMPEXT-3530' for more detail.
+PreRoute RC Extraction called for design layout_lab_design.
+RC Extraction called in multi-corner(1) mode.
+RCMode: PreRoute
+      RC Corner Indexes            0   
+Capacitance Scaling Factor   : 1.00000 
+Resistance Scaling Factor    : 1.00000 
+Clock Cap. Scaling Factor    : 1.00000 
+Clock Res. Scaling Factor    : 1.00000 
+Shrink Factor                : 1.00000
+PreRoute extraction is honoring NDR/Shielding/ExtraSpace for clock nets.
+Using capacitance table file ...
+Initializing multi-corner capacitance tables ... 
+Initializing multi-corner resistance tables ...
+PreRoute RC Extraction DONE (CPU Time: 0:00:00.0  Real Time: 0:00:00.0  MEM: 1222.051M)
+*** Steiner Routed Nets: 3.647%; Threshold: 100; Threshold for Hold: 100
+[NR-eGR] honorMsvRouteConstraint: false
+[NR-eGR] honorClockSpecNDR      : 0
+[NR-eGR] minRouteLayer          : 2
+[NR-eGR] maxRouteLayer          : 2147483647
+[NR-eGR] numTracksPerClockWire  : 0
+[NR-eGR] Layer1 has no routable track
+[NR-eGR] Layer2 has single uniform track structure
+[NR-eGR] Layer3 has single uniform track structure
+[NR-eGR] numRoutingBlks=0 numInstBlks=293 numPGBlocks=12 numBumpBlks=0 numBoundaryFakeBlks=0
+[NR-eGR] numPreroutedNet = 0  numPreroutedWires = 0
+[NR-eGR] Read numTotalNets=713  numIgnoredNets=16
+[NR-eGR] There are 1 clock nets ( 0 with NDR ).
+[NR-eGR] ============ Routing rule table ============
+[NR-eGR] Rule id 0. Nets 697 
+[NR-eGR] id=0  ndrTrackId=0  ndrViaId=-1  extraSpace=0  numShields=0  maxHorDemand=1  maxVerDemand=1
+[NR-eGR] Pitch:  L1=1800  L2=2400  L3=3000
+[NR-eGR] ========================================
+[NR-eGR] 
+[NR-eGR] Layer group 1: route 697 net(s) in layer range [2, 3]
+[NR-eGR] earlyGlobalRoute overflow of layer group 1: 0.00% H + 0.11% V. EstWL: 9.717000e+04um
+[NR-eGR] 
+[NR-eGR] Overflow after earlyGlobalRoute (GR compatible) 0.00% H + 0.00% V
+[NR-eGR] Overflow after earlyGlobalRoute 0.00% H + 0.00% V
+[NR-eGR] Layer1(metal1)(F) length: 0.000000e+00um, number of vias: 2366
+[NR-eGR] Layer2(metal2)(V) length: 5.105910e+04um, number of vias: 3641
+[NR-eGR] Layer3(metal3)(H) length: 5.280000e+04um, number of vias: 0
+[NR-eGR] Total length: 1.038591e+05um, number of vias: 6007
+[NR-eGR] End Peak syMemory usage = 1222.1 MB
+[NR-eGR] Early Global Router Kernel+IO runtime : 0.02 seconds
+Extraction called for design 'layout_lab_design' of instances=729 and nets=722 using extraction engine 'preRoute' .
+**WARN: (IMPEXT-3530):	The process node is not set. Use the command setDesignMode -process <process node> prior to extraction for maximum accuracy and optimal automatic threshold setting.
+Type 'man IMPEXT-3530' for more detail.
+PreRoute RC Extraction called for design layout_lab_design.
+RC Extraction called in multi-corner(1) mode.
+RCMode: PreRoute
+      RC Corner Indexes            0   
+Capacitance Scaling Factor   : 1.00000 
+Resistance Scaling Factor    : 1.00000 
+Clock Cap. Scaling Factor    : 1.00000 
+Clock Res. Scaling Factor    : 1.00000 
+Shrink Factor                : 1.00000
+PreRoute extraction is honoring NDR/Shielding/ExtraSpace for clock nets.
+Using capacitance table file ...
+Updating RC grid for preRoute extraction ...
+Initializing multi-corner capacitance tables ... 
+Initializing multi-corner resistance tables ...
+PreRoute RC Extraction DONE (CPU Time: 0:00:00.0  Real Time: 0:00:00.0  MEM: 1222.051M)
+Compute RC Scale Done ...
+WARN: Correct the flow
+#################################################################################
+# Design Stage: PreRoute
+# Design Name: layout_lab_design
+# Design Mode: 90nm
+# Analysis Mode: MMMC Non-OCV 
+# Parasitics Mode: No SPEF/RCDB
+# Signoff Settings: SI Off 
+#################################################################################
+AAE_INFO: 1 threads acquired from CTE.
+Calculate delays in Single mode...
+Total number of fetched objects 713
+End delay calculation. (MEM=1312.5 CPU=0:00:00.7 REAL=0:00:00.0)
+**optDesign ... cpu = 0:00:07, real = 0:00:07, mem = 1238.2M, totSessionCpu=0:00:55 **
+*** Finished optDesign ***
+*** ThreeLayerMode is automatically turned on for small designs with less than 4 layers.
+ThreeLayerMode is on. Timing-driven placement option disabled.
+Deleted 0 physical inst  (cell - / prefix -).
+*** Starting "NanoPlace(TM) placement v#1 (mem=1238.2M)" ...
+Options: clkGateAware pinGuide congEffort=medium gpeffort=medium 
+#std cell=685 (0 fixed + 685 movable) #block=0 (0 floating + 0 preplaced)
+#ioInst=44 #net=713 #term=2414 #term/net=3.39, #fixedIo=44, #floatIo=0, #fixedPin=16, #floatPin=0
+stdCell: 685 single + 0 double + 0 multi
+Total standard cell length = 10.5792 (mm), area = 0.3174 (mm^2)
+Average module density = 0.509.
+Density for the design = 0.509.
+       = stdcell_area 4408 sites (317376 um^2) / alloc_area 8658 sites (623376 um^2).
+Pin Density = 0.2788.
+            = total # of pins 2414 / total area 8658.
+=== lastAutoLevel = 6 
+**WARN: (IMPSP-9531):	Turning off clkGateAware when timingDriven is off
+Iteration  6: Total net bbox = 6.665e+04 (3.69e+04 2.98e+04)
+              Est.  stn bbox = 8.330e+04 (4.79e+04 3.54e+04)
+              cpu = 0:00:00.1 real = 0:00:01.0 mem = 1224.1M
+Iteration  7: Total net bbox = 7.594e+04 (4.23e+04 3.36e+04)
+              Est.  stn bbox = 9.321e+04 (5.37e+04 3.96e+04)
+              cpu = 0:00:00.4 real = 0:00:00.0 mem = 1224.1M
+Iteration  8: Total net bbox = 7.950e+04 (4.34e+04 3.62e+04)
+              Est.  stn bbox = 9.658e+04 (5.45e+04 4.20e+04)
+              cpu = 0:00:00.5 real = 0:00:00.0 mem = 1224.1M
+Iteration  9: Total net bbox = 8.343e+04 (4.66e+04 3.69e+04)
+              Est.  stn bbox = 1.014e+05 (5.84e+04 4.30e+04)
+              cpu = 0:00:01.0 real = 0:00:01.0 mem = 1224.1M
+Iteration 10: Total net bbox = 8.343e+04 (4.66e+04 3.69e+04)
+              Est.  stn bbox = 1.014e+05 (5.84e+04 4.30e+04)
+              cpu = 0:00:00.0 real = 0:00:00.0 mem = 1224.1M
+Iteration 11: Total net bbox = 8.343e+04 (4.66e+04 3.69e+04)
+              Est.  stn bbox = 1.014e+05 (5.84e+04 4.30e+04)
+              cpu = 0:00:00.0 real = 0:00:00.0 mem = 1224.1M
+*** cost = 8.343e+04 (4.66e+04 3.69e+04) (cpu for global=0:00:02.0) real=0:00:02.0***
+Core Placement runtime cpu: 0:00:02.0 real: 0:00:02.0
+**WARN: (IMPSP-9025):	No scan chain specified/traced.
+Type 'man IMPSP-9025' for more detail.
+*** Starting refinePlace (0:00:57.1 mem=1224.1M) ***
+Total net bbox length = 8.343e+04 (4.657e+04 3.686e+04) (ext = 3.139e+03)
+Density distribution unevenness ratio = 4.691%
+Move report: Detail placement moves 685 insts, mean move: 15.60 um, max move: 101.76 um
+	Max move on inst (I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U280): (636.47, 514.43) --> (724.80, 501.00)
+	Runtime: CPU: 0:00:00.1 REAL: 0:00:01.0 MEM: 1224.1MB
+Summary Report:
+Instances move: 685 (out of 685 movable)
+Instances flipped: 0
+Mean displacement: 15.60 um
+Max displacement: 101.76 um (Instance: I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U280) (636.47, 514.428) -> (724.8, 501)
+	Length: 2 sites, height: 1 rows, site name: core, cell type: INVX2
+Total net bbox length = 7.961e+04 (4.280e+04 3.681e+04) (ext = 3.080e+03)
+Runtime: CPU: 0:00:00.1 REAL: 0:00:01.0 MEM: 1224.1MB
+*** Finished refinePlace (0:00:57.2 mem=1224.1M) ***
+*** End of Placement (cpu=0:00:02.1, real=0:00:03.0, mem=1224.1M) ***
+default core: bins with density >  0.75 =    0 % ( 0 / 9 )
+Density distribution unevenness ratio = 4.555%
+*** Finishing placeDesign concurrent flow ***
+**placeDesign ... cpu = 0: 0:13, real = 0: 0:15, mem = 1188.8M **
+Command spTest is not supported.
+**WARN: (IMPEXT-3493):	The design extraction status has been reset by the 'setExtractRCMode' command. The parasitic data can be regenerated either by extracting the design using the extractRC command or by loading the SPEF or RCDB file(s). To prevent resetting of the extraction status, avoid changing extraction modes.
+Type 'man IMPEXT-3493' for more detail.
+
+*** Summary of all messages that are not suppressed in this session:
+Severity  ID               Count  Summary                                  
+WARNING   IMPEXT-3493          1  The design extraction status has been re...
+WARNING   IMPEXT-3530          4  The process node is not set. Use the com...
+WARNING   IMPDC-1629           1  The default delay limit was set to %d. T...
+WARNING   IMPSP-5140           1  Global net connect rules have not been c...
+WARNING   IMPSP-9531           2  Turning off clkGateAware when timingDriv...
+WARNING   IMPSP-315            1  Found %d instances insts with no PG Term...
+WARNING   IMPSP-9025           2  No scan chain specified/traced.          
+WARNING   IMPOPT-6118          1  The following cells have a dont_touch pr...
+*** Message Summary: 13 warning(s), 0 error(s)
+
+<CMD> checkPlace
+Begin checking placement ... (start mem=1188.8M, init mem=1188.8M)
+*info: Placed = 685           
+*info: Unplaced = 0           
+Placement Density:50.91%(317376/623376)
+Placement Density (including fixed std cells):50.91%(317376/623376)
+Finished checkPlace (cpu: total=0:00:00.0, vio checks=0:00:00.0; mem=1188.8M)
+<CMD> zoomIn
+<CMD> uiSetTool ruler
+<CMD> uiSetTool ruler
+<CMD> uiSetTool select
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U203
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U257
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U204
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[5][6]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U86
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U277
+<CMD> zoomIn
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> zoomIn
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> panPage -1 0
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> zoomIn
+<CMD> panPage 0 -1
+<CMD> panPage -1 0
+<CMD> zoomIn
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 1 0
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage -1 0
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> zoomIn
+<CMD> deselectAll
+<CMD> selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/B
+<CMD> deselectAll
+<CMD> selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/D
+<CMD> deselectAll
+<CMD> selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/Y
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260
+<CMD> deselectAll
+<CMD> selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/A
+<CMD> deselectAll
+<CMD> selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/C
+<CMD> deselectAll
+<CMD> selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/Y
+<CMD> deselectAll
+<CMD> selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/B
+<CMD> zoomOut
+<CMD> deselectAll
+<CMD> selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/A
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260
+<CMD> deselectAll
+<CMD> selectObject Pin I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260/C
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U260
+<CMD> zoomOut
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/waddr_reg[2]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UWFC/full_flag_r_reg
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UWFC/U16
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/WPU1/binary_r_reg[0]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UWFC/WPU1/U21
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/waddr_reg[0]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[3]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_1/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_1/curr_val_reg[6]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[6]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U161
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][6]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/wrptr_r1_reg[1]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/wrptr_r2_reg[1]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/WPU1/binary_r_reg[1]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/wrptr_r2_reg[1]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[7][4]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U198
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U13
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U12
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[7][5]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U98
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[2][4]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U254
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[2][5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][2]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U247
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_1/curr_val_reg[6]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_SR_1/FE_OFC21_n58
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/URFC/raddr_reg[2]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[7]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][7]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][7]}
+<CMD> panPage -1 0
+<CMD> panPage 0 1
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/CTRL/curr_state_reg[3]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U92
+<CMD> deselectAll
+<CMD> selectInst I0/LD/OCTRL/d_plus_reg_reg
+<CMD> deselectAll
+<CMD> selectInst I0/LD/ENC/last_bit_reg
+<CMD> deselectAll
+<CMD> selectInst I0/LD/ENC/FE_RC_1_0
+<CMD> deselectAll
+<CMD> selectInst I0/LD/ENC/U5
+<CMD> deselectAll
+<CMD> selectInst I0/LD/OCTRL/U9
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/CTRL/curr_state_reg[3]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U88
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U75
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U51
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U73
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U50
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U46
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U17
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U53
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U19
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U62
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U18
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U39
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U56
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U54
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U60
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U7
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U79
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/TIM/curr_state_reg[1]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U32
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/CTRL/bit_cnt_reg[0]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_1/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_1/curr_val_reg[6]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[6]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][4]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_1/curr_val_reg[7]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_SR_1/U24
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/FE_OFC40_n31
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U62
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U53
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U17
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U50
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U73
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U75
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/FE_OFC43_n59
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[4]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_1/curr_val_reg[7]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U35
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U62
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U80
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U88
+<CMD> deselectAll
+<CMD> selectInst I0/LD/ENC/last_bit_reg
+<CMD> deselectAll
+<CMD> selectInst I0/LD/OCTRL/d_plus_reg_reg
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U87
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U41
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/CTRL/curr_state_reg[0]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/CTRL/curr_state_reg[1]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/CTRL/curr_state_reg[2]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/CTRL/bit_cnt_reg[0]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/CTRL/bit_cnt_reg[1]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_SR_0/U11
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_1/curr_val_reg[7]}
+<CMD> deselectAll
+<CMD> zoomOut
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[0][5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[4]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U134
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[5][3]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/CTRL/bit_cnt_reg[2]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_1/curr_val_reg[6]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[6]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/wrptr_r1_reg[1]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UWFC/wrptr_r2_reg[1]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[2]}
+<CMD> deselectAll
+<CMD> sroute
+#- Begin sroute (date=11/04 18:13:49, mem=1342.8M)
+*** Begin SPECIAL ROUTE on Wed Nov  4 18:13:49 2020 ***
+SPECIAL ROUTE ran on directory: /home/ecegrid/a/mg45/ece337/Lab11
+SPECIAL ROUTE ran on machine: ecegrid-thin1.ecn.purdue.edu (Linux 3.10.0-1127.8.2.el7.x86_64 Xeon 3.06Ghz)
+
+Begin option processing ...
+srouteConnectPowerBump set to false
+routeSpecial set to true
+srouteConnectConverterPin set to false
+srouteFollowCorePinEnd set to 3
+srouteJogControl set to "preferWithChanges differentLayer"
+sroutePadPinAllPorts set to true
+sroutePreserveExistingRoutes set to true
+srouteRoutePowerBarPortOnBothDir set to true
+End option processing: cpu: 0:00:00, real: 0:00:00, peak: 2114.00 megs.
+
+Reading DB technology information...
+Finished reading DB technology information.
+Reading floorplan and netlist information...
+Finished reading floorplan and netlist information.
+Read in 6 layers, 3 routing layers, 0 overlap layer
+Read in 39 macros, 25 used
+Read in 729 components
+  685 core components: 0 unplaced, 685 placed, 0 fixed
+  40 pad components: 0 unplaced, 40 placed, 0 fixed
+  4 other components: 0 unplaced, 4 placed, 0 fixed
+Read in 16 logical pins
+Read in 16 nets
+Read in 2 special nets, 2 routed
+Begin power routing ...
+**WARN: (IMPSR-1253):	Cannot find any standard cell pin connected to net vdd.
+Run globalNetConnect command or change CPF file to make sure that the netlist reflects the correct power ground connections. The standard cell pins must be defined as 'USE POWER' or 'USE GROUND'.
+**WARN: (IMPSR-1254):	Cannot find any block pin of net vdd. Check netlist, or change option to include the pin.
+**WARN: (IMPSR-1256):	Cannot find any CORE class pad pin of net vdd. Change routing area or layer to include the expected pin, or check netlist, or change port class in the technology file.
+Type 'man IMPSR-1256' for more detail.
+Cannot find any AREAIO class pad pin of net vdd. Check net list, or change port class in the technology file, or change option to include pin in given range.
+**WARN: (IMPSR-1253):	Cannot find any standard cell pin connected to net gnd.
+Run globalNetConnect command or change CPF file to make sure that the netlist reflects the correct power ground connections. The standard cell pins must be defined as 'USE POWER' or 'USE GROUND'.
+**WARN: (IMPSR-1254):	Cannot find any block pin of net gnd. Check netlist, or change option to include the pin.
+**WARN: (IMPSR-1256):	Cannot find any CORE class pad pin of net gnd. Change routing area or layer to include the expected pin, or check netlist, or change port class in the technology file.
+Type 'man IMPSR-1256' for more detail.
+Cannot find any AREAIO class pad pin of net gnd. Check net list, or change port class in the technology file, or change option to include pin in given range.
+**WARN: (IMPSR-468):	Cannot find any standard cell pin connected to net vdd.
+Use setSrouteMode -corePinReferenceMacro <standard cell> to specify a reference macro for followpin connection, or run globalNetConnect command or change CPF file to make sure that the netlist reflects the correct power ground connections. The standard cell pins must be defined as "USE POWER" or "USE GROUND".
+**WARN: (IMPSR-468):	Cannot find any standard cell pin connected to net vdd.
+Use setSrouteMode -corePinReferenceMacro <standard cell> to specify a reference macro for followpin connection, or run globalNetConnect command or change CPF file to make sure that the netlist reflects the correct power ground connections. The standard cell pins must be defined as "USE POWER" or "USE GROUND".
+CPU time for FollowPin 0 seconds
+**WARN: (IMPSR-468):	Cannot find any standard cell pin connected to net gnd.
+Use setSrouteMode -corePinReferenceMacro <standard cell> to specify a reference macro for followpin connection, or run globalNetConnect command or change CPF file to make sure that the netlist reflects the correct power ground connections. The standard cell pins must be defined as "USE POWER" or "USE GROUND".
+**WARN: (IMPSR-468):	Cannot find any standard cell pin connected to net gnd.
+Use setSrouteMode -corePinReferenceMacro <standard cell> to specify a reference macro for followpin connection, or run globalNetConnect command or change CPF file to make sure that the netlist reflects the correct power ground connections. The standard cell pins must be defined as "USE POWER" or "USE GROUND".
+CPU time for FollowPin 0 seconds
+  Number of IO ports routed: 0
+  Number of Block ports routed: 0
+  Number of Stripe ports routed: 0
+  Number of Core ports routed: 54
+  Number of Pad ports routed: 0
+  Number of Power Bump ports routed: 0
+  Number of Followpin connections: 27
+End power routing: cpu: 0:00:00, real: 0:00:00, peak: 2116.00 megs.
+
+
+
+ Begin updating DB with routing results ...
+ Updating DB with 4 via definition ...
+
+sroute post-processing starts at Wed Nov  4 18:13:49 2020
+The viaGen is rebuilding shadow vias for net gnd.
+sroute post-processing ends at Wed Nov  4 18:13:49 2020
+
+sroute post-processing starts at Wed Nov  4 18:13:49 2020
+The viaGen is rebuilding shadow vias for net vdd.
+sroute post-processing ends at Wed Nov  4 18:13:49 2020
+sroute created 81 wires.
+ViaGen created 54 vias and deleted 0 via to avoid violation.
++--------+----------------+----------------+
+|  Layer |     Created    |     Deleted    |
++--------+----------------+----------------+
+| metal1 |       81       |       NA       |
+|   via  |       54       |        0       |
++--------+----------------+----------------+
+#- End sroute (date=11/04 18:13:49, total cpu=0:00:00.1, real=0:00:00.0, peak res=1209.5M, current mem=1209.5M)
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/CTRL/U77
+<CMD> deselectAll
+<CMD> selectInst I0/LD/TIM/U30
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_1/curr_val_reg[7]}
+<CMD> deselectAll
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> uiSetTool ruler
+<CMD> trialRoute
+*** Starting trialRoute (mem=1207.2M) ***
+
+There are 0 guide points passed to trialRoute for fixed pins.
+There are 0 guide points passed to trialRoute for pinGroup/netGroup/pinGuide pins.
+Options:  -handlePreroute -keepMarkedOptRoutes -noPinGuide
+
+Nr of prerouted/Fixed nets = 16
+
+Phase 1a-1d Overflow: 0.00% H + 1.68% V (0:00:00.0 1208.2M)
+
+Phase 1e-1f Overflow: 0.00% H + 0.69% V (0:00:00.0 1208.2M)
+
+Phase 1l Overflow: 0.00% H + 0.69% V (0:00:00.0 1208.2M)
+
+
+Congestion distribution:
+
+Remain	cntH		cntV
+--------------------------------------
+ -1:	0	 0.00%	14	 0.69%
+--------------------------------------
+  0:	0	 0.00%	229	11.27%
+  1:	0	 0.00%	225	11.07%
+  2:	5	 0.25%	362	17.81%
+  3:	96	 4.72%	411	20.23%
+  4:	79	 3.88%	298	14.67%
+  5:	1856	91.16%	493	24.26%
+
+
+Total length: 1.005e+05um, number of vias: 4524
+M1(H) length: 0.000e+00um, number of vias: 2366
+M2(V) length: 5.148e+04um, number of vias: 2158
+M3(H) length: 4.906e+04um
+
+Peak Memory Usage was 1208.2M 
+*** Finished trialRoute (cpu=0:00:00.1 mem=1208.2M) ***
+
+<CMD> timeDesign -preCTS
+Start to check current routing status for nets...
+All nets are already routed correctly.
+End to check current routing status for nets (mem=1209.9M)
+Extraction called for design 'layout_lab_design' of instances=729 and nets=722 using extraction engine 'preRoute' .
+**WARN: (IMPEXT-3530):	The process node is not set. Use the command setDesignMode -process <process node> prior to extraction for maximum accuracy and optimal automatic threshold setting.
+Type 'man IMPEXT-3530' for more detail.
+PreRoute RC Extraction called for design layout_lab_design.
+RC Extraction called in multi-corner(1) mode.
+RCMode: PreRoute
+      RC Corner Indexes            0   
+Capacitance Scaling Factor   : 1.00000 
+Resistance Scaling Factor    : 1.00000 
+Clock Cap. Scaling Factor    : 1.00000 
+Clock Res. Scaling Factor    : 1.00000 
+Shrink Factor                : 1.00000
+PreRoute extraction is honoring NDR/Shielding/ExtraSpace for clock nets.
+Using capacitance table file ...
+Updating RC grid for preRoute extraction ...
+Initializing multi-corner capacitance tables ... 
+Initializing multi-corner resistance tables ...
+PreRoute RC Extraction DONE (CPU Time: 0:00:00.0  Real Time: 0:00:00.0  MEM: 1209.926M)
+#################################################################################
+# Design Stage: PreRoute
+# Design Name: layout_lab_design
+# Design Mode: 90nm
+# Analysis Mode: MMMC Non-OCV 
+# Parasitics Mode: No SPEF/RCDB
+# Signoff Settings: SI Off 
+#################################################################################
+AAE_INFO: 1 threads acquired from CTE.
+Calculate delays in Single mode...
+Total number of fetched objects 713
+End delay calculation. (MEM=1286.32 CPU=0:00:00.4 REAL=0:00:00.0)
+*** Done Building Timing Graph (cpu=0:00:00.7 real=0:00:01.0 totSessionCpu=0:07:24 mem=1286.3M)
+
+------------------------------------------------------------
+          timeDesign Summary                             
+------------------------------------------------------------
+
+Setup views included:
+ osu05 
+
++--------------------+---------+---------+---------+
+|     Setup mode     |   all   | reg2reg | default |
++--------------------+---------+---------+---------+
+|           WNS (ns):|  0.057  |  0.061  |  0.057  |
+|           TNS (ns):|  0.000  |  0.000  |  0.000  |
+|    Violating Paths:|    0    |    0    |    0    |
+|          All Paths:|   210   |   135   |   155   |
++--------------------+---------+---------+---------+
+
++----------------+-------------------------------+------------------+
+|                |              Real             |       Total      |
+|    DRVs        +------------------+------------+------------------|
+|                |  Nr nets(terms)  | Worst Vio  |  Nr nets(terms)  |
++----------------+------------------+------------+------------------+
+|   max_cap      |      0 (0)       |   0.000    |      0 (0)       |
+|   max_tran     |      0 (0)       |   0.000    |      0 (0)       |
+|   max_fanout   |      0 (0)       |     0      |      0 (0)       |
+|   max_length   |      0 (0)       |     0      |      0 (0)       |
++----------------+------------------+------------+------------------+
+
+Density: 50.912%
+Routing Overflow: 0.00% H and 0.69% V
+------------------------------------------------------------
+Reported timing to dir ./timingReports
+Total CPU time: 1.25 sec
+Total Real time: 2.0 sec
+Total Memory Usage: 1229.074219 Mbytes
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> zoomIn
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> zoomOut
+<CMD> fit
+<CMD> fit
+<CMD> fit
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> setLayerPreference allM1 -isVisible 0
+<CMD> setLayerPreference allM1 -isVisible 1
+<CMD> setLayerPreference allM1 -isVisible 0
+<CMD> setLayerPreference allM1 -isVisible 1
+<CMD> setLayerPreference allM3 -isVisible 0
+<CMD> setLayerPreference allM3 -isVisible 1
+<CMD> setLayerPreference allM3Cont -isVisible 0
+<CMD> setLayerPreference allM3Cont -isVisible 1
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> uiSetTool select
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][4]}
+<CMD> deselectAll
+<CMD> selectWire 821.2500 729.7500 827.5500 731.2500 3 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/n12
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[6][4]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_1/curr_val_reg[6]}
+<CMD> zoomIn
+<CMD> deselectAll
+<CMD> selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+<CMD> deselectAll
+<CMD> selectWire 732.7500 751.0500 736.0500 751.9500 2 nclk
+<CMD> deselectAll
+<CMD> selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 732.7500 751.0500 736.0500 751.9500 2 nclk
+<CMD> deselectAll
+<CMD> selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+<CMD> deselectAll
+<CMD> selectWire 732.7500 751.0500 736.0500 751.9500 2 nclk
+<CMD> deselectAll
+<CMD> selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+<CMD> deselectAll
+<CMD> selectWire 732.7500 751.0500 736.0500 751.9500 2 nclk
+<CMD> deselectAll
+<CMD> selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+<CMD> deselectAll
+<CMD> selectWire 739.9500 739.0500 740.8500 754.9500 2 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/n117
+<CMD> deselectAll
+<CMD> selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 751.6500 759.7500 767.5500 761.2500 3 {I0/LD/tx_data_int[5]}
+<CMD> deselectAll
+<CMD> selectWire 751.6500 759.7500 767.5500 761.2500 3 {I0/LD/tx_data_int[5]}
+<CMD> deselectAll
+<CMD> selectWire 751.6500 759.7500 767.5500 761.2500 3 {I0/LD/tx_data_int[5]}
+<CMD> deselectAll
+<CMD> selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 773.5500 748.0500 774.4500 751.9500 2 {I0/LD/read_data_int[5]}
+<CMD> deselectAll
+<CMD> selectWire 773.2500 747.7500 803.5500 749.2500 3 {I0/LD/read_data_int[5]}
+<CMD> deselectAll
+<CMD> selectWire 770.8500 753.7500 781.9500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 782.8500 750.7500 899.5500 752.2500 3 {I0/LD/read_data_int[6]}
+<CMD> deselectAll
+<CMD> selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+<CMD> deselectAll
+<CMD> selectWire 734.8500 738.7500 741.1500 740.2500 3 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/n117
+<CMD> deselectAll
+<CMD> selectWire 734.8500 738.7500 741.1500 740.2500 3 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/n117
+<CMD> deselectAll
+<CMD> selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 722.8500 753.7500 772.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 732.7500 751.0500 736.0500 751.9500 2 nclk
+<CMD> deselectAll
+<CMD> selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> deselectAll
+<CMD> selectObject Pin {I0/LD/T_SR_0/curr_val_reg[5]/S}
+<CMD> deselectAll
+<CMD> selectWire 638.8500 753.7500 724.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 684.7500 751.0500 685.6500 790.9500 2 I0/LD/T_SR_0/n32
+<CMD> deselectAll
+<CMD> selectWire 658.0500 747.7500 681.1500 749.2500 3 nclk
+<CMD> deselectAll
+<CMD> selectWire 655.9500 760.0500 656.8500 766.9500 2 {I0/LD/T_SR_0/curr_val[5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectWire 638.8500 753.7500 724.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 684.7500 751.0500 685.6500 790.9500 2 I0/LD/T_SR_0/n32
+<CMD> deselectAll
+<CMD> selectWire 658.0500 747.7500 681.1500 749.2500 3 nclk
+<CMD> zoomOut
+<CMD> deselectAll
+<CMD> selectInst I0/LD/U5
+<CMD> deselectAll
+<CMD> selectWire 638.8500 753.7500 724.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_SR_0/curr_val_reg[5]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_SR_1/U27
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+<CMD> deselectAll
+<CMD> selectWire 576.4500 753.7500 640.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+<CMD> deselectAll
+<CMD> selectWire 576.4500 753.7500 640.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectWire 617.5500 730.0500 618.4500 754.9500 2 {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg[4][3]}
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/U5
+<CMD> panPage 0 1
+<CMD> deselectAll
+<CMD> selectInst I0/LD/U5
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> deselectAll
+<CMD> selectWire 638.8500 753.7500 724.3500 755.2500 3 I0/LD/n3
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> deselectAll
+<CMD> selectWire 638.8500 753.7500 724.3500 755.2500 3 I0/LD/n3
+<CMD> deselectAll
+<CMD> selectInst I0/LD/U5
+<CMD> panPage 0 -1
+<CMD> panPage -1 0
+<CMD> zoomIn
+<CMD> panPage 1 0
+<CMD> deselectAll
+<CMD> selectInst I0/LD/U5
+<CMD> zoomOut
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][3]}
+<CMD> deselectAll
+<CMD> selectInst I0/LD/U5
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+<CMD> zoomIn
+<CMD> zoomIn
+<CMD> zoomOut
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+<CMD> deselectAll
+<CMD> selectWire 751.6500 759.7500 767.5500 761.2500 3 {I0/LD/tx_data_int[5]}
+<CMD> deselectAll
+<CMD> selectWire 679.6500 747.7500 736.3500 749.2500 3 nclk
+<CMD> deselectAll
+<CMD> selectInst {I0/LD/T_FIFO/IP_FIFO/UFIFORAM/fiforeg_reg[4][4]}
+<CMD> deselectAll
+<CMD> selectWire 658.0500 747.7500 681.1500 749.2500 3 nclk
+<CMD> zoomOut
+<CMD> deselectAll
+<CMD> selectInst I0/LD/U5
+<CMD> deselectAll
+<CMD> selectInst I0/LD/U3
+<CMD> deselectAll
+<CMD> selectInst I0/LD/U5
+<CMD> zoomIn
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> deselectAll
+<CMD> selectWire 509.5500 670.0500 512.8500 670.9500 2 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/n263
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U239
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U239
+<CMD> deselectAll
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> selectWire 471.1500 670.0500 484.0500 670.9500 2 I0/LD/T_FIFO/IP_FIFO/UFIFORAM/FE_OFN8_n29
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 1 0
+<CMD> deselectAll
+<CMD> selectInst I0/LD/T_FIFO/IP_FIFO/UFIFORAM/U231
+<CMD> deselectAll
+<CMD> panPage 0 -1
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 -1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 -1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 -1
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> panPage 0 -1
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> zoomOut
+<CMD> zoomOut
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> zoomOut
+<CMD> panPage 0 -1
+<CMD> panPage 0 1
+<CMD> panPage 0 -1
+<CMD> panPage 0 1
+<CMD> panPage 0 -1
+<CMD> panPage 0 1
+<CMD> panPage 0 -1
+<CMD> fit
+<CMD> selectInst U16
+<CMD> deselectAll
+<CMD> zoomIn
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> zoomIn
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 -1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 0 1
+<CMD> panPage 0 1
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 1 0
+<CMD> panPage 1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage -1 0
+<CMD> panPage 0 -1

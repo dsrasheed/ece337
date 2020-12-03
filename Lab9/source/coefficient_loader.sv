@@ -10,46 +10,79 @@ module coefficient_loader (
     input clk, n_rst,
     input new_coefficient_set,
     input modwait,
-    output reg load_coeff,
-    output reg [1:0] coefficient_num
+    output logic load_coeff,
+    output logic [1:0] coefficient_num
 );
 
-logic nxt_load_coeff;
-logic increment;
-logic clear;
+typedef enum logic [3:0] {IDLE, S1, S2, S3, S4, S5, S6, S7, S8, S9} state_type;
+
+state_type nxt_state;
+state_type state;
+
+logic [1:0] nxt_coefficient_num;
 
 always_comb begin
-    nxt_load_coeff = 0;
-    increment = 0;
-    clear = 0;
-
-    if (new_coefficient_set) begin
-        if (coefficient_num == 2'd3)
-            nxt_load_coeff = 1'b0;
-        else
-            nxt_load_coeff = !load_coeff;
-
-        if (modwait == 1)
-            increment = 1;
-        if (modwait == 1 && clear == 1)
-            clear = 1;
-    end
+    nxt_state = IDLE;
+    case(state)
+        IDLE: if (new_coefficient_set) nxt_state = S1;
+        S1: nxt_state = S2;
+        S2: nxt_state = S3;
+        S3: nxt_state = S4;
+        S4: nxt_state = S5;
+        S5: nxt_state = S6;
+        S6: nxt_state = S7;
+        S7: nxt_state = S8;
+        S8: nxt_state = IDLE;
+        default: nxt_state = IDLE;
+    endcase
 end 
 
 always_ff @ (posedge clk, negedge n_rst) begin
     if (n_rst == 0) begin
-        load_coeff <= '0;
+        state <= IDLE;
+        coefficient_num <= '0;
     end
     else begin
-        load_coeff <= nxt_load_coeff;
+        state <= nxt_state;
+        coefficient_num <= nxt_coefficient_num;
     end
 end
 
-flex_counter #(.NUM_CNT_BITS(2)) coeff_cnt(
-    .clk(clk), .n_rst(n_rst),
-    .clear(clear), .count_enable(increment),
-    .count_out(coefficient_num),
-    .rollover_val(2'd3)
-);
+always_comb begin
+    load_coeff = 0;
+    case (state)
+        S1: begin
+            nxt_coefficient_num = 2'd0;
+            load_coeff = 1'b1;
+        end
+        S2: begin
+            nxt_coefficient_num = 2'd1;
+        end
+        S3: begin
+            nxt_coefficient_num = 2'd1;
+            load_coeff = 1'b1;
+        end
+        S4: begin
+            nxt_coefficient_num = 2'd2;
+        end
+        S5: begin
+            nxt_coefficient_num = 2'd2;
+            load_coeff = 1'b1;
+        end
+        S6: begin
+            nxt_coefficient_num = 2'd3;
+        end
+        S7: begin
+            nxt_coefficient_num = 2'd3;
+            load_coeff = 1'b1;
+        end
+        S8: begin
+            nxt_coefficient_num = 2'd0;
+        end
+        default: begin
+            nxt_coefficient_num = 2'd0;
+        end
+    endcase
+end
 
 endmodule

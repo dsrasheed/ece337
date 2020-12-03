@@ -1123,4 +1123,9 @@ PADINC U14 ( .DI(nwrite_data[6]), .YPAD(write_data[6]) );
 PADINC U15 ( .DI(nwrite_data[7]), .YPAD(write_data[7]) );
 PADINC U16 ( .DI(nwrite_enable), .YPAD(write_enable) );
 
+// Bottom 3 pads should be write_enable, fifo_empty, fifo_full
+// U1 <- U16
+// Top 3 pads should be d_plus, d_minus, and transmit
+// U16 <- U1
+
 endmodule

@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////
 // Created by: Synopsys DC Expert(TM) in wire load mode
 // Version   : K-2015.06-SP1
-// Date      : Mon Nov  2 21:13:37 2020
+// Date      : Mon Nov  2 23:25:47 2020
 /////////////////////////////////////////////////////////////
 
 
@@ -4283,62 +4283,47 @@ module fir_filter ( clk, n_reset, sample_data, fir_coefficient, load_coeff,
 endmodule
 
 
-module flex_counter_NUM_CNT_BITS2 ( clk, n_rst, clear, count_enable, 
-        rollover_val, count_out, rollover_flag );
-  input [1:0] rollover_val;
-  output [1:0] count_out;
-  input clk, n_rst, clear, count_enable;
-  output rollover_flag;
-  wire   n33, n34, n35, n1, n2, n3, n4, n5, n6, n7, n8, n9, n13, n14, n15, n16,
-         n17, n18, n19, n20, n21, n22, n23;
-
-  DFFSR \count_out_reg[0]  ( .D(n35), .CLK(clk), .R(n_rst), .S(1'b1), .Q(
-        count_out[0]) );
-  DFFSR \count_out_reg[1]  ( .D(n34), .CLK(clk), .R(n_rst), .S(1'b1), .Q(
-        count_out[1]) );
-  DFFSR rollover_flag_reg ( .D(n33), .CLK(clk), .R(n_rst), .S(1'b1), .Q(
-        rollover_flag) );
-  NOR2X1 U6 ( .A(clear), .B(n1), .Y(n35) );
-  MUX2X1 U7 ( .B(n2), .A(count_enable), .S(n3), .Y(n1) );
-  OAI21X1 U8 ( .A(n4), .B(n5), .C(count_enable), .Y(n2) );
-  INVX1 U9 ( .A(n6), .Y(n4) );
-  NOR2X1 U10 ( .A(clear), .B(n7), .Y(n34) );
-  MUX2X1 U11 ( .B(n8), .A(n9), .S(count_out[1]), .Y(n7) );
-  OAI21X1 U12 ( .A(count_out[0]), .B(n13), .C(count_enable), .Y(n9) );
-  INVX1 U13 ( .A(n14), .Y(n13) );
-  NOR2X1 U14 ( .A(n3), .B(n15), .Y(n8) );
-  NAND2X1 U15 ( .A(count_enable), .B(n14), .Y(n15) );
-  AOI21X1 U16 ( .A(n16), .B(n17), .C(clear), .Y(n33) );
-  NAND3X1 U17 ( .A(count_enable), .B(n18), .C(n19), .Y(n17) );
-  MUX2X1 U18 ( .B(n20), .A(n21), .S(n5), .Y(n19) );
-  NAND2X1 U19 ( .A(n6), .B(n3), .Y(n20) );
-  OAI21X1 U20 ( .A(count_out[1]), .B(n3), .C(n5), .Y(n18) );
-  INVX1 U21 ( .A(rollover_val[0]), .Y(n5) );
-  INVX1 U22 ( .A(count_out[0]), .Y(n3) );
-  OAI21X1 U23 ( .A(n22), .B(n14), .C(rollover_flag), .Y(n16) );
-  NAND2X1 U24 ( .A(n23), .B(n6), .Y(n14) );
-  XOR2X1 U25 ( .A(count_out[1]), .B(n21), .Y(n6) );
-  INVX1 U26 ( .A(rollover_val[1]), .Y(n21) );
-  XNOR2X1 U27 ( .A(rollover_val[0]), .B(count_out[0]), .Y(n23) );
-  INVX1 U28 ( .A(count_enable), .Y(n22) );
-endmodule
-
-
 module coefficient_loader ( clk, n_rst, new_coefficient_set, modwait, 
         load_coeff, coefficient_num );
   output [1:0] coefficient_num;
   input clk, n_rst, new_coefficient_set, modwait;
   output load_coeff;
-  wire   nxt_load_coeff, increment, n2;
+  wire   n7, n8, n9, n10, n11, n12, n13, n14, n15, n16, n17, n18, n19;
+  wire   [3:0] nxt_state;
+  wire   [3:0] state;
+  wire   [1:0] nxt_coefficient_num;
 
-  DFFSR load_coeff_reg ( .D(nxt_load_coeff), .CLK(clk), .R(n_rst), .S(1'b1), 
-        .Q(load_coeff) );
-  flex_counter_NUM_CNT_BITS2 coeff_cnt ( .clk(clk), .n_rst(n_rst), .clear(1'b0), .count_enable(increment), .rollover_val({1'b1, 1'b1}), .count_out(
-        coefficient_num) );
-  AND2X1 U4 ( .A(n2), .B(new_coefficient_set), .Y(nxt_load_coeff) );
-  AOI21X1 U5 ( .A(coefficient_num[1]), .B(coefficient_num[0]), .C(load_coeff), 
-        .Y(n2) );
-  AND2X1 U6 ( .A(modwait), .B(new_coefficient_set), .Y(increment) );
+  DFFSR \state_reg[0]  ( .D(n18), .CLK(clk), .R(n_rst), .S(1'b1), .Q(state[0])
+         );
+  DFFSR \state_reg[1]  ( .D(nxt_state[1]), .CLK(clk), .R(n_rst), .S(1'b1), .Q(
+        state[1]) );
+  DFFSR \state_reg[3]  ( .D(n19), .CLK(clk), .R(n_rst), .S(1'b1), .Q(state[3])
+         );
+  DFFSR \state_reg[2]  ( .D(nxt_state[2]), .CLK(clk), .R(n_rst), .S(1'b1), .Q(
+        state[2]) );
+  DFFSR \coefficient_num_reg[1]  ( .D(nxt_coefficient_num[1]), .CLK(clk), .R(
+        n_rst), .S(1'b1), .Q(coefficient_num[1]) );
+  DFFSR \coefficient_num_reg[0]  ( .D(nxt_coefficient_num[0]), .CLK(clk), .R(
+        n_rst), .S(1'b1), .Q(coefficient_num[0]) );
+  OAI21X1 U9 ( .A(n7), .B(n8), .C(n9), .Y(nxt_state[2]) );
+  NAND2X1 U10 ( .A(nxt_coefficient_num[0]), .B(n10), .Y(n8) );
+  OAI22X1 U11 ( .A(state[0]), .B(n11), .C(state[1]), .D(n12), .Y(nxt_state[1])
+         );
+  INVX1 U12 ( .A(load_coeff), .Y(n12) );
+  NAND2X1 U13 ( .A(n13), .B(n9), .Y(nxt_coefficient_num[1]) );
+  OR2X1 U14 ( .A(n10), .B(n14), .Y(n9) );
+  OAI21X1 U15 ( .A(n15), .B(n7), .C(n16), .Y(n14) );
+  INVX1 U16 ( .A(state[1]), .Y(n15) );
+  INVX1 U17 ( .A(state[2]), .Y(n10) );
+  AOI21X1 U18 ( .A(n11), .B(n17), .C(state[0]), .Y(n18) );
+  OAI21X1 U19 ( .A(new_coefficient_set), .B(state[2]), .C(n16), .Y(n17) );
+  INVX1 U20 ( .A(n13), .Y(n19) );
+  NAND3X1 U21 ( .A(state[0]), .B(nxt_coefficient_num[0]), .C(state[2]), .Y(n13) );
+  INVX1 U22 ( .A(n11), .Y(nxt_coefficient_num[0]) );
+  NAND2X1 U23 ( .A(state[1]), .B(n16), .Y(n11) );
+  INVX1 U24 ( .A(state[3]), .Y(n16) );
+  NOR2X1 U25 ( .A(n7), .B(state[3]), .Y(load_coeff) );
+  INVX1 U26 ( .A(state[0]), .Y(n7) );
 endmodule
 
 
