@@ -60,7 +60,7 @@ pid_register pid (.clk(clk), .n_rst(n_rst),
 );
 
 rcu ctrl (.clk(clk), .n_rst(n_rst), 
-    .d_edge(d_edge), .eop(eop), .shift_enable(shift_enable), .byte_received(byte_received), .rcv_data(rcv_data),
+    .d_edge(d_edge), .eop(eop), .shift_enable(shift_enable), .byte_received(byte_received), .rcv_data(rcv_data[23:16]),
     .pid_reset(pid_reset), .pid_save(pid_save), .rcving(rcving), .r_error(r_error), .w_enable(w_enable)
 );
 

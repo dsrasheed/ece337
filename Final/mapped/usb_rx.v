@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////
 // Created by: Synopsys DC Expert(TM) in wire load mode
 // Version   : K-2015.06-SP1
-// Date      : Wed Dec  2 18:31:53 2020
+// Date      : Fri Dec  4 08:11:15 2020
 /////////////////////////////////////////////////////////////
 
 
@@ -30,15 +30,10 @@ endmodule
 module edge_det ( clk, n_rst, serial_in, edge_detected );
   input clk, n_rst, serial_in;
   output edge_detected;
-  wire   old_sample, new_sample, sync_phase;
+  wire   prev;
 
-  DFFSR sync_phase_reg ( .D(serial_in), .CLK(clk), .R(1'b1), .S(n_rst), .Q(
-        sync_phase) );
-  DFFSR new_sample_reg ( .D(sync_phase), .CLK(clk), .R(1'b1), .S(n_rst), .Q(
-        new_sample) );
-  DFFSR old_sample_reg ( .D(new_sample), .CLK(clk), .R(1'b1), .S(n_rst), .Q(
-        old_sample) );
-  XOR2X1 U6 ( .A(old_sample), .B(new_sample), .Y(edge_detected) );
+  DFFSR prev_reg ( .D(serial_in), .CLK(clk), .R(1'b1), .S(n_rst), .Q(prev) );
+  XOR2X1 U4 ( .A(serial_in), .B(prev), .Y(edge_detected) );
 endmodule
 
 
@@ -411,37 +406,39 @@ module timer ( clk, n_rst, rcving, d_edge, bit_stuff_det, shift_enable,
         byte_received );
   input clk, n_rst, rcving, d_edge, bit_stuff_det;
   output shift_enable, byte_received;
-  wire   n14, \ctrl[0] , clk_pulse, rollover_1, cnt_en, handler_state, _0_net_,
-         n5, n6, n7, n8, n9, n10, n11, n12, n13;
+  wire   n15, \ctrl[0] , clk_pulse, rollover_1, cnt_en, N43, handler_state,
+         _0_net_, n14, n5, n6, n7, n8, n9, n10, n11, n12, n13;
   wire   [1:0] nxt_ctrl;
 
   DFFSR \ctrl_reg[0]  ( .D(nxt_ctrl[0]), .CLK(clk), .R(n_rst), .S(1'b1), .Q(
         \ctrl[0] ) );
   DFFSR \ctrl_reg[1]  ( .D(nxt_ctrl[1]), .CLK(clk), .R(n_rst), .S(1'b1), .Q(
         cnt_en) );
-  DFFSR handler_state_reg ( .D(1'b1), .CLK(clk), .R(n_rst), .S(1'b1), .Q(
+  DFFSR handler_state_reg ( .D(n14), .CLK(clk), .R(n_rst), .S(1'b1), .Q(
         handler_state) );
   flex_counter_NUM_CNT_BITS4_1 clkdiv ( .clk(clk), .n_rst(n_rst), .clear(n13), 
-        .count_enable(cnt_en), .rollover_val({n12, 1'b0, rollover_1, 1'b0}), 
+        .count_enable(cnt_en), .rollover_val({N43, 1'b0, rollover_1, 1'b0}), 
         .rollover_flag(clk_pulse) );
   flex_counter_NUM_CNT_BITS4_0 bitcnt ( .clk(clk), .n_rst(n_rst), .clear(
         _0_net_), .count_enable(shift_enable), .rollover_val({1'b1, 1'b0, 1'b0, 
         1'b0}), .rollover_flag(byte_received) );
-  BUFX4 U6 ( .A(n14), .Y(shift_enable) );
-  NOR2X1 U7 ( .A(handler_state), .B(n5), .Y(n14) );
-  INVX1 U8 ( .A(clk_pulse), .Y(n5) );
-  AND2X1 U9 ( .A(rcving), .B(n6), .Y(nxt_ctrl[1]) );
-  OAI21X1 U10 ( .A(d_edge), .B(n13), .C(n7), .Y(n6) );
-  INVX1 U11 ( .A(rollover_1), .Y(n7) );
-  XNOR2X1 U12 ( .A(\ctrl[0] ), .B(n13), .Y(rollover_1) );
-  OAI21X1 U13 ( .A(n8), .B(n9), .C(n10), .Y(nxt_ctrl[0]) );
-  NAND3X1 U14 ( .A(n13), .B(n11), .C(d_edge), .Y(n10) );
-  AOI21X1 U15 ( .A(clk_pulse), .B(cnt_en), .C(n12), .Y(n8) );
-  NOR2X1 U16 ( .A(n11), .B(n13), .Y(n12) );
-  INVX1 U17 ( .A(\ctrl[0] ), .Y(n11) );
-  INVX1 U18 ( .A(cnt_en), .Y(n13) );
-  AND2X1 U19 ( .A(byte_received), .B(n9), .Y(_0_net_) );
-  INVX1 U20 ( .A(rcving), .Y(n9) );
+  BUFX4 U6 ( .A(n15), .Y(shift_enable) );
+  NOR2X1 U7 ( .A(handler_state), .B(n5), .Y(n15) );
+  AND2X1 U8 ( .A(rcving), .B(n6), .Y(nxt_ctrl[1]) );
+  OAI21X1 U9 ( .A(d_edge), .B(n13), .C(n7), .Y(n6) );
+  INVX1 U10 ( .A(rollover_1), .Y(n7) );
+  XNOR2X1 U11 ( .A(\ctrl[0] ), .B(n13), .Y(rollover_1) );
+  OAI21X1 U12 ( .A(n8), .B(n9), .C(n10), .Y(nxt_ctrl[0]) );
+  NAND3X1 U13 ( .A(n13), .B(n11), .C(d_edge), .Y(n10) );
+  AOI21X1 U14 ( .A(clk_pulse), .B(cnt_en), .C(N43), .Y(n8) );
+  INVX1 U15 ( .A(n12), .Y(n14) );
+  MUX2X1 U16 ( .B(bit_stuff_det), .A(n5), .S(handler_state), .Y(n12) );
+  INVX1 U17 ( .A(clk_pulse), .Y(n5) );
+  OR2X1 U18 ( .A(byte_received), .B(n9), .Y(_0_net_) );
+  INVX1 U19 ( .A(rcving), .Y(n9) );
+  NOR2X1 U20 ( .A(n11), .B(n13), .Y(N43) );
+  INVX1 U21 ( .A(cnt_en), .Y(n13) );
+  INVX1 U22 ( .A(\ctrl[0] ), .Y(n11) );
 endmodule
 
 
@@ -473,7 +470,7 @@ endmodule
 
 module rcu ( clk, n_rst, d_edge, eop, shift_enable, byte_received, rcv_data, 
         pid_reset, pid_save, rcving, r_error, w_enable );
-  input [23:0] rcv_data;
+  input [7:0] rcv_data;
   input clk, n_rst, d_edge, eop, shift_enable, byte_received;
   output pid_reset, pid_save, rcving, r_error, w_enable;
   wire   n131, n132, n133, n134, n135, n6, n7, n8, n9, n10, n11, n12, n13, n14,
@@ -485,7 +482,7 @@ module rcu ( clk, n_rst, d_edge, eop, shift_enable, byte_received, rcv_data,
          n85, n86, n87, n88, n89, n90, n91, n92, n93, n94, n95, n96, n97, n98,
          n99, n100, n101, n102, n103, n104, n105, n106, n107, n108, n109, n110,
          n111, n112, n113, n114, n115, n116, n117, n118, n119, n120, n121,
-         n122, n123, n124;
+         n122, n123, n124, n125, n126, n127, n128, n129, n130;
   wire   [4:0] state;
 
   DFFSR \state_reg[0]  ( .D(n135), .CLK(clk), .R(n_rst), .S(1'b1), .Q(state[0]) );
@@ -496,132 +493,138 @@ module rcu ( clk, n_rst, d_edge, eop, shift_enable, byte_received, rcv_data,
   OAI21X1 U8 ( .A(n6), .B(n7), .C(n8), .Y(rcving) );
   MUX2X1 U9 ( .B(n9), .A(n10), .S(state[3]), .Y(n8) );
   NOR2X1 U10 ( .A(state[2]), .B(n11), .Y(n9) );
-  NOR2X1 U11 ( .A(n12), .B(n13), .Y(r_error) );
-  OAI21X1 U12 ( .A(n14), .B(n15), .C(n16), .Y(n13) );
-  NOR2X1 U13 ( .A(state[4]), .B(n7), .Y(n14) );
-  NOR2X1 U14 ( .A(n6), .B(n17), .Y(pid_save) );
-  OR2X1 U15 ( .A(n16), .B(n18), .Y(n17) );
-  INVX1 U16 ( .A(n19), .Y(w_enable) );
-  OAI21X1 U17 ( .A(n20), .B(n21), .C(n22), .Y(n135) );
-  OAI21X1 U18 ( .A(n23), .B(n24), .C(n25), .Y(n22) );
-  OR2X1 U19 ( .A(n26), .B(n27), .Y(n24) );
-  OAI21X1 U20 ( .A(n28), .B(n29), .C(n30), .Y(n27) );
-  OAI22X1 U21 ( .A(n31), .B(n32), .C(state[3]), .D(n33), .Y(n26) );
-  NAND3X1 U22 ( .A(n34), .B(n35), .C(n36), .Y(n23) );
-  NOR2X1 U23 ( .A(n37), .B(n38), .Y(n36) );
-  NAND2X1 U24 ( .A(n39), .B(n19), .Y(n38) );
-  INVX1 U25 ( .A(n40), .Y(n37) );
-  OAI21X1 U26 ( .A(n41), .B(n42), .C(n11), .Y(n34) );
-  OAI21X1 U27 ( .A(n20), .B(n7), .C(n43), .Y(n134) );
-  OAI21X1 U28 ( .A(n44), .B(n45), .C(n25), .Y(n43) );
-  NAND3X1 U29 ( .A(n46), .B(n28), .C(n47), .Y(n45) );
-  NAND2X1 U30 ( .A(n48), .B(n30), .Y(n44) );
-  INVX1 U31 ( .A(n49), .Y(n30) );
-  AOI22X1 U32 ( .A(n50), .B(n51), .C(byte_received), .D(pid_reset), .Y(n48) );
-  OAI21X1 U33 ( .A(n20), .B(n12), .C(n52), .Y(n133) );
-  AOI22X1 U34 ( .A(n53), .B(n54), .C(n25), .D(n55), .Y(n52) );
-  NAND3X1 U35 ( .A(n56), .B(n47), .C(n57), .Y(n55) );
-  NOR2X1 U36 ( .A(n58), .B(n59), .Y(n57) );
-  OAI22X1 U37 ( .A(n60), .B(n61), .C(n46), .D(n31), .Y(n59) );
-  AND2X1 U38 ( .A(n62), .B(n40), .Y(n46) );
-  OAI21X1 U39 ( .A(n63), .B(n64), .C(pid_reset), .Y(n61) );
-  NAND3X1 U40 ( .A(n65), .B(n66), .C(n67), .Y(n64) );
-  INVX1 U41 ( .A(n68), .Y(n67) );
-  INVX1 U42 ( .A(rcv_data[18]), .Y(n66) );
-  NAND3X1 U43 ( .A(n69), .B(n70), .C(n71), .Y(n63) );
-  INVX1 U44 ( .A(rcv_data[19]), .Y(n71) );
-  INVX1 U45 ( .A(rcv_data[23]), .Y(n70) );
-  OAI21X1 U46 ( .A(eop), .B(n72), .C(n73), .Y(n58) );
-  INVX1 U47 ( .A(n74), .Y(n47) );
-  OAI22X1 U48 ( .A(n31), .B(n39), .C(n75), .D(n76), .Y(n74) );
-  AOI21X1 U49 ( .A(n51), .B(n77), .C(n49), .Y(n56) );
-  OAI21X1 U50 ( .A(n12), .B(n78), .C(n79), .Y(n49) );
-  INVX1 U51 ( .A(n80), .Y(n79) );
-  AOI21X1 U52 ( .A(n81), .B(n76), .C(n31), .Y(n80) );
-  NAND2X1 U53 ( .A(state[1]), .B(n11), .Y(n78) );
-  NOR2X1 U54 ( .A(eop), .B(n82), .Y(n53) );
-  OAI21X1 U55 ( .A(n62), .B(n60), .C(n83), .Y(n132) );
-  AOI22X1 U56 ( .A(n51), .B(n84), .C(state[3]), .D(n85), .Y(n83) );
-  OAI21X1 U57 ( .A(n68), .B(n86), .C(n50), .Y(n84) );
-  NOR2X1 U58 ( .A(n87), .B(n88), .Y(n50) );
-  INVX1 U59 ( .A(n77), .Y(n88) );
-  NAND3X1 U60 ( .A(n89), .B(n90), .C(n91), .Y(n77) );
-  AND2X1 U61 ( .A(rcv_data[16]), .B(rcv_data[21]), .Y(n91) );
-  NOR2X1 U62 ( .A(rcv_data[20]), .B(rcv_data[17]), .Y(n89) );
-  INVX1 U63 ( .A(n92), .Y(n87) );
-  NAND3X1 U64 ( .A(n93), .B(n90), .C(n94), .Y(n92) );
-  NOR2X1 U65 ( .A(n65), .B(n95), .Y(n94) );
-  INVX1 U66 ( .A(rcv_data[17]), .Y(n65) );
-  NOR2X1 U67 ( .A(rcv_data[21]), .B(rcv_data[16]), .Y(n93) );
-  NAND2X1 U68 ( .A(rcv_data[17]), .B(n90), .Y(n86) );
-  XOR2X1 U69 ( .A(rcv_data[19]), .B(rcv_data[23]), .Y(n90) );
-  NAND3X1 U70 ( .A(n95), .B(n96), .C(rcv_data[16]), .Y(n68) );
-  INVX1 U71 ( .A(rcv_data[21]), .Y(n96) );
-  INVX1 U72 ( .A(rcv_data[20]), .Y(n95) );
-  INVX1 U73 ( .A(n97), .Y(n51) );
-  NAND3X1 U74 ( .A(n75), .B(n98), .C(byte_received), .Y(n97) );
-  INVX1 U75 ( .A(n76), .Y(n98) );
-  NOR2X1 U76 ( .A(n69), .B(rcv_data[18]), .Y(n75) );
-  INVX1 U77 ( .A(rcv_data[22]), .Y(n69) );
-  OR2X1 U78 ( .A(n99), .B(n100), .Y(n131) );
-  OAI22X1 U79 ( .A(n101), .B(n60), .C(n20), .D(n10), .Y(n100) );
-  INVX1 U80 ( .A(n85), .Y(n20) );
-  NAND2X1 U81 ( .A(n102), .B(n25), .Y(n85) );
-  INVX1 U82 ( .A(n103), .Y(n25) );
-  NAND3X1 U83 ( .A(n104), .B(n105), .C(n106), .Y(n103) );
-  AOI22X1 U84 ( .A(n107), .B(n29), .C(n108), .D(n109), .Y(n106) );
-  INVX1 U85 ( .A(d_edge), .Y(n109) );
-  INVX1 U86 ( .A(n110), .Y(n108) );
-  OAI21X1 U87 ( .A(shift_enable), .B(n28), .C(n73), .Y(n107) );
-  INVX1 U88 ( .A(n111), .Y(n28) );
-  NAND3X1 U89 ( .A(n11), .B(n16), .C(n112), .Y(n105) );
-  MUX2X1 U90 ( .B(d_edge), .A(n113), .S(state[1]), .Y(n112) );
-  NAND2X1 U91 ( .A(state[2]), .B(n29), .Y(n113) );
-  INVX1 U92 ( .A(eop), .Y(n29) );
-  NAND3X1 U93 ( .A(n31), .B(n60), .C(n114), .Y(n104) );
-  NAND2X1 U94 ( .A(eop), .B(n60), .Y(n31) );
-  MUX2X1 U95 ( .B(n115), .A(n60), .S(pid_reset), .Y(n102) );
-  NOR2X1 U96 ( .A(n116), .B(n117), .Y(pid_reset) );
-  NOR2X1 U97 ( .A(n118), .B(n119), .Y(n115) );
-  OR2X1 U98 ( .A(n114), .B(n111), .Y(n119) );
-  OAI21X1 U99 ( .A(n82), .B(n33), .C(n120), .Y(n111) );
-  AND2X1 U100 ( .A(n121), .B(n72), .Y(n120) );
-  NAND3X1 U101 ( .A(n15), .B(state[3]), .C(n18), .Y(n72) );
-  NAND3X1 U102 ( .A(n101), .B(n76), .C(n62), .Y(n114) );
-  AND2X1 U103 ( .A(n32), .B(n35), .Y(n62) );
-  NAND3X1 U104 ( .A(n11), .B(state[3]), .C(n18), .Y(n35) );
-  NAND3X1 U105 ( .A(n15), .B(n12), .C(n42), .Y(n32) );
-  INVX1 U106 ( .A(n82), .Y(n42) );
-  NAND2X1 U107 ( .A(state[3]), .B(n7), .Y(n82) );
-  NAND2X1 U108 ( .A(n122), .B(n11), .Y(n76) );
-  INVX1 U109 ( .A(n6), .Y(n11) );
-  NAND3X1 U110 ( .A(n19), .B(n110), .C(n73), .Y(n118) );
-  NAND2X1 U111 ( .A(n122), .B(n15), .Y(n73) );
-  NAND3X1 U112 ( .A(n123), .B(n16), .C(state[2]), .Y(n110) );
-  OAI21X1 U113 ( .A(state[1]), .B(n6), .C(n116), .Y(n123) );
-  NAND2X1 U114 ( .A(n21), .B(n10), .Y(n6) );
-  INVX1 U115 ( .A(byte_received), .Y(n60) );
-  INVX1 U116 ( .A(n124), .Y(n101) );
-  NAND3X1 U117 ( .A(n39), .B(n81), .C(n40), .Y(n124) );
-  NAND3X1 U118 ( .A(n122), .B(n21), .C(state[4]), .Y(n40) );
-  NAND3X1 U119 ( .A(state[1]), .B(state[3]), .C(n54), .Y(n81) );
-  INVX1 U120 ( .A(n33), .Y(n54) );
-  NAND2X1 U121 ( .A(n15), .B(state[2]), .Y(n33) );
-  INVX1 U122 ( .A(n116), .Y(n15) );
-  NAND2X1 U123 ( .A(state[0]), .B(n10), .Y(n116) );
-  INVX1 U124 ( .A(state[4]), .Y(n10) );
-  NAND3X1 U125 ( .A(n41), .B(n21), .C(state[4]), .Y(n39) );
-  INVX1 U126 ( .A(state[0]), .Y(n21) );
-  OAI21X1 U127 ( .A(eop), .B(n121), .C(n19), .Y(n99) );
-  NAND3X1 U128 ( .A(n122), .B(state[0]), .C(state[4]), .Y(n19) );
-  AND2X1 U129 ( .A(n18), .B(n16), .Y(n122) );
-  NOR2X1 U130 ( .A(n7), .B(state[2]), .Y(n18) );
-  NAND3X1 U131 ( .A(n41), .B(state[0]), .C(state[4]), .Y(n121) );
-  INVX1 U132 ( .A(n117), .Y(n41) );
-  NAND3X1 U133 ( .A(n12), .B(n16), .C(n7), .Y(n117) );
-  INVX1 U134 ( .A(state[1]), .Y(n7) );
-  INVX1 U135 ( .A(state[3]), .Y(n16) );
-  INVX1 U136 ( .A(state[2]), .Y(n12) );
+  OAI21X1 U11 ( .A(state[4]), .B(n12), .C(n13), .Y(r_error) );
+  NOR2X1 U12 ( .A(n6), .B(n14), .Y(pid_save) );
+  OR2X1 U13 ( .A(n15), .B(n16), .Y(n14) );
+  INVX1 U14 ( .A(n17), .Y(w_enable) );
+  OAI21X1 U15 ( .A(n18), .B(n19), .C(n20), .Y(n135) );
+  OAI21X1 U16 ( .A(n21), .B(n22), .C(n23), .Y(n20) );
+  OR2X1 U17 ( .A(n24), .B(n25), .Y(n22) );
+  OAI21X1 U18 ( .A(n6), .B(n26), .C(n27), .Y(n25) );
+  OAI21X1 U19 ( .A(n28), .B(n29), .C(n30), .Y(n24) );
+  AOI21X1 U20 ( .A(n31), .B(n32), .C(n33), .Y(n30) );
+  NAND3X1 U21 ( .A(n34), .B(n17), .C(n35), .Y(n21) );
+  NOR2X1 U22 ( .A(n36), .B(n37), .Y(n35) );
+  AND2X1 U23 ( .A(n38), .B(n13), .Y(n34) );
+  OAI21X1 U24 ( .A(n18), .B(n7), .C(n39), .Y(n134) );
+  OAI21X1 U25 ( .A(n40), .B(n41), .C(n23), .Y(n39) );
+  NAND3X1 U26 ( .A(n42), .B(n28), .C(n43), .Y(n41) );
+  INVX1 U27 ( .A(n44), .Y(n42) );
+  NAND2X1 U28 ( .A(n45), .B(n27), .Y(n40) );
+  AOI22X1 U29 ( .A(n46), .B(n47), .C(byte_received), .D(pid_reset), .Y(n45) );
+  OAI21X1 U30 ( .A(n18), .B(n48), .C(n49), .Y(n133) );
+  AOI22X1 U31 ( .A(n50), .B(n29), .C(n23), .D(n51), .Y(n49) );
+  NAND3X1 U32 ( .A(n52), .B(n53), .C(n54), .Y(n51) );
+  NOR2X1 U33 ( .A(n55), .B(n56), .Y(n54) );
+  NAND2X1 U34 ( .A(n43), .B(n27), .Y(n56) );
+  INVX1 U35 ( .A(n57), .Y(n27) );
+  OAI21X1 U36 ( .A(n6), .B(n58), .C(n59), .Y(n57) );
+  NOR2X1 U37 ( .A(n60), .B(n61), .Y(n59) );
+  INVX1 U38 ( .A(n62), .Y(n60) );
+  OAI21X1 U39 ( .A(n63), .B(n64), .C(n32), .Y(n62) );
+  AOI22X1 U40 ( .A(n32), .B(n36), .C(n65), .D(n64), .Y(n43) );
+  OAI22X1 U41 ( .A(n66), .B(n67), .C(n68), .D(n69), .Y(n55) );
+  OAI21X1 U42 ( .A(n70), .B(n71), .C(pid_reset), .Y(n69) );
+  NAND3X1 U43 ( .A(rcv_data[7]), .B(n72), .C(n73), .Y(n71) );
+  NOR2X1 U44 ( .A(rcv_data[2]), .B(rcv_data[1]), .Y(n73) );
+  NAND3X1 U45 ( .A(n74), .B(n75), .C(n76), .Y(n70) );
+  NOR2X1 U46 ( .A(rcv_data[6]), .B(rcv_data[5]), .Y(n76) );
+  INVX1 U47 ( .A(rcv_data[3]), .Y(n74) );
+  AND2X1 U48 ( .A(n12), .B(n77), .Y(n53) );
+  AOI22X1 U49 ( .A(n78), .B(n29), .C(n32), .D(n44), .Y(n52) );
+  NAND2X1 U50 ( .A(n79), .B(n80), .Y(n44) );
+  INVX1 U51 ( .A(n81), .Y(n78) );
+  INVX1 U52 ( .A(n82), .Y(n50) );
+  OAI21X1 U53 ( .A(n79), .B(n68), .C(n83), .Y(n132) );
+  AOI22X1 U54 ( .A(n47), .B(n84), .C(state[3]), .D(n85), .Y(n83) );
+  OAI21X1 U55 ( .A(n86), .B(n87), .C(n46), .Y(n84) );
+  NOR2X1 U56 ( .A(n88), .B(n66), .Y(n46) );
+  INVX1 U57 ( .A(n89), .Y(n66) );
+  NAND3X1 U58 ( .A(n90), .B(n91), .C(n92), .Y(n89) );
+  NOR2X1 U59 ( .A(n72), .B(n93), .Y(n92) );
+  INVX1 U60 ( .A(rcv_data[0]), .Y(n72) );
+  NOR2X1 U61 ( .A(rcv_data[4]), .B(rcv_data[1]), .Y(n90) );
+  INVX1 U62 ( .A(n94), .Y(n88) );
+  NAND3X1 U63 ( .A(n95), .B(n91), .C(n96), .Y(n94) );
+  AND2X1 U64 ( .A(rcv_data[1]), .B(rcv_data[4]), .Y(n96) );
+  NOR2X1 U65 ( .A(rcv_data[5]), .B(rcv_data[0]), .Y(n95) );
+  NAND2X1 U66 ( .A(rcv_data[0]), .B(rcv_data[1]), .Y(n87) );
+  NAND3X1 U67 ( .A(n75), .B(n93), .C(n91), .Y(n86) );
+  XOR2X1 U68 ( .A(rcv_data[3]), .B(rcv_data[7]), .Y(n91) );
+  INVX1 U69 ( .A(rcv_data[5]), .Y(n93) );
+  INVX1 U70 ( .A(rcv_data[4]), .Y(n75) );
+  INVX1 U71 ( .A(n67), .Y(n47) );
+  NAND3X1 U72 ( .A(n97), .B(n64), .C(byte_received), .Y(n67) );
+  INVX1 U73 ( .A(n98), .Y(n64) );
+  INVX1 U74 ( .A(n65), .Y(n97) );
+  NAND2X1 U75 ( .A(rcv_data[6]), .B(n99), .Y(n65) );
+  INVX1 U76 ( .A(rcv_data[2]), .Y(n99) );
+  OR2X1 U77 ( .A(n100), .B(n101), .Y(n131) );
+  OAI22X1 U78 ( .A(n102), .B(n68), .C(n18), .D(n10), .Y(n101) );
+  INVX1 U79 ( .A(n85), .Y(n18) );
+  NAND2X1 U80 ( .A(n103), .B(n23), .Y(n85) );
+  AOI21X1 U81 ( .A(n29), .B(n104), .C(n105), .Y(n23) );
+  INVX1 U82 ( .A(n106), .Y(n105) );
+  AOI21X1 U83 ( .A(n107), .B(n108), .C(n109), .Y(n106) );
+  AOI21X1 U84 ( .A(n110), .B(n38), .C(d_edge), .Y(n109) );
+  NAND2X1 U85 ( .A(n111), .B(n11), .Y(n38) );
+  NOR2X1 U86 ( .A(byte_received), .B(n32), .Y(n107) );
+  NOR2X1 U87 ( .A(n29), .B(byte_received), .Y(n32) );
+  OAI21X1 U88 ( .A(shift_enable), .B(n28), .C(n112), .Y(n104) );
+  NOR2X1 U89 ( .A(n61), .B(n113), .Y(n112) );
+  INVX1 U90 ( .A(n77), .Y(n113) );
+  NOR2X1 U91 ( .A(n12), .B(n6), .Y(n61) );
+  NAND2X1 U92 ( .A(n114), .B(state[1]), .Y(n12) );
+  INVX1 U93 ( .A(n115), .Y(n28) );
+  INVX1 U94 ( .A(eop), .Y(n29) );
+  MUX2X1 U95 ( .B(n116), .A(n68), .S(pid_reset), .Y(n103) );
+  NOR2X1 U96 ( .A(n117), .B(n118), .Y(pid_reset) );
+  NOR2X1 U97 ( .A(n119), .B(n120), .Y(n116) );
+  OR2X1 U98 ( .A(n108), .B(n115), .Y(n120) );
+  NAND3X1 U99 ( .A(n81), .B(n121), .C(n82), .Y(n115) );
+  NAND3X1 U100 ( .A(n122), .B(state[2]), .C(n123), .Y(n82) );
+  NAND3X1 U101 ( .A(n122), .B(state[3]), .C(n16), .Y(n81) );
+  NAND3X1 U102 ( .A(n102), .B(n98), .C(n79), .Y(n108) );
+  NOR2X1 U103 ( .A(n31), .B(n33), .Y(n79) );
+  INVX1 U104 ( .A(n124), .Y(n33) );
+  NAND3X1 U105 ( .A(n11), .B(state[3]), .C(n16), .Y(n124) );
+  INVX1 U106 ( .A(n125), .Y(n31) );
+  NAND3X1 U107 ( .A(n122), .B(n48), .C(n123), .Y(n125) );
+  INVX1 U108 ( .A(n26), .Y(n123) );
+  NAND2X1 U109 ( .A(state[3]), .B(n7), .Y(n26) );
+  NAND2X1 U110 ( .A(n126), .B(n11), .Y(n98) );
+  NAND3X1 U111 ( .A(n77), .B(n17), .C(n110), .Y(n119) );
+  INVX1 U112 ( .A(n127), .Y(n110) );
+  OAI21X1 U113 ( .A(n128), .B(n129), .C(n13), .Y(n127) );
+  NAND2X1 U114 ( .A(n122), .B(n114), .Y(n13) );
+  INVX1 U115 ( .A(n128), .Y(n114) );
+  NAND2X1 U116 ( .A(n11), .B(n7), .Y(n129) );
+  INVX1 U117 ( .A(n6), .Y(n11) );
+  NAND2X1 U118 ( .A(n19), .B(n10), .Y(n6) );
+  NAND2X1 U119 ( .A(state[2]), .B(n15), .Y(n128) );
+  NAND2X1 U120 ( .A(n126), .B(n122), .Y(n77) );
+  INVX1 U121 ( .A(n118), .Y(n122) );
+  INVX1 U122 ( .A(byte_received), .Y(n68) );
+  NOR3X1 U123 ( .A(n36), .B(n63), .C(n37), .Y(n102) );
+  INVX1 U124 ( .A(n80), .Y(n37) );
+  NAND3X1 U125 ( .A(n126), .B(n19), .C(state[4]), .Y(n80) );
+  NOR2X1 U126 ( .A(n58), .B(n118), .Y(n63) );
+  NAND2X1 U127 ( .A(state[0]), .B(n10), .Y(n118) );
+  INVX1 U128 ( .A(state[4]), .Y(n10) );
+  NAND3X1 U129 ( .A(state[1]), .B(state[3]), .C(state[2]), .Y(n58) );
+  INVX1 U130 ( .A(n130), .Y(n36) );
+  NAND3X1 U131 ( .A(n111), .B(n19), .C(state[4]), .Y(n130) );
+  INVX1 U132 ( .A(state[0]), .Y(n19) );
+  OAI21X1 U133 ( .A(eop), .B(n121), .C(n17), .Y(n100) );
+  NAND3X1 U134 ( .A(n126), .B(state[0]), .C(state[4]), .Y(n17) );
+  AND2X1 U135 ( .A(n16), .B(n15), .Y(n126) );
+  NOR2X1 U136 ( .A(n7), .B(state[2]), .Y(n16) );
+  NAND3X1 U137 ( .A(n111), .B(state[0]), .C(state[4]), .Y(n121) );
+  INVX1 U138 ( .A(n117), .Y(n111) );
+  NAND3X1 U139 ( .A(n48), .B(n15), .C(n7), .Y(n117) );
+  INVX1 U140 ( .A(state[1]), .Y(n7) );
+  INVX1 U141 ( .A(state[3]), .Y(n15) );
+  INVX1 U142 ( .A(state[2]), .Y(n48) );
 endmodule
 
 
@@ -659,8 +662,7 @@ module usb_rx ( clk, n_rst, d_plus, d_minus, rx_packet, address, endpoint,
         rx_packet) );
   rcu ctrl ( .clk(clk), .n_rst(n_rst), .d_edge(d_edge), .eop(eop), 
         .shift_enable(shift_enable), .byte_received(byte_received), .rcv_data(
-        {rcv_data, endpoint, address, packet_data}), .pid_reset(pid_reset), 
-        .pid_save(pid_save), .rcving(rcving), .r_error(r_error), .w_enable(
-        w_enable) );
+        {rcv_data, endpoint[3:1]}), .pid_reset(pid_reset), .pid_save(pid_save), 
+        .rcving(rcving), .r_error(r_error), .w_enable(w_enable) );
 endmodule
 

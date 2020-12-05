@@ -16,27 +16,21 @@ module edge_det
   output wire edge_detected
 );
 
-  reg old_sample;
-  reg new_sample;
-  reg sync_phase;
+  reg prev;
   
   always @ (negedge n_rst, posedge clk)
   begin : REG_LOGIC
     if(1'b0 == n_rst)
     begin
-      old_sample  <= 1'b1; // Reset value to idle line value
-      new_sample  <= 1'b1; // Reset value to idle line value
-      sync_phase  <= 1'b1; // Reset value to idle line value
+      prev  <= 1'b1;
     end
     else
     begin
-      old_sample  <= new_sample;
-      new_sample  <= sync_phase;
-      sync_phase  <= serial_in;
+      prev  <= serial_in;
     end
   end
   
   // Output logic
-  assign edge_detected = old_sample ^ new_sample;
+  assign edge_detected = serial_in ^ prev;
   
 endmodule

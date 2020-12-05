@@ -88,7 +88,7 @@ always_ff @ (posedge clk, negedge n_rst) begin
 	if (n_rst == 1'b0)
 		handler_state <= ENABLE_SHIFT;
 	else
-		handler_state <= DISABLE_SHIFT;
+		handler_state <= nxt_handler_state;
 end
 
 assign shift_enable_en = handler_state == ENABLE_SHIFT;
@@ -104,7 +104,7 @@ flex_counter #(.NUM_CNT_BITS(4)) clkdiv (
 
 flex_counter #(.NUM_CNT_BITS(4)) bitcnt (
 	.clk(clk), .n_rst(n_rst),
-	.clear(byte_received & ~rcving),
+	.clear(byte_received | ~rcving),
 	.count_enable(shift_enable),
 	.rollover_val(4'd8),
 	.rollover_flag(byte_received)

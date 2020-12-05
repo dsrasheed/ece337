@@ -8,7 +8,7 @@
 
 module rcu (
     input clk, n_rst, d_edge, eop, shift_enable, byte_received,
-    input wire [23:0] rcv_data,
+    input wire [7:0] rcv_data,
     output logic pid_reset, pid_save, rcving, r_error, w_enable
 );
 
@@ -36,10 +36,10 @@ always_comb begin
 
     case (state)
         IDLE: if (d_edge) nxt_state = SYNC;
-        SYNC: if (byte_received && rcv_data[23:16] == 8'b1) nxt_state = PID;
-          else if (byte_received && rcv_data[23:16] != 8'b1) nxt_state = E_W8_EOP;
+        SYNC: if (byte_received && rcv_data == 8'h80) nxt_state = PID;
+          else if (byte_received && rcv_data != 8'h80) nxt_state = E_W8_EOP;
         PID: if (byte_received) begin
-                case (rcv_data[23:16])
+                case (rcv_data)
                     IN,OUT: nxt_state = TOKEN;
                     DATA0,DATA1: nxt_state = DATA;
                     ACK,NAK: nxt_state = HSHAKE;
@@ -52,7 +52,7 @@ always_comb begin
         W8_IDLE: if (d_edge) nxt_state = IDLE;
         E_IDLE: if (d_edge) nxt_state = SYNC;
         E_W8_EOP: if (eop) nxt_state = E_W8_IDLE;
-        E_W8_IDLE: if (d_edge) nxt_state = SYNC;
+        E_W8_IDLE: if (d_edge) nxt_state = E_IDLE;
         TOKEN: nxt_state = T1;
         T1: if (byte_received) nxt_state = T2;
             else if (!byte_received && eop) nxt_state = E_W8_IDLE;
