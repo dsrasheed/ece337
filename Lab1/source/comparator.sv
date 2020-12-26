@@ -21,7 +21,7 @@ module comparator
 	reg lte;
 
 	always @ (a, b) begin: COM
-		gte = 0;
+		//gte = 0;
 		lte = 0;
 		if (!(a < b)) begin
 			gte = 1;
