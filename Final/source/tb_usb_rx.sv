@@ -133,6 +133,7 @@ module tb_usb_rx();
   int num_ones;
   int stuff;
   int prev_was_stuff;
+
   task send_bits;
     input bit bits[]; // First bit must be 0.
   begin
@@ -237,15 +238,15 @@ module tb_usb_rx();
       end
 
       while (1'b1) begin
-        @(negedge w_enable);
+        @(negedge w_enable); 
 
         if ($time != prev_time) begin
 
           if (packet_data == bytes[2+i]) begin
-            $info("Correct packet data %s during %s test case", check_tag, tb_test_case);
+            $info("Correct packet data %d %s during %s test case", i, check_tag, tb_test_case);
           end
           else begin // Check failed
-            $error("Incorrect packet data %s during %s test case", check_tag, tb_test_case);
+            $error("Incorrect packet data %d %s during %s test case", i, check_tag, tb_test_case);
           end
 
           i++;
@@ -254,56 +255,15 @@ module tb_usb_rx();
       end
     join_any
 
-    if (i == bytes.size() - 4) begin
-      $info("Correct w_enable did output the right # times %s during %s test case", check_tag, tb_test_case);
-    end
-    else begin
-      $error("Incorrect w_enable did not output the right # times %s during %s test case", check_tag, tb_test_case);
-    end
-
-  end
-  endtask
-
-  task check_data_packet_bits;
-    input bit bits[];
-    input bit [7:0] bytes[];
-    input string check_tag;
-  begin
-    int i;
-    int prev_time;
-    i = 0;
-    prev_time = 0;
-
-    fork
-      begin
-        send_bits(bits);
-        send_eop();
-      end
-
-      while (1'b1) begin
-        @(negedge w_enable);
-
-        if ($time != prev_time) begin
-          $info("%h == %h", packet_data, bytes[2+i]);
-          if (packet_data == bytes[2+i]) begin
-            $info("Correct packet data %s during %s test case", check_tag, tb_test_case);
-          end
-          else begin // Check failed
-            $error("Incorrect packet data %s during %s test case", check_tag, tb_test_case);
-          end
-
-          i++;
-          prev_time = $time;
-        end
-      end
-    join_any
+    disable fork;
 
     if (i == bytes.size() - 4) begin
-      $info("Correct w_enable did output the right # times %s during %s test case", check_tag, tb_test_case);
+      $info("Correct, w_enable did output the right # times %s during %s test case", check_tag, tb_test_case);
     end
     else begin
-      $error("Incorrect w_enable did not output the right # times %s during %s test case", check_tag, tb_test_case);
+      $error("Incorrect, w_enable did not output the right # times %s during %s test case", check_tag, tb_test_case);
     end
+
   end
   endtask
 
@@ -324,6 +284,7 @@ module tb_usb_rx();
         .packet_data(packet_data), .w_enable(w_enable), .rcving(rcving), .r_error(r_error));
 
   bit [7:0] packet[];
+  bit bits[];
   
   // Test bench main process
   initial
@@ -587,19 +548,19 @@ module tb_usb_rx();
     bits = {0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,1,0};
     send_bits(bits);
     send_eop();
-    check_output(DATA0, 1'b1, 1'b0, "premature EOP in the 1st data byte of data packet");
+    check_output(DATA0, 1'b1, 1'b0, "after premature EOP in the 1st data byte of data packet");
 
     bits = new[8 * 3 + 7];
     bits = {0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,1,0,1,0,1,0,1,1,1,0,1,1};
     send_bits(bits);
     send_eop();
-    check_output(DATA0, 1'b1, 1'b0, "premature EOP in the 2nd data byte of data packet");
+    check_output(DATA0, 1'b1, 1'b0, "after premature EOP in the 2nd data byte of data packet");
 
     bits = new[8 * 4 + 7];
     bits = {0,0,0,0,0,0,0,1, 1,1,0,0,0,0,1,1, 1,0,0,1,0,1,0,1, 0,1,1,1,0,1,1,1, 1,1,0,0,0,1,1};
     send_bits(bits);
     send_eop();
-    check_output(DATA0, 1'b1, 1'b0, "premature EOP in the 3rd data byte of data packet");
+    check_output(DATA0, 1'b1, 1'b0, "after premature EOP in the 3rd data byte of data packet");
 
     // ************************************************************************
     // Test Case 11: Premature EOPs in Token Bytes
@@ -635,6 +596,24 @@ module tb_usb_rx();
     packet = {SYNC_BYTE, DATA0, 8'hff, 8'h0, 8'h0};
     check_data_packet(packet, "Bit Stuffing");
     check_output(DATA0, 1'b0, 1'b0, "after bit stuffing");
-    
+
+    // ************************************************************************
+    // Test Case 12: Huge Data Packet
+    // ************************************************************************ 
+    @(negedge tb_clk); 
+    tb_test_num = tb_test_num + 1;
+    tb_test_case = "Huge Data Packet";
+
+    reset_dut();
+
+    packet = new[30];
+    packet[0] = SYNC_BYTE;
+    packet[1] = DATA0;
+    for (bit [7:0] i = '0; i < 8'd30 - 8'd2; i = i + 8'd1) begin
+      packet[i+2] = i;
+    end
+    check_data_packet(packet, "Huge Data Packet");
+    check_output(DATA0, 1'b0, 1'b0, "after sending Huge Data Packet");
+
   end
 endmodule
